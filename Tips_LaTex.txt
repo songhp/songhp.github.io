@@ -1,0 +1,3544 @@
+﻿【LaTeX is a word processing (or, more accurately, a typesetting) program. It typesets a file of text using the TeX program and the LaTeX Macro package for TeX. It does this by processing an input file containing the text of a document with interspersed commands that describe how the text should be formatted. 
+TeX 简介　　电子排版系统的出现给印刷出版业带来了一场革命，利用电子计算机及各种辅助设备，可以完成从文稿、图表的录入、编辑、修改、组版，直至得到各种不同用途、不同质量的输出结果。利用电子排版系统，可以减轻劳动强度，缩短出版周期。 
+　　目前世界上有许多电子排版系统。这些系统各有特点，也各有自己的适用范围。TeX 就是一种优秀的电子排版系统。 
+　　TeX 提供了一套功能强大并且十分灵活的排版语言，它多达 900 多条指令，并且 TeX 有宏功能，用户可以不断地定义自己适用的新命令来扩展 TeX 系统的功能。许多人利用 TeX 提供的宏定义功能对 TeX 进行了二次开发，其中比较著名的有美国数学学会推荐的非常适合于数学家使用的 AMS-TeX 以及适合于一般文章、报告、书籍的 LaTeX 系统。 
+　　TeX 系统是公认的数学公式排得最好的系统。美国数学学会（AMS） 鼓励数学家们使用 TeX 系统向它的期刊投稿。世界上许多一流的出版社如 Kluwer、Addison-Wesley、牛津大学出版社等也利用 TeX 系统出版书籍和期刊。 
+　　大部分的 TeX 系统都是免费的。Knuth 教授还公开了他的全部源程序。TeX 系统目前已经在数百种计算机系统上得到实现。TeX 系统的排版结果 DVI（DeVice Independent）文件与输出设备无关。DVI 文件可以显示、打印、照排，几乎可以在所有的输出设备上输出。TeX 排版源文件及结果在各种计算机系统上互相兼容。 
+】 
+
+
+%%%%%%%%%%%%%%%%%%%%  把MATLAB代码输出为Latex代码  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+publish('EMD.m','latex')
+
+
+%%%%%%%%%%%%%%%%%%%%  表格\图形固定在here当前位置  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{float}
+\begin{table}[H]
+
+
+还可以使用float宏包, 然后figure环境的位置参数写成[H].
+
+%%%%%%%%%%%%%%%%%%%%    设置环境变量     %%%%%%%%%%%%%%%%%%%%%%%%%%%
+Path 
+d:\CTeX\texmf\miktex\bin;d:\CTeX\gs\gs8.51\bin;d:\CTeX\WinEdt;D:\CTeX\LOCALT~1\ty\bin;D:\CTeX\LOCALT~1\cct\bin;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem
+CCHZPATH
+d:\CTeX\LOCALT~1\cct\fonts
+CCPKPATH
+d:\CTeX\LOCALT~1\fonts\pk\modeless\cct\dpi$d
+
+
+%%%%%%%%%%%%%%%%%%%%    useful link     %%%%%%%%%%%%%%%%%%%%%%%%%%%
+http://www.ctex.org
+http://www.hooklee.com/default.asp?t=TeX%2FLaTeX
+http://zzg34b.w3.c361.com/index.htm  LaTeX编辑部
+http://www.cs.duke.edu/~haohe/resource.html
+http://www.math.ecnu.edu.cn/~latex/
+http://www.smth.org/bbsdoc.php?board=TeX
+http://bbs.sjtu.edu.cn/bbsdoc?board=TeX_LaTeX
+http://edt1023.sayya.org/
+http://learn.tsinghua.edu.cn:8080/2001315450/tex_frame.html
+http://learn.tsinghua.edu.cn:8080/2003214890/publish/Default/WelcomePage.html
+http://math.nju.edu.cn/~meijq 梅加强
+http://www1.chapman.edu/~jipsen/mathml/ASCIIMathML.js
+http://www1.chapman.edu/~jipsen/svg/ASCIIsvg.js %用ASCII显示公式, web下的利器
+<img src="http://www.forkosh.dreamhost.com/mimetex.cgi?c=\sqrt{a^2+b^2}" >
+% 图片显示数学公式
+http://tex.72pines.com/latex.php?latex=$x\in%20%20\frac{1}{2}$
+在线公式编辑器 
+国内网站：
+http://www.math15.com/bbs/latex.html
+国外网站：
+http://codecogs.izyba.com/components/eqneditor/editor.php 
+http://www.sitmo.com/latex/
+http://codecogs.com/components/equationeditor/equationeditor.php 
+http://www.numberempire.com/texequationeditor/equationeditor.php 
+http://www.thesis-template.com/ 学位论文模板
+
+WinEdt的注册：
+Name：Hard Wisdom
+Code：1135362106278309830
+
+GSview的注册：
+Name：随便
+Code：55555-24868
+
+winedt注册码
+Hard Wisdom 
+1135362106278309830 
+5.4版本的。
+
+GSVIEW 注册码： Name: Registered s/n: 195938022 5598
+winedt注册码. 用户：linuxfans superpig 注册码：2266474541532194432
+WinEdt 注册码 Hard Wisdom    1135362106278309830
+
+
+哈工的tex资源
+ftp://202.118.224.241/software/Science/TeX&LaTeX/
+
+%%%%%%%%%%%%%%% 生成透明eps图形  %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+在网上发现如下codes，可以生成透明图形。
+% If you ever wondered how to get a matlab figure transparent (particularly usefull when you export it to formats that feature transparency, like eps, gif, png, etc.), here is how you do it:
+
+% you created a figure and it is "current". % the following, you could have guessed
+set(gcf,'color','none');
+set(gca,'color','none');
+% but this following little detail took me ages to figure out
+set(gcf,'InvertHardCopy','off');
+print -depsc2 framework.eps
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+连分数 连分式
+
+continued fraction formulae for modified Bessel function ratio \cite[page. 153]{watson95}
+\begin{equation}
+\frac{I_v(z)}{I_{v-1}(z)}=
+\frac{1}{2v/z}
+\begin{array}{*{20}{c}}
+   {}  \\
+    +   \\
+\end{array}
+\frac{1}{2(v+1)/z}
+\begin{array}{*{20}{c}}
+   {}  \\
+    + \cdots +  \\
+\end{array}
+\frac{1}{2(v+m)/z}
+\begin{array}{*{20}{c}}
+   {}  \\
+    +   \\
+\end{array}
+\frac{I_{v+m+1}(z)}{I_{v+m}(z)}\
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/fonts.html
+IEEE 采用的字体 
+\usepackage{palatino}
+Book Antiqua是它的变体
+
+\usepackage{times} 
+\usepackage{mathpazo} - times font plus extra support for maths 
+\usepackage{courier} 
+\usepackage{helvet} - %helvetica字体 helvetica as the sans serif font 
+
+Package Description 
+avant AvantGarde font as default sans 
+avantgar ITC Avant Garde  
+bookman Bookman font as default roman. Avant Garde as default sans 
+chancery Zapf Chancery font as default roman 
+charter default roman 
+courier default ttdefault 
+helvet Helvetica font as default sans 
+helvetic Helvetica-Oblique font as default sans 
+mathpazo Palatino font as default roman. Math in Palatino where possible 
+mathptmx Times font as default roman. Math in Times where possible. 
+ncntrsbk NewCenturySchlbk-Roman 
+newcent NewCenturySchoolbook font as default roman 
+palatcm Palatino + Computer Modern math fonts 
+pifont Pi font support (special characters) 
+utopia Utopia font as default roman  
+zapfchan ITC Zapf Chancery as default roman  
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+algorithm2e
+它提供一个 Algorithm2e 环境，用于在 LaTeX2e  中排版算法步骤。它将算法步骤定义为浮动体；它提供一组关键词供排版使用，关键词既可修改也可创新。
+源文件
+Christophe Fiorio
+　
+algorithms
+它定义了 algorithmic 和 algorithm 两个环境和一组命令，可用于排版算法步骤，对其中的关键词可以采用不同的显示效果。两种环境可分别使用，也可同时使用；其中 algorithm 环境还可以处理图形之类的浮动体。 
+源文件  示例
+Rogério Brito
+
+
+算法 algorithm 重命名
+
+使用 \usepackage{algorithm2e} 如何使得caption{}排版结果产生的“Agorithm”变为 "算法"？
+
+milksea 回复：
+改这两个
+\renewcommand{\listalgorithmcfname}{List of Algorithms}
+\renewcommand{\algorithmcfname}{Algorithm}
+
+\renewcommand{\listalgorithmname}{算\SYSUspace 法}
+%\renewcommand{\algorithmname}{算法}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\renewcommand\thealgorithm{\arabic{chapter}-\arabic{algorithm}}
+
+
+
+%%算法描述
+\begin{algorithm}[H] %算法放置 usual ‘H’(for “here”), ‘B’ (for “bottom”)
+  \caption{Computing $I_s(x)$ via truncated power-series} %标题
+  \label{bessel} %引用标记, 引用时用\ref{bessel}
+  \begin{algorithmic}[1] %%[1]显示行号
+  %% 语法
+    % \usepackage{algorithm}
+    % \usepackage{algorithmic}
+    % \STATE $i \Leftarrow 1$
+    % \IF{<condition1>} <text1> \ELSIF{<condition2>} <text2> \ELSE <text3> \ENDIF
+    % \FOR{<condition>} <text> \ENDFOR
+    % \FORALL{<condition>} <text> \ENDFOR
+    % \WHILE{<condition>} <text> \ENDWHILE
+    % \REPEAT <text> \UNTIL{<condition>}
+    % \LOOP <text> \ENDLOOP
+    % \REQUIRE <text> %前提
+    % \ENSURE <text>
+    % \RETURN <text>
+    % \IF{$n$ is odd}
+    % \RETURN \TRUE
+    % \ELSE
+    % \RETURN \FALSE
+    % \ENDIF
+    % \PRINT <text>
+    % \COMMENT{<text>}
+    % \algsetup{indent=2em} %设置缩进
+    % \algsetup{linenodelimiter=.} %设置行号结束符
+    % \renewcommand{\algorithmicrequire}{\textbf{Input:}} %重定义require为Input
+    % \renewcommand{\algorithmicensure}{\textbf{Output:}}
+    % \renewcommand{\algorithmiccomment}[1]{// #1} %定义C++注释
+    % \label{alg:lineXXX} % \ref{alg:lineXXX}引用算法第几行
+    % \floatname{algorithm}{算法} %重定义, 如显示为中文
+    \REQUIRE $s, x$: positive real number, $\varepsilon$: convergence tolerance
+    \ENSURE approximation to $I_x(s)$
+    \STATE $R \leftarrow 1$, $t_1 \leftarrow (\frac{xe}{2s})^s$
+    \STATE $t_2 \leftarrow stirling$
+    \STATE $t_1 \leftarrow t_1t_2$
+    \STATE $M \leftarrow 1/s$, $k \leftarrow 1$
+    \WHILE{$not~~converged $}
+    \STATE $R \leftarrow R \frac{0.25x^2}{k(s+k)}$
+    \STATE $M \leftarrow M+R$
+    \IF{$R/M < \varepsilon$}
+    \STATE $converged \leftarrow true$
+    \ENDIF
+    \STATE $k \leftarrow k+1$
+    \ENDWHILE
+    \RETURN $t_1M$.
+  \end{algorithmic}
+\end{algorithm}
+
+
+为了不另建算法环境, 用表格table嵌套
+\begin{table}
+\caption{Computing $I_s(x)$ via truncated power-series} %标题
+\label{bessel} %引用标记, 引用时用\ref{bessel}
+\end{table}
+
+
+
+
+ latex中algorithm2e包的用法示例收藏
+1.首先添加如下内容：
+\usepackage[linesnumbered,boxed]{algorithm2e}
+2.然后正文中添加如下示例：
+\begin{algorithm}
+\caption{identifyRowContext}
+\KwIn{$r_i$ , $Backgrd(T_i)$=${T_1,T_2,\ldots,T_n}$ and similarity threshold $\theta_r$}
+\KwOut{$con(r_i)$}
+$con(r_i)= \Phi$\;
+\For{$j=1;j \le n;j \ne i$}
+{
+ float $maxSim=0$\;
+ $r^{maxSim}=null$\;
+ 
+ \While{not end of $T_j$}
+ {
+     compute Jaro($r_i,r_m$)($r_m \in T_j$)\;
+     \If{$(Jaro(r_i,r_m) \ge \theta _r) \wedge ((Jaro(r_i,r_m) \ge r^{maxSim}) $}
+      {
+           replace $r^maxSim$ with $r_m$\;
+
+      }    
+
+
+ }
+$con(r_i)=con(r_i) \cup {r^{maxSim}}$\;
+
+}
+return $con(r_i)$\;
+\end{algorithm} 
+3.效果运行可知。
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+http://wangyongxian.blogspot.com/2006/08/latex-squeezing-space-in-latex-latex.html
+
+压缩LaTeX文档中的空白
+原文: Squeezing Space in LaTeX http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/squeeze.html
+
+本文介绍一些用来压缩LaTeX文档中过多空白的技巧。请注意，这里提到的一些技巧有可能会对文档的美观性造成损坏，因此在使用这些技巧时要特别小心。 
+在 savetrees 这个宏包中就使用了这里提及的许多技巧，从而使得在每个页面上容纳下更多的文本。 
+
+页面布局
+首先，a4 宏包可以压缩页面边距。其次，为了控制得更精确，可以使用 geometry 宏包。另外，若已使用了 layout 宏包，则使用 \layout 命令就能生成一个标示有页面布局中各种长度度量的测试页。 
+更改各种长度
+LaTeX中有大量控制尺寸的长度变量，可以使用 \addtolength 和 \setlength 来更改这些长度值。在LaTeX中长度的单位可以是厘米(cm)、毫米(mm)、英寸(in)以及磅(pt)。此外，长度变量可以取负值。
+示例: \addtolength{\parindent}{-5mm} 
+
+常用的长度变量 
+
+页面布局 
+\columnsep: 栏间距(gap between columns)
+\topmargin: 页眉之上的页边距(gap above header)
+\topskip: 页眉与正文之间的间距(between header and text)
+\textheight: 正文高度(height of main text)
+\textwidth: 正文宽度(width of text)
+\oddsidemargin: 奇数页面左边距(odd page left margin)
+\evensidemargin: 偶数页面左边距(even page left margin) 
+段落控制 
+\parindent: 段落缩进(indentation of paragraphs)
+\parskip: 段落间距(gap between paragraphs)
+浮动体(图表) 
+\floatsep: 连续两个浮动体之间的间距(space left between floats)
+\textfloatsep: 首个页底浮动体或最后一个页顶浮动体与正文之间的间距(space between last top float or first bottom float and the text)
+\intextsep : 嵌入正文的浮动体的顶部与底部要留的空白高度(space left on top and bottom of an in-text float)
+\dbltextfloatsep 是在两栏输出时与 \textfloatsep 相对应的长度
+\dblfloatsep 是两栏输出模式下与 \floatsep 相对应的长度
+\abovecaptionskip: 浮动体标题之上的空白(space above caption)
+\belowcaptionskip: 浮动体标题之下的空白(space below caption)
+数学公式
+\abovedisplayskip: 公式之间的行间距(space before maths)
+\belowdisplayskip: 公式之下的空白(space after maths)
+\arraycolsep: 在array中各列之间的水平间距(gap between columns of an array)
+\mathindent: 公式首行缩进的水平间距
+
+列表项
+\topsep: 第一个列表项与之前段落之间的垂直间距(space between first item and preceding paragraph).
+\partopsep: 当列表环境是一个新的段落时，需要在 \topsep 之前追加的额外垂直距离。
+\itemsep: 连续两个列表项之间的垂直间距。
+环境
+在宏包 atbeginend.sty 中提供了诸如 \BeforeBegin{environment}{code-to-execute}, \AfterEnd ... 等命令，这些命令可以去除环境外部及内部的空白量。使用这个宏包可以克服有些环境会“破坏”掉先前正常文本中定义的长度值的情形，例如 \AfterBegin{itemize}{\addtolength{\itemsep}{-\baselineskip}} 通过在环境中重置\itemsep 值而将各个列表项压缩在一起。 
+宏包 mdwlist 中提供有一个 itemize* 环境。 
+
+宏包 paralist 则提供了一个 compactitem 环境(压缩了列表项之间的间距) 及一个 inparaenum 环境(每个列表项不置于新段落中)。 
+
+图表
+为节约空间，可以使用 subfigure 将多张图放在一个图浮动环境中。还可以使用 floatflt 宏包使文本环绕在图的四周。 
+不要使用"\begin{figure} ... \begin{center} ..."而改用"\begin{figure} ... \centering ..."也能压缩多余的空白。在一张图周围出现的额外空白可能并不是LaTeX的过错，而是由于postscript图片本身就有很大的空白边框。程序 ps2epsi 可以裁剪图片以得到最小的 bounding box，此外还可以使用 graphicx 宏包中 \includegraphics 命令的裁剪功能。 
+
+缺省情况下，LaTeX不喜欢在一页中放置超过70%版面的图或表，同时也不喜欢在一页中放置太多的图或表。要改变这种缺省行为，可以在 \begin{document} 之前写入以下内容： 
+
+\renewcommand\floatpagefraction{.9}\renewcommand\topfraction{.9}\renewcommand\bottomfraction{.9}\renewcommand\textfraction{.1}\setcounter{totalnumber}{50}\setcounter{topnumber}{50}\setcounter{bottomnumber}{50}要缩小图表标题，可使用 caption 宏包。 
+如果表格太大，可以将它括在 \begin{small} 和 \end{small} 之间。 
+
+减小表格的列间距可以用 \setlength{\tabcolsep}{1pt}。
+
+还可将整个表格当成图片一样整体比例缩放，如: \resizebox{!}{5cm}{\begin{tabular} ... \end{tabular}} 当然，这样生成的文档是postscript格式。 
+
+标题
+标题前后的纵向空白量取决于 \parskip, \baselineskip 等这些长度值，它们将由LaTeX向 @startsection 子例程传递。此外，要注意：LaTeX特别不喜欢将标题放在页尾，因此它一定会留下这种空白。 
+除非你特别希望重新定义各种标题级命令，否则最好使用 titlesec 宏包，它会压缩标准的标题命令中的空白(特别是 \chapter)。即便你只用 \usepackage[small,compact]{titlesec} 都会压缩不少空白。 
+
+目录与参考文献
+宏包 multitoc 可以在单栏文档中生成一个双栏目录。 
+为减小参考文献中各条目之间的行间距，可以使用 setspace 宏包(处理目录中的行间距也类似) 
+
+\begin{spacing}{0.9}\tableofcontents\end{spacing}...\begin{spacing}{0.9}\bibliographystyle{plain}\bibliography{refs}\end{spacing}若使用了 natbib 宏包(推荐使用!)则可以更改 \bibsep 的值以减小文献条目之间的行间距，否则可以在序言部分使用如下命令： 
+  \let\oldthebibliography=\thebibliography\let\endoldthebibliography=\endthebibliography\renewenvironment{thebibliography}[1]{%\begin{oldthebibliography}{#1}%\setlength{\parskip}{0ex}%\setlength{\itemsep}{0ex}%}%{%\end{oldthebibliography}%}可以用类似的办法去修改其它环境，如 theglossary 等。
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+怎样精确控制图表等浮动体的位置
+http://wangyongxian.blogspot.com/2006/09/latex-htbp.html
+
+LaTeX在处理浮动体方面需要改进, !htbp这五个参数太少. 有很多情况都体现不出LaTeX的优越性.
+
+为了避免浮动体的缺点, 不使用figure等环境就行了,因为它们是浮动的. 相反, 什么环境都不用, 直接使用includegraphics, 然后定义caption为
+makeatletter\def\@captype{figure}\makeatother
+再写 \caption{}. 例如：
+
+--------------------------------------------------------------------------------
+%这样插入图片
+\begin{minipage}{0.3\linewidth}
+\centering\includegraphics[width=\linewidth]{d:/zq/thesis/porch/vf15w55f024.eps}\newline
+[a] $Re_G\,=\,0.24\,,Re_H\,\simeq\,51$
+\end{minipage}
+......
+
+%完事之后写
+
+makeatletter\def\@captype{figure}\makeatother
+\caption{Streamlines for cylinder area fraction $\beta\,=\,15\%$
+and channel width $H/a\,=\,13.69$ at different Reynolds numbers
+(to be continued) ($Re_H$ is calculated according to (\ref{ReH})).}
+
+--------------------------------------------------------------------------------
+
+
+此外，宏包endfloat可将所有浮动体放到最后.
+
+还可以使用float宏包, 然后figure环境的位置参数写成[H].
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%效果 第1 共3页
+\usepackage{lastpage}%获得总页数
+
+\fancyhead[L]{\CJKfamily{kai}\xiaowu 2008-10-24~～~2008-11-02}
+\fancyhead[R]{\CJKfamily{kai}\xiaowu 研究日志}
+\fancyhead[C]{\CJKfamily{kai}\xiaowu 第~\thepage~页~~共~\pageref{LastPage}~页}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+直接画图
+Sysquake for LaTeX
+http://www.calerga.com/products/SQLx/index.html
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+关于生成论文的索引 
+
+Monday, April 16, 2007, 01:08 AM
+生成的论文没有索引心里总是觉得怪怪的。对于如何生成索引，主要有两种方式。
+
+1.pdflatex编译。这种方式会自动生成索引，不过对于某些版本由于编码格式问题会产生乱码，其解决方式如下（以mythesis.tex为例）：
+   pdflatex mythesis.tex   pdflatex mythesis.tex   gbk2uni mythesis.out   pdflatex mythesis.tex
+这种编译方式的主要问题在于图片格式不支持eps，pdf的边框往往又不太好去除，所以很多人比较倾向于第二种方式。
+
+2.latex＋dvipdf(dvipdfm,dvipdfmx)编译。这种方式的问题在于不能默认生成索引，需要将选项\usepackage[dvipdf
+]{hyperref}改成：
+  \usepackage[dvipdfm]{hyperref}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+如何自动生成eps的boundingbox 
+
+Monday, April 16, 2007, 01:04 AM
+长期的工作实践中研究出来的方法，比较墨迹，但的确有效
+
+对于原有eps格式首先将其转换成pdf格式，然后另存为ps格式，然后再转换成eps格式。
+
+其中eps转换成pdf可以通过pdf打印机或者相关软件转换完成， pdf转换成ps在acrobat professional里面已经具备，ps转换成eps可以有Gsview完成。
+
+归纳起来步骤就是： eps->pdf->ps->eps。
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+LaTeX Notes
+http://www.cs.toronto.edu/~dross/latex/
+--------------------------------------------------------------------------------
+
+Here are a few LaTeX tricks I've picked up. Some of these took me a while to figure out, so hopefully you might find them useful.
+
+colordvi
+The colordvi package provides named colours that can be included by doing, for example, \Red{red text goes here}. Here is a document that lists and displays all the colours available in this package. [TEX] [PS.GZ] [PDF] 
+Landscape Trick
+Do you every get frusted that "dvips -t landscape" always results in upside-down (seascape) pages? Well the trick to solve this problem is to include the following line near the top of your document (one version of it, anyway). More info on this can be found at the Official dvips Home Page 
+\special{! TeXDict begin /landplus90{true}store end }
+or maybe just \special{! /landplus90 true store} 
+Type 1 Fonts - Making PDF's look good
+Blind use of dvips + ps2pdf results in PDF files that look terrible in Adobe Acrobat. The problem is with Type 3 Postscript fonts. To get your document to use Type 1 fonts instead, and hence get good-looking PDF's, use one of the following methods. 
+pdflatex file.tex 
+dvips -Pamz -Pcmz -o outfile.ps infile.dvi, then ps2pdf outfile.ps 
+dvips -Ppdf -o outfile.ps infile.dvi, then ps2pdf outfile.ps 
+ps2pdf: Preserving Image Quality
+By default ps2pdf compresses images for inclusion in the pdf file. This can result in images of unacceptably poor quality (e.g. ). The trick to avoiding this is to use the following flags when invoking ps2pdf: 
+      ps2pdf -dMaxSubsetPct=100 -dCompatibilityLevel=1.2 \
+             -dSubsetFonts=true -dEmbedAllFonts=true \
+             -dAutoFilterColorImages=false \
+             -dAutoFilterGrayImages=false \
+             -dColorImageFilter=/FlateEncode \
+             -dGrayImageFilter=/FlateEncode \
+             -dModoImageFilter=/FlateEncode \
+             file.ps
+       
+To see the difference in results, compare the following files original.ps, bad.pdf, and good.pdf. This tip was obtained from the VIS 2004 conference website. 
+Hyperref & List of Figures
+When converting my thesis to a pdf, I discovered that inclusion of the hyperref package causes multi-line captions in a List of Figures or List of Tables to be written entirely on one line. The trick to avoiding this problem is to pass the option linktocpages to hyperref. The resulting code looks something like: 
+      \usepackage[dvips,letterpaper,linktocpage]{hyperref}
+      \hypersetup{
+          pdfauthor = {David A. Ross},
+          pdftitle = {Learning Parts-Based Representations of Data},
+          pdfsubject = {M.Sc. Thesis}
+      }
+      
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+LaTeX里处理不浮动的图形和表格的办法
+
+众所周知，LaTeX里面处理图形和表格的浮动体历来是最麻烦的问题之一，原因是即使使用了[h]选项，浮动体还是会乱跑，但如果去掉\begin {figure}\end{figure}来一个裸的\includegraphics又不能结合\caption命令加标题。这个问题其实在著名的 "LaTeX2e及常用宏包使用指南"里的8.7节有介绍，但我也是今天才偶然看到这一节，想必还有很多同仁还在为处理浮动体而奋斗，因此贴出来共享一下：
+
+figure和table之所以能够使用\caption命令是因为定义了\@captype命令，也就是说，如果我们自己定义一下的话也是可以起到同样的效果的。要想做到这一点，首先在引言中加入如下的命令：
+
+\makeatletter
+\newcommand{\figcaption}{\def\@captype{figure}\caption}
+\newcommand{\tabcaption}{\def\@captype{table}\caption}
+\makeatother
+
+其中加入\makeatletter;\makeatother的原因是命令中有@符号。
+
+加入这四行后，再要插入图片时，可以
+
+\begin{center}
+\includegraphics{xxx.eps}
+\figcaption{xxxx}\label{fig:xxx}
+\end{center}
+
+而表格则是
+
+\begin{center}
+\begin{tabular}
+xxx
+\end{tabular}
+\tabcaption{xxx}\label{tab:xxxx}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+画表格的粗线时横竖交点的问题
+
+
+在画表格时，顶线和底线往往是要用粗线表示的，这个功能可以使用booktabs 宏包完成。
+
+在booktabs宏包中，定义了\toprule和\bottomerule两个命令画顶/底的粗线。但问题在于，如果同时使用竖线的话，交点会非常难看：
+
+p2 
+
+为了这个问题找了半天，最后发现\toprule还带了个\belowrulesep,\bottomrule还带了个\aboverulesep，分别是控制了底/顶的距离。这样问题就简单了（什么问题都是解决了之后才发现那么简单）：
+
+\renewcommand{\belowrulesep}{0pt}      
+\renewcommand{\aboverulesep}{0pt}   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+给盒子加背景本来不难，就用\colorbox{颜色}{文本}就可以了，但难在如果文本是equation环境的话， colorbox是左右盒子，会行不通。当然，如果用minipage环境可以解决左右盒子这个问题，但如何给minipage加背景我也不是很清楚。
+
+最终在该网页上发现framed.sty里面居然带了一个shaded环境，可以解决这个问题（以前都直接搜shade之类的，怎么也没想到在framed宏包里面@_#
+
+言归正传，使用方法是：首先
+\usepackage{framed}
+
+之后先定义颜色，比如
+\definecolor{shadecolor}{gray}{0.85}   %shadecolor是保留字，不能改。后面是淡灰底
+
+之后再使用就直接用
+\begin{shaded}
+\begin{equation}
+x+y=z
+\end{equation}
+\end{shaded}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+改变item的间距的办法
+当
+\begin{itemize}
+\item a
+\item b
+\end{itemize}
+这样每个item之间只有一行的时候，会发现原来的item的间距大的有点傻。但改变这个距离却远不是看起来那么容易。
+
+
+其原因在于，尽管LaTeX也提供了\itemsep这个参数来决定items的距离，这个参数却只在itemize,enumerate, description,list这四个列表环境中最不常用的list中起作用。对其它三个环境这个参数都被封装掉了，外部的设置自然也无法起作用。
+
+
+除了自己新建一个list外（就为了改个间距自己写itemize环境实在有点高射炮打蚊子了-_-），另一个常用的办法是使用
+
+
+mdwlist宏包
+
+这个宏包是通常的列表环境的扩展，其中提供了“压缩格式”的列表环境
+
+\begin{itemize*},\begin{enumerate*},\begin{description*}，可以很好的解决开始的问题。
+
+另外，这个宏包还提供了列表的“中断”与“恢复”功能(suspend and resume)，详见该宏包的介绍。
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+文档中插入图片的几种常用的方法
+
+LaTeX中一般只直接支持插入eps(Encapsulated PostScript)格式的图形文件, 因此在图片插入latex文档之前应先设法得到图片的eps格式的文件.
+
+在LaTeX文档中插入图片都是通过使用一些latex图形处理宏命令来实现的, 有很多宏命令都支持在在LaTeX文档中插入eps格式的图形文件, 主要有:
+
+
+1. 用includegraphics宏命令(graphicx包):
+
+首先需在latex文档的文件说明部分加上:
+
+\usepackage{graphicx}
+
+然后在需要插入图片的地方引用:
+
+\includegraphics[height=高度]{图片文件名}
+
+或者: \includegraphics[width=宽度]{图片文件名}
+
+其中的"高度"和"宽度"是指希望图片打印的高度和宽度, 必须给出单位, 可用厘米(cm)或英寸(in). 高度和宽度也可用上述格式同时给出, 这样可以改变原图的长宽比例. 上述命令中的图片文件名是指欲插入的图片文件 的文件名, 图片必需是eps格式的.
+
+用graphicx包的includegraphics宏命令插入图片时还可以使图片旋转, 方法是:
+\includegraphics[height=高度][angle=旋转角度]{图片文件名}
+
+2. 用includegraphics宏命令(graphics包):
+3. 用psfig宏命令:
+首先需在latex文档的文件说明部分加上:
+
+\usepackage{psfig}
+然后在需要插入图片的地方引用:
+\psfig{figure=图片文件名,height=高度}
+或者: \psfig{figure=图片文件名,width=宽度}
+其中的"高度"和"宽度"是指希望图片打印的高度和宽度, 必须给出单位, 可用厘米(cm)或英寸(in). 高度和宽度也可用上述格式同时给出, 这样可以改变原图的长宽比例. 上述命令中的图片文件名是指欲插入的图片文件 的文件名, 图片必需是eps格式的.
+
+
+4. 用epsfig宏命令:
+epsfig宏命令的使用方法和psfig完全相同, 具体方法是: 首先需在latex文档的文件说明部分加上:
+
+\usepackage{epsfig}
+然后在需要插入图片的地方引用:
+\epsfig{figure=图片文件名,height=高度}
+或者: \epsfig{figure=图片文件名,width=宽度}
+其中的"高度"和"宽度"是指希望图片打印的高度和宽度, 必须给出单位, 可用厘米(cm)或英寸(in). 高度和宽度也可用上述格式同时给出, 这样可以改变原图的长宽比例. 上述命令中的图片文件名是指欲插入的图片文件 的文件名, 图片必需是eps格式的.
+
+
+5. 用epsf宏命令:
+用epsf宏命令的使用方法是: 首先需在latex文档的文件说明部分加上:
+
+\usepackage{epsf}
+然后在需要插入图片的地方引用:
+\epsfxsize=宽度\epsffile{图片文件名}
+或者: \epsfysize=高度\epsffile{图片文件名}
+其中的"高度"和"宽度"是指希望图片打印的高度和宽度, 必须给出单位, 可用厘米(cm)或英寸(in). 高度和宽度也可用上述格式同时给出, 这样可以改变原图的长宽比例. 上述命令中的图片文件名是指欲插入的图片文件 的文件名, 图片必需是eps格式的.
+
+
+在网上发现如下codes，可以生成透明图形。
+% If you ever wondered how to get a matlab figure transparent (particularly usefull when you export it to formats that feature transparency, like eps, gif, png, etc.), here is how you do it:
+imshow(framework)
+% you created a figure and it is "current". % the following, you could have guessed
+set(gcf,'color','none');
+set(gca,'color','none');
+% but this following little detail took me ages to figure out
+set(gcf,'InvertHardCopy','off');
+print -depsc2 schematic.eps
+ 
+
+charcnt file.dvi %字数统计
+
+%数学模式加粗 如\pi
+用bm宏包 \bm{\pi}
+
+1 让表格的标题离表格远一点！
+
+\belowcaptionskip命令可以让表格上面的标题离表格远一点。如果标题在表格的下面，则需要使用
+
+\abovecaptionskip 命令。举一个例子：\abovecaptionskip=2cm。
+
+2 让一个文本块出现在同一行上，而不换行输出，可以使用命令\mbox{文本}。
+
+比如让一个大的数字不换行输出就可以这样：\mbox{222222}。
+
+3 为了让Latex支持Arial字体，需要使用宏包times：在导言区加上\usepackage{times}，然后在正文中只要使用\sf{text}就可以了。
+
+□硕士 ■博士
+第一个：在导言区(preamble)导入宏包：\usepackage{amssymb}
+然后在正文中使用$\Box$就可以得到“□”。
+第二个：在正文中直接使用命令\rule{0.8em}{0.8em}就可以得到“■”。
+
+
+URL Style
+- \usepackage{url}
+- \urlstyle{same | rm | tt | sf | user-defined}
+- \bibliographystyle{abbrvurl|unsrturl}
+
+Math Displaystyle
+\everymath{\displaystyle}
+
+如果想在提示错误的地方“强行换行”，请用 \mbox{}\vspace{} 。
+
+中文下标   $C_{\mbox{汉字}}$
+
+务必将label写在caption的后面
+
+带圈的数字或者汉字
+使用\textcircled{}命令，后面的参数可以是一个字符或者汉字（配合CJK）
+，甚至也可以是公式，但是它只会给第一个字符或者汉字加上 > 合适的圆圈，字体
+放缩命令对它也有效，因此可以利用这点实现两个字符加圈的效果，但是需要仔细的
+调整尺寸，参考如下命令： > \Large{\textcircled{\small{12}}}、\textcircled
+{九}。
+①②③④⑤⑥⑦⑧⑨⑩可以直接在CJK中使用
+
+\heartpar{} %以心形输出文字段落
+
+条件编译
+\usepackage{ifthen}
+这次需要ifthen包
+\newboolean{HAVEAAA}
+\setboolean{HAVEAAA}{false}
+\begin{document}
+\ifthenelse{\boolean{HAVEAAA}}
+{
+ aaa.
+}%
+{
+ bbb.
+}%
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%    WinEdt 使用技巧     %%%%%%%%%%%%%%%%%%%%%%%%%
+行号显示:  编辑器左侧 --> 右键 --> ShowLine Numbers
+
+行宽设置 自动换行 Option --> Preference --> Editor --> Right Margins[Chars]
+
+强行换行 点击 编辑器的状态栏的[Wrap]
+
+复制方式 点击 编辑器的状态栏的[Line 或 Block]
+
+打开默认文件类型 Option --> Preference --> Modes --> Modes and File Filters
+
+书签设置与使用 编辑器左侧 --> 右键 --> Set Bookmark
+
+%%%%%%%%%%%%%%%%%%%%    美化技术     %%%%%%%%%%%%%%%%%%%%%%%%%%%
+表达强调
+\newcommand{\emph}[1]{\textbf{\large #1}}
+
+实数集R
+\newcommand{\rtn}{\mathbb{R}}
+
+隔开中文和英文/数字/数学公式
+\CJKtilde 重定义~, 成为可断的橡皮长度
+
+在有中文/英文/数字/数学公式
+用全角 。、“”（）《》·
+用半角 , ; : ? ! 
+
+大多数情况下, 半角标点后加一空格
+全角标点后接半角标点时, 中间加\!
+
+Prof. \ Song, I from JIANGXI\@.
+
+逗号与顿号
+外文/阿拉伯数字间的并列关系不用顿号;
+
+连字符
+- 用-产生, 公式/图/表中的短横线
+－用- -产生, 时间/地点等的起止, 复合名词的短横线
+— 用- - -产生, 中文的破折号, 与汉字"一"在一直线上, \raisebox{0.5mm}{------}
+
+省略号
+... \ldots \cdots 外文/阿拉伯数字省略, 在中间保留前后的标点[注意最后加\,],如$\cdots \,$, 在最后保留前面的标点
+...... 汉语省略, 也可用于外文/阿拉伯数字整行/段省略
+............ 汉语整行/段省略
+
+
+
+%%%%%%%%%%%%%%%%%%%%     解决乱码    %%%%%%%%%%%%%%%%%%%%%%%%%%%
+pdfLaTex 命令产生的文件copy出来的是乱码
+
+生成dvi文件后，用dvipdfmx + 文件名.dvi命令去生成pdf文件，这时复制粘贴其中的文本出来的就不再是乱码了，而且中文搜索也没问题。
+
+用PDFLaTeX制作可查找/复制/粘贴的PDF文件
+这些文件已经包含在新版CCT (0.618), 其中的ccmap.sty支持CCT/CJK
+另外，新版的makecmap可以直接读sfd文件。
+
+
+使用CJK
+\documentclass{article}
+\usepackage{CJK}
+
+\usepackage{ccmap}  %关键
+
+\begin{document}
+\begin{CJK*}{GBK}{kai}
+用PDFLaTeX制作可查找/拷贝/粘贴的PDF文件
+\end{CJK*}
+\end{document}
+
+
+
+CCT
+\documentclass[CJK]{cctart}
+\usepackage{ccmap}
+\begin{document}
+
+用PDFLaTeX制作可查找/拷贝/粘贴的PDF文件
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%    基本   %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{名称}[参数个数][默认]{定义}
+
+\shapepar{形状参数} 段落文字 %不能用数学模式
+参数有: 
+\diamondshape
+\heartshape
+\circleshape
+\starshape
+\nutshape
+\squarshape
+或更简单的\形状par{}
+
+垂直文本
+\shortstack[位置l c r]{文本行\\ 文本行\\ 文本行\\}
+
+图文框
+\begin{window}[行数, 位置, 内容, 描述]
+段落文字 
+\end{window}
+如:
+\begin{figwindow}[1,r,{\includegraphics%
+[width=3.0cm]{photo.ps},{my photo}]
+段落文字 
+\end{figwindow}
+
+
+命令或声明的组成
+  Control sequence: 命令或声明
+  命令有参数，声明没有参数
+  绝大多数命令或声明由\ 后接字母序列构成，如\texttt
+  有些特殊命令由\ 接非字母字符构成，如\$
+  有些特殊符号也是命令，它们只有9 个：$ # { } ^ _ ~ % &
+
+LaTeX文档的结构
+  第一句为
+\documentclass{article}
+article可以换为book, cctart, cctbook 等
+  导言preamble:从开头到\begin{document}之前的内容在此设置文档全局定义，如页宽的指定\setlength{\textwidth}{14cm}，不能出现有输出的命令
+  正文
+\begin{document}
+……
+\end{document}
+  可以利用模板生成这个框架
+
+
+普通文本排版的约定
+  %为注释符，相当于C++中的//
+  用空格公开单词，空格个数不限；
+  用非字母字符表示命令的结束
+  空行表示新段落的开始
+  每行开头的空格无用
+  每行结尾的回车相当于空格的作用，但可以用%去掉它的效用
+
+
+长度
+  固定长度: (浮点数) + (长度单位)
+  长度单位：cm厘米=1/25in, mm毫米, in英寸=25.4mm, 
+  pt点=1/72.27in约1/3mm, bp大点=1/72in, pc pico=12pt, dd, cc, em大写字母M的宽度,ex小写字母x的高度
+  
+  弹性长度: (长度) plus (长度) minus (长度)
+  改变长度的值 \setlength{…}{…}
+\stretch{} %伸长
+
+空白间隔 空格 间距
+~ \nbs %英中文不可打断的空格,不能增大, 常用予人名处
+\mspace{数mu} %mu是math unit=1/18em
+\, 等价\thinspace
+\! 等价\negthinspace %负间距
+\: 等价\medspace
+\; 等价\thickspace 
+\ 
+\quad 
+\qquad  
+\phantom{}
+\hspace{} %水平空白
+\vspace{} %垂直空白
+\/ \mbox{} \textcompwordmark f{f} %强制分开连体字
+\@ %表示句子结束,不管大写字母的句号
+
+
+
+\medskip
+\textsuperscript{[3]} %文字上标
+\textbf{} %粗体
+\textit{} %斜体
+\textsl{}
+
+$\backslash$ %输出\
+\symbol{92} %输出\
+\textbar %输出|
+\mid %| 公式
+\textless %输出<
+\textgreater %输出>
+\S \P \dag \ddag \copyright \pounds
+\TeX{} \LaTeX{} \LaTeXe{} 
+` %左单引号 \textquoteleft
+' %右单引号 \textquoteright
+``  %左双引号
+'' " %右双引号
+
+
+\DeclareSymbolFont{lettersA}{U}{pxmia}{m}{it}
+\DeclareMathSymbol{\piup}{\mathord}{lettersA}{"19}
+\piup %pi
+
+\ne %不等号
+\ge %大于等于
+\emptyset %空集
+\, %产生1/6quad间隔
+- %连字符
+-- %数字范围符
+--- %西文破折号
+
+\frenchspacing
+\nonfrenchspacing
+\noindent
+
+抄录
+\begin{verbatim*} %带*用符号显示空格
+\end{verbatim}
+\verb*|\命令| %单行输出tex命令
+
+显示源文本
+   \verb|…|
+   \begin{verbatim}
+……
+\end{verbatim}
+
+\startTEX
+\author{薛瑞尼}
+\stopTEX
+
+
+\begin{flishleft} %左对齐
+\end{flishleft}
+\centering %后续文本居中对齐
+\centerline %一行文本居中对齐
+\begin{center}
+\end{center}
+\begin{flushright} %右对齐
+\end{flushright}
+
+LR盒子
+\mbox{单行文本} %
+\fbox{单行文本} %带边框的
+\makebox[宽度][位置]{单行文本}  %不带边框的
+\framebox[宽度][位置]{单行文本} %带边框的
+
+段落盒子
+\parbox
+
+提升盒子
+\raisebox{上移量}[高度][深度]{文本}
+生成一个\mbox，它相对于当前基线向上移
+动指定量。缺省参数指定所得结果的高度和深度
+如果上移量为负数，则向下移位
+
+
+标尺盒子
+\rule[提升量]{宽度}{高度}
+生成具有指定宽度和高度的实心盒子，并且相对于基线向上提升指定距离
+•可以生成具有零宽度的标尺，从而得到一个不可见的具有给定高度的盒子，称为支撑
+•可以生成表示定理或其证明结果的黑方框
+
+\shadowbox %边框带阴影的盒子
+\doublebox %双层边框的盒子
+\ovalbox  %圆角边框的盒子
+\Ovalbox %粗线圆角边框的盒子
+
+
+
+
+罗列
+
+条目列表
+\begin{itemize}
+\item
+\end{itemize}
+
+编号列表
+\begin{enumerate}
+\item
+\end{enumerate}
+
+\begin{discription}
+\end{discription}
+
+\begin{lsit}
+\end{list}
+
+
+例子
+\begin{itemize}
+  \item 这是~itemize~环境的第一层, 标签是黑圆点.
+  \begin{enumerate}
+    \item 虽然是总的第二层, 但这是~enumerate~环境的第一层.
+    \begin{enumerate}
+      \item 这是~enumerate~环境的第二层.
+      \item 条目标签与总的嵌套层数无关,
+            只取决于它在所属的罗列环境中的层数.
+    \end{enumerate}
+    \item 回到了~enumerate~环境第一层, 是这个环境的第二个条目.
+  \end{enumerate}
+  \item 回到了~itemize~环境, 条目标签又变成了黑圆点.
+\end{itemize}
+
+
+中文书签
+\usepackage[CJKbookmarks]{hyperref}
+
+书签和超级链接
+在preamble中加上 \usepackage[pdftex]{hyperref} 则会自动生成包括书签和超级链接的PDF文件，如果使用CJK中文需要不同的选项 \usepackage[pdftex,CJKbookmarks=true,colorlinks=true]{hyperref} 其中的pdftex选项根据生成pdf的方式选择，有dvips，dvipdfm等，参考hyperref文档。
+如果section之类的命令中有中文，而且又设置了label，那么hyperref会出问题，导致编译进入死循环，总说有label改变了，需要再编译。解决办法：
+\makeatletter
+\@tempcnta=128
+\loop \catcode\@tempcnta=13 \ifnum\@tempcnta<255 \advance \@tempcnta \@ne
+\repeat
+\makeatother
+具体原因参见TeX@SMTH 
+
+
+加入\usepackage{hyperref} 可以自动将图表文献的引用变成超链接，但它们都是仅仅将编号的数字变成超链接，如图(1)，表(3)，而我想将相应的文字也超链接，即：(图1)，(表3)，请问该怎么实现？
+   可以利用{hyperref} 包中的\autoref功能。只要将引用图或表的\ref{label}换成\autoref{label}即可。但有个问题就是，这样处理的结果是英文的，即“Figure 1”。要想超链接的文字变成“图1”，可以预先做如下的重定义：
+\renewcommand\figureautorefname{图}
+
+%%%%%%%%%%%%%%%%%%%%  分行 分段 分页   %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\ %分段但不开始新段
+\\*
+\\[length]
+
+   另起一行，但不缩进
+空行或者\par
+   另起一行，而且有缩进
+
+\par %出现空行分段[多个回车产生一个没空行分段]
+
+
+\\[长度] \\* \newline %强制分行，\\*禁止分行处分页
+
+\linebreak[长度] %建议分行
+\nolinebreak[长度] %不建议分行
+\mbox %保持在同一行
+\newpage %分页
+\pagebreak[数字] %建议分页
+\nopagebreak[数字] %禁止当前行分页
+\enlargethispage{尺寸} %增加当前页的高度
+\enlargethispage*{尺寸} %增加当前页的指定高度
+
+ 
+%%%%%%%%%%%%%%%%%%%%     水平 垂直间距     %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hsapce{长度} %产生长度的空白
+\hsapce*{长度} %产生指定长度的空白
+\hspace*{\fill} \hfill %自动充满一行
+文字左对齐\hspace*{\fill}\\
+\hspace*{\fill}文字中间对齐\hspace*{\fill}\\
+\hspace*{\fill} 文字右对齐
+\quad \qquad %插入当前font长度的空白
+\dotfill \hrulefill %点线/实线填充空白
+\vspace{\smallskipamount\medskipamount\bigskipamount} %两行间插入垂直间隔
+\vspace*{长度} %两行间强制插入垂直间隔
+\vspace{\fill} \vfill %插入空白充满一页
+
+%%%%%%%%%%%%%%%%%%%%    段落     %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\parindent}{2em} %首行缩进两个汉字
+\setlength{\parindent}{2em} % 设置段首缩进量
+\renewcommand{\baselinestretch}{1.2} % 重设行距
+\CJKindent
+\noindent %不缩进
+\hspace*{parindent} %第一节第一段首行不缩进，使之首行缩进
+\usepackage{indentfirst}
+\setlength{\parskip}{0pt} %段落间距
+\setlength{\baselineskip}{20pt} %行距20pt
+\centerline{} %居中
+\begin{center}
+\end{center}
+\centering %后续文本居中对齐
+
+%%%%%%%%%%%%%%%%%%%%     导言区     %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+导言区中的中文
+不使用CJK环境而使用中文，在导言区中加入：
+%% USE Chinese in premable without CJK
+\makeatletter
+\@tempcnta=128
+\loop \catcode\@tempcnta=13 \ifnum\@tempcnta<255 \advance \@tempcnta \@ne
+\repeat
+\makeatother
+
+
+
+
+\syntaxonly %[syntonly包] 只检查语法, 不生成dvi文件
+
+
+
+
+
+
+文档类型
+   \documentclass[…]{…}为LaTeX源文件的第一条命令，它的参数{…}定义了文档的类型,[…]中为可省参数
+   可选用的标准文档类型很多，主要有article, book, cctart, cctbook, ….
+  有些出版社提供了自己的文档类型
+  文档类型是以文件的形式存贮的，后缀为.cls. 例如，在安装了AMS-LaTeX后，就会得到amsart.cls文件, 那么参数值可以取amsart
+
+可省参数
+  字体尺寸
+10pt 11pt 12pt
+  纸张大小
+a4paper a5paper b5paper
+letterpaper legalpaper
+executivepaper
+  页面格式
+onecolumn twocolumn
+oneside twoside
+openright openany
+notitlepage titlepage
+  其它参数
+leqno fleqn openbib draft final
+
+可省参数组合
+   各个可省参数可以同时出现在\documentclass后面的方括号内，相互之间用逗号分开，但不要同时出现两个
+矛盾的选项\documentclass[11pt,twoside, fleqn]{article}
+
+
+
+宏包(package)
+  调用命令为\usepackage[…]{…}
+    大括号内是宏包的名称，例如amsmath, 这时系统中应当包含amsmath.sty文件
+    中括号内是相应宏包的可省参数
+    紧接在\documentclass命令后面  
+  可以在一条\usepackage命令的大括号内同时放置多个宏包，例如\usepackage{makeidx, ifthen}
+
+标题
+   标题信息定义命令:
+\title{}, \author{}, \date{}
+  定义组成标题的信息
+  不生成任何直接输出
+  可以放在导言中，也可以放在正文中
+  用\\表示多行文本的断行, 不能有空行
+   \thank{}
+   在正文中应用\maketitle生成标题
+     要保证标题信息定义命令在之前已存在
+  标题的样式由文档类确定
+
+
+article类型
+􀁺 写作学术论文，页数一般不超过30页
+􀁺 页面布局示例
+• 节section
+• 小节subsection
+• 小小节subsubsection
+􀁺 标题与其它正文出现在同一页上
+
+
+
+book类型
+􀁺 写作书籍，页数一般不低于30页
+􀁺 页面布局示例
+• 部分part
+• 章chapter
+• 节section
+• 小节subsection
+• 小小节subsubsection
+􀁺 标题页
+􀁺 可以有目录、索引等
+
+页面样式
+􀁺 定义页眉、页脚等: \pagestyle{…}
+􀁺 参数：
+•plain 默认值，页眉空，页脚是页码居中
+•empty 页眉与页脚都是空的
+•headings 页眉：页码与标题; 页脚：空
+•myheadings：自己定义
+•\markright \markboth
+
+
+局部页面样式修改
+􀁺 \thispagestyle{}
+•参数与\pagestyle完全相同，作用也一样
+􀁺 使用位置非常敏感，有时候需要仔细调整放置
+的地方
+􀁺 如果要使首页没有页码，那么应当把
+\thispagestyle{empty}放到\maketitle
+之后，否则不起作用
+􀁺 注意\thispagestyle要位于所在页的完整一
+段开头才能对当前页起作用，否则作用范围是
+上一页
+
+复杂页面格式
+􀁺 可以通过修改LaTeX的\markleft和
+\markright构造复杂的页眉和页脚
+􀁺 例子见教材
+• 页脚：空
+• 页眉：页码在外侧，左内侧是章的题目，右内
+侧是当前节的题目，正文与页眉之前有一横线
+
+
+段落
+􀁺 \parskip: 两个段落之间的距离
+•以ex为单位可以使它随着字体大小相应改变
+•应当是弹性长度
+•例\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+􀁺 \parindent: 第一行的缩进量
+•每一节第一段不缩进
+•可以用\indent或\noindent强制改变
+•\setlength{\parindent}{2\ccwd}
+
+行距
+  \linespread{1.6}
+ \linespread{}\selectfont %当需要将行间距恢复到默认值时
+
+  \baselinestretch %度量两条基线之间, 改变整片文章
+正常间距
+• 它不是长度，是一个无单位的相对值，默认值为1
+• 改变：\renewcommand{\baselinestretch}{1.6} %双倍行距
+• 最好放在导言中
+• 如果出现在正文中，会直到应用了另外一条字体尺寸命令后才有效
+• \normalfont
+
+
+
+\documentclass[a4paper,twocolumn]{article}
+部分单双列
+\twocolumn[…] 中止当前页，以双列形式排版后续
+文本，中括号内的文本以单列形式居中放置在双列文本
+的顶部
+\onecolumn 中止当前页，以单列形式排版后续文本
+
+列宽和列间距由
+\columnwidth和
+\columnsep确定
+
+宏包multicol可以实现单双列在同一页中的混排
+
+\documentclass[11pt/默认10pt,a4paper/a5paper/b5paper/legalpaper/letterpaper/executivepaper,landscape横向模式,notitlepage/titlepage默认单独一页, onecolumn/twocolmn, oneside/twoside]{book/report/article/letter}
+除\part外，其它章节命令形成一个章节序列
+在article类中没有\chapter命令
+在book类中章节编号的最高层次是\chapter
+
+\章节命令[短标题]{标题}
+把序列中下一个编号赋给章节，并把这个编号与标题一起显示出来
+当需要显示目录时，该项会出现在目录中
+短标题用于目录和页眉，当标题过长时需要给出短标题
+
+\章节命令*{标题}
+ 不会显示出章节编号，也不会在目录表中列出该项
+
+在book类中
+ 章号显示为单独的数字
+ 节号是由章号与节号用句号连接形成
+ 小节号是由章号、节号、小节号用句号连接形
+成
+
+在article类中
+ 节号显示为单独的数字
+ 小节号是由节号与小节号用句号连接形成
+
+
+自定义章节号
+CCT中节号前面会显示出§(\S), 有时需要自定义章节
+编号去掉这个符号
+\renewcommand{\thesection}{\arabic{section}}
+
+CCT中：
+\renewcommand{\sectionname}{\arabic{section}}
+
+\setcounter{chapter}{0}把前一章的编号设为0
+
+\tableofcontents：生成目录
+\setcounter{tocdepth}{??}设置出现在目录表中的章节层次
+section总为第1层
+当改变了章节标题内容或者其所在的页码后，需要编译两遍才会使目录表显示正确的内容
+
+
+\usepackage{indentfirst} %首行缩进
+ 
+章节
+\章节命令[短标题]{标题} %短标题显示在目录和headings的页眉, 内部集数器自动编号
+\章节命令*{标题} %不自动编号
+\part \chapter \section \subsection \subsubsection \paragraph \subparagraph
+\part{篇(Part)的标题} %输出Part
+\setcounter{section}{3} 
+\section{节(Section)的标题}  %输出Section
+\setcounter{章节命令}{新的初始值}
+\addtocounter{计算器}{数字}
+\stepcounter{计算器}
+\newcounter{新计算器名}[上级计算器]
+\value{计算器}
+\数字样式{计算器}
+\arabic \roman \Roman \alph \Alph \fnsymbol %脚注符号
+\the计算器名称
+\arabic{footnote}
+
+
+标题
+\title{标题文本} 
+\author{作者信息} \and \\[距离]
+\date{日期文本} %没有date命令自动加日期,\date{}取消日期
+\footnotetext{\textit{Keyword}: 广义特征值, ...} %在thanks上面显示
+\thanks{脚注文本}
+\maketitle % 打印 \title、\author、\date 等内容
+\begin{titlepage} \end{titlepage} %不需\maketitle, 自定义标题页, 重置页码计算器
+
+摘要
+\begin{abstract} \end{abstract} %自动生成英文Abstract
+\renewcommand{\abstractname}{摘\qquad 要} %改变标题名为中文或大写ABSTRACT
+
+\setlength{\textwidth}{页心宽度mm/cm/in}
+\setlength{\textheight}{页心宽度mm/cm/in}
+\setlength{\voffset}{-10mm/10mm} %增大缩小空白[默认左/上留1英寸/25.4mm]
+\setlength{\hoffset}{-10mm/10mm}
+
+
+\usepackage{indentfirst} %首行缩进
+\setlength{\parskip}{0pt} %段落间距
+\setlength{\baselineskip}{20pt} %行距20pt
+%%%%%%%%%%%%%%%%%%%%     英文     %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+英文字体及大小
+􀁺 命令：\textrm \textit \textsl \textnormal \emph{}
+\texttt \textsc \textbf \textup 
+•这些命令可以嵌套，从而形成综合效果，但具
+体的结果依赖于系统所提供的字体
+􀁺 大小声明
+\tiny 5pt
+\scriptsize 7pt
+\footnotesize 8pt
+\small 9pt
+\normalsize 10pt
+\large 12pt
+\Large 14pt
+\LARGE 17pt
+\huge 20pt
+\Huge 25pt
+
+小页环境
+􀁺 \begin{minipage}[b]{7cm}
+……
+\end{minipage}
+􀁺 可以实现特殊效果
+•简单双列或多列
+•公式编号的位置
+
+
+
+\documentclass[9.5pt]{article}
+%\documentclass[11pt/默认10pt]{book/report/article/letter}
+%导言区
+\begin{document}
+
+
+字体族famuly 
+\textrm{} \textsf{} \texttt{}
+
+形状shape
+\textup{} \textit{} \textsl{} \textsc{}
+
+强调
+\emph{}
+
+字体尺寸
+\tiny \scriptsize \footnotesize \small \normalsize \large \Large \LARGE \huge \Huge
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%    中文     %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[10pt]{article}
+\usepackage{CJK}
+\begin{document}
+\begin{CJK}{GBK}{kai} %GB GBK Bg5 Gbt  /song fs kai hei li you
+\begin{CJK*}{GBK}{kai} %忽略汉字后面的空格
+\CJKspace \CJKnospace %切换CJK CJK*环境
+%\begin{CJK}{GBK}{song}
+\newcommand*{\SONG}{\CJKfamily{song}}
+\newcommand*{\HEI}{\CJKfamily{hei}}
+\newcommand*{\KAI}{\CJKfamily{kai}}
+\newcommand*{\FS}{\CJKfamily{fs}}
+\CJKenc{Gbt}
+\CJKfamily{hei}我是黑体字}
+\CJKtilde %西文在汉字产生间隔
+\fontsize{字体尺寸}{行距}
+
+\CJKindent %段首缩进两个中文字符
+\CJKglude %汉字间距 中文字符间距
+\renewcommand{\CJKglue}{\hskip 1pt plus 0.08\baselineskip}
+\renewcommand{\CJKglude}{\hskip <b> plus <b> minus<b> }
+
+\usepackage{indentfirst} %首段段首也缩进
+\renewcommand{\baselinestretch}{倍数} %行间距
+
+\textvisiblespace %可见的空格符
+
+% redefine section
+\titleformat{\section}[hang]{\LARGE}{\CJKnumber{\thesection}{}\@.}{0em}{}
+\usepackage{CJKnumb}
+\renewcommand \thesection {\CJKnumber{\value{section}}、} % 一、章节标题
+
+\usepackage{CJKnumb}
+\CJKnumber{阿拉伯数字} %转化为中文数字2003 --二千零三
+\CJKdigits{阿拉伯数字} %转化为中文数字2003 --二〇〇三
+
+\usepackage{CJKulem}
+\uline{下划线文字}
+
+\usepackage{pinyin} %拼音
+\song{4} \he{2} \ping{2}
+
+\usepackage{ruby}
+\ruby{宋}{\song{4}} 
+中文竖排
+
+初号=42磅=14.82毫米
+小初=36磅=12.70毫米
+一号=26磅=9.17毫米
+小一=24磅=8.47毫米
+二号=22磅=7.76毫米
+小二=18磅=6.35毫米
+三号=16磅=5.64毫米
+小三=15磅=5.29毫米
+四号=14磅=4.94毫米
+小四=12磅=4.23毫米
+五号=10.5磅=3.70毫米
+小五=9磅=3.18毫米
+六号=7.5磅=2.56毫米
+小六=6.5磅=2.29毫米
+七号=5.5磅=1.94毫米
+八号=5磅=1.76毫米
+
+
+参考科学出版社编写的《著译编辑手册》(1994年)
+七号      5.25pt        1.845mm
+六号      7.875pt      2.768mm
+小五号    9pt              3.163mm
+五号      10.5pt        3.69mm
+小四号    12pt            4.2175mm
+四号      13.75pt      4.83mm
+三号      15.75pt      5.53mm
+二号      21pt            7.38mm
+一号      27.5pt        9.48mm
+小初号    36pt            12.65mm
+初号      42pt            14.76mm
+
+
+CJK的中文字号设置
+
+一个方法是进行如下的定义：
+\newcommand{\CJKfontsize}[4]{%
+\fontsize{#1}{#2 plus#3 minus #4}\selectfont}
+\newcommand\zihao[1]{%
+\ifthenelse{\equal{#1}{0}}{%
+\CJKfontsize{42bp}{50.4pt}{.5pt}{.3pt}}{}%
+\ifthenelse{\equal{#1}{0-}}{%
+\CJKfontsize{36bp}{43.2pt}{.5pt}{.3pt}}{}%
+\ifthenelse{\equal{#1}{1}}{%
+\CJKfontsize{26bp}{31.2pt}{.5pt}{.3pt}}{}%
+\ifthenelse{\equal{#1}{1-}}{%
+\CJKfontsize{24bp}{28.8pt}{.5pt}{.3pt}}{}%
+\ifthenelse{\equal{#1}{2}}{%
+\CJKfontsize{22bp}{26.4pt}{.5pt}{.3pt}}{}%
+\ifthenelse{\equal{#1}{2-}}{%
+\CJKfontsize{18bp}{21.6pt}{.3pt}{.2pt}}{}%
+\ifthenelse{\equal{#1}{3}}{%
+\CJKfontsize{16bp}{19.3pt}{.3pt}{.2pt}}{}%
+\ifthenelse{\equal{#1}{3-}}{%
+\CJKfontsize{15bp}{18pt}{.3pt}{.2pt}}{}%
+\ifthenelse{\equal{#1}{4}}{%
+\CJKfontsize{14bp}{16.8pt}{.3pt}{.2pt}}{}%
+\ifthenelse{\equal{#1}{4-}}{%
+\CJKfontsize{12bp}{14.4pt}{.3pt}{.2pt}}{}%
+\ifthenelse{\equal{#1}{5}}{%
+\CJKfontsize{10.5bp}{12.6pt}{.3pt}{.2pt}}{}%
+\ifthenelse{\equal{#1}{5-}}{%
+\CJKfontsize{9bp}{10.8pt}{.2pt}{.1pt}}{}%
+\ifthenelse{\equal{#1}{6}}{%
+\CJKfontsize{7.5bp}{9pt}{.2pt}{.1pt}}{}%
+\ifthenelse{\equal{#1}{6-}}{%
+\CJKfontsize{6.5bp}{7.8pt}{.2pt}{.1pt}}{}%
+\ifthenelse{\equal{#1}{7}}{%
+\CJKfontsize{5.5bp}{6.6pt}{.1pt}{.1pt}}{}%
+\ifthenelse{\equal{#1}{8}}{%
+\CJKfontsize{5bp}{6pt}{.1pt}{.1pt}}{}}
+
+\zihao{5}这是5号
+
+
+
+一个方法是进行如下定义
+
+\fontsize{5pt}{11pt}\selectfont    %5pt 大小的字
+\fontsize{10pt}{11pt}\selectfont   %10pt 大小的字
+\fontsize{15pt}{16pt}\selectfont   %15pt 大小的字
+\fontsize{20pt}{21pt}\selectfont   %20pt 大小的字
+\fontsize{25pt}{26pt}\selectfont   %25pt 大小的字
+\fontsize{30pt}{31pt}\selectfont   %30pt 大小的字
+\fontsize{40pt}{41pt}\selectfont   %40pt 大小的字
+\fontsize{100pt}{100pt}\selectfont %100pt 大小的字
+
+\newcommand{\song}{\CJKfamily{song}}    % 宋体   (Windows自带simsun.ttf)
+\newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体 (Windows自带simfs.ttf)
+\newcommand{\kai}{\CJKfamily{kai}}      % 楷体   (Windows自带simkai.ttf)
+\newcommand{\hei}{\CJKfamily{hei}}      % 黑体   (Windows自带simhei.ttf)
+\newcommand{\li}{\CJKfamily{li}}        % 隶书   (Windows自带simli.ttf)
+\newcommand{\you}{\CJKfamily{you}}      % 幼圆   (Windows自带simyou.ttf)
+
+\newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}     % 字号设置
+\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont} % 字号设置
+\newcommand{\yichu}{\fontsize{32pt}{\baselineskip}\selectfont}      % 字号设置
+\newcommand{\yihao}{\fontsize{28pt}{\baselineskip}\selectfont}      % 字号设置
+\newcommand{\erhao}{\fontsize{21pt}{\baselineskip}\selectfont}      % 字号设置
+\newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\sanhao}{\fontsize{15.75pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}      % 字号设置
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}    % 字号设置
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}   % 字号设置
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % 字号设置
+
+
+%%%%%%%%%%%%%%%%%%%%   参考文献   %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 将参考文献条目间距变小
+一般来说，要生成正确的引用，一般要latex->bibtex->latex->latex这个过程，那么在bibtex后，将*.bbl文件打开，然后在\begin{thebibliography}{100}语句下面加上\addtolength{\itemsep}{-1em} ，再经过两次latex，就可以达到目的了。
+
+\addtolength{\bibsep}{-1ex} % 将参考文献条目间距变小
+
+\begin{thebibliography}{编号样本} %{99}表示编号所占的宽度
+\bibitem[记号]{引用标志} 文献条目 %使用了记号不被编号,正文显示记号
+\bibitem[记号]{引用标志} 文献条目 
+\end{thebibliography}
+
+\newcommand{\supercite}[1]{\textsuperscript{\cite{#1}}}
+\cite{引用标志1，引用标志2, ....}
+
+\makeatletter
+\def\@cite#1#2{\textsuperscript{[{#1\if@tempswa , #2\fi}]}}
+\makeatother
+
+稍改一下
+\makeatletter
+\def\@cite#1#2{\textsuperscript{[{#1\if@tempswa  #2\fi}]}}
+\makeatother
+就可以了
+
+\renewcommand{\refname}{\hfil参\quad 考\quad 文\quad 献}
+\renewcommand{\bibname}{\hfil 参~考~文~献}
+
+ 请参见~\cite{lamport, knuth, dbk}.\CJKfamily{song}
+
+\renewcommand{\refname}{\hfil参\quad 考\quad 文\quad 献}
+
+\begin{thebibliography}{Lam} %{99}表示编号所占的宽度
+\bibitem[Lam]{lamport}Lamport, L. \textsl{\LaTeX\ -- A Document ...}
+\bibitem[Knu]{knuth}Knuth, D. E., \textsl{The \TeX{}book}, ...  %斜体
+\bibitem{dbk}中国大百科全书
+\end{thebibliography}
+
+参考文献
+\begin{thebibliography}{99}
+\bibitem{acton} Acton, F. …
+\bibitem{…}…
+\end{thebibliography}
+其中{99}表示编号所占的宽度
+\bibitem{}中的参数就是所对应文献的标签
+标签中不能包含逗号
+缺省方式中各文献用阿拉伯数字顺序编号
+\bibitem[]{…}用[]中的内容作为编号
+
+\cite[pp. 100, ch. 2]{}，其中参数就是相应参考文献的标签
+ 可以用逗号分开多个标签
+ 文献编号放在中括号内
+
+有许多宏包定制引用格式
+ cite: 会把三个或更多的相邻编号用横线表示，即[2,3,4,7] -->  [2-4,7]
+ 提供了命令\citen: 编号不放在中括号内
+ citesort: 把引用编号自动排序，然后连写
+ overcite: 把文献编号显示为上标，进行排序连写
+
+在源文件中启用数据库
+在导言区
+ 指定参考文献样式：
+\bibliographystyle{apalike}
+  硬盘上应存在名为apalike.bst的文件
+  在此之前上载必要的宏包
+\usepackage{apalike}
+  硬盘上应存在名为apalike.sty的文件
+  在希望参考文献出现的地方指定数据库名称
+\bibliography{as-articles,as-books}
+  硬盘上应存在名为as-articles.bib等的文件
+
+%%%%%%%%%%%%%%%%%%%% 表格  制表位       %%%%%%%%%%%%%%%%%%%%%%%%%%%
+表格的斜线
+在斜线的下方显示a,斜线的上方显示b
+\usepackage{slashbox}
+\backslashbox{a}{b}
+
+
+\begin{tabular}[竖向位置t/c/b]{列格式l/c/r左中右对齐 列分割线|}
+第一行 列分割符& \\\hline
+第二行\\
+....\\
+末行\\
+\end{tabular}
+
+
+\begin{tabbing} %无框表格
+\= %产生制表位
+\> %跳到下一制表位, 可用\'使文字右对齐
+\hspace %控制列宽
+\kill %第一行尾不能用\\
+\end{tabbing}
+
+\begin{tabular}[竖直位置t/b顶部底部对齐]{列格式l/c/r左中右对齐}
+\end{tabular}
+
+\begin{tabular}{|c|c|c|}
+  \MC{3}{c}{\textbf{Font Size}}\\[5pt] \hline
+  \MC{3}{|c|}{\ZZ{-8pt}{30pt}\hfill\Huge Huge 25\hfill
+     \vline\hfill\huge huge 20\hfill\mbox{}}\\ \hline
+  \ZZ{-6pt}{22pt}\LARGE LARGE 17 & \Large Large 14
+     & \large large 12\\ \hline
+  \normalsize normalsize 10 & \small small 9
+     & \footnotesize footnotesize 8\\ \hline
+  \scriptsize scriptsize 7 & \tiny tiny 5 &\\ \hline
+\end{tabular}
+
+\begin{tabular*}{整表宽度}[竖直位置t/b顶部底部对齐]{列格式l/c/r左中右对齐}
+\end{tabular*}
+
+
+Tex表格的线的宽度怎么改？
+1.修改水平线
+%One easy way out is to define a command \hlinewd which takes an argument:
+
+\makeatletter
+\def\hlinewd#1{%
+  \noalign{\ifnum0=`}\fi\hrule \@height #1 \futurelet
+   \reserved@a\@xhline}
+\makeatother
+
+%and use it as
+
+\begin{tabular}{|l|r|}      \hline
+first       &   1       \\  \hline
+second      &   2       \\ \hlinewd{5pt}
+total       &   3     \\  \hline
+\end{tabular}
+
+2.修改竖直线
+\begin{tabular}{|c!{\vrule width 3pt}c|c|}
+\hline
+A & B & C \\ \hline
+100 & 10 & 1 \\ \hline
+\end{tabular}
+
+table中的行高 可以自己随意调节
+\begin{table}{cccc}
+\centering
+\begin{tabular}
+\hline
+a&b&c&d\\[-5pt]
+\hline e&f&g&h\\[-5pt]
+\hline
+\end{...}
+\end{...}
+
+
+复杂表格
+% \usepackage{multirow}
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{2}*{image} &\multicolumn{2}{c}{method 1}  & \multicolumn{2}{|c|}{method 2}  & \multicolumn{2}{|c|}{method 3} & \multicolumn{2}{|c|}{method 4}    \\
+    \cline{2-9}
+    & A & B & A & B & A & B & A & B\\
+    \hline
+    lena&&&&&&&&\\
+    \hline
+    baboon&&&&&&&&\\ \hline
+    \end{tabular}
+\end{center}
+
+
+表格中跨行又跨列的cell
+毫无疑问必须结合multicolumn和multirow，但是只能用 \multicolumn{n}{format}{\multirow{m}{what}}， 不能用multirow包含multicolumn，不知道为什么反正能用就成。给一个例子：
+\begin{table*}[htbp]
+  \centering
+  \begin{tabular}{|*{10}{r|}}
+    \hline
+\multicolumn{2}{|c|}{\multirow{2}*{Blank}}
+      &  \multicolumn{2}{|c|}{CG} & \multicolumn{2}{|c|}{IS} 
+      & \multicolumn{2}{|c|}{MG} & \multicolumn{2}{|c|}{LU}\\\cline{3-10}
+      \multicolumn{2}{|c|}{}  & 2   & 4 & 2 & 4 & 2 & 4 & 2 & 4\\\hline
+\multirow{2}*{Run Time(s)}
+      & IA32 & 24.37   & 16.18 & 19.62 & 8.98 & 31.98 & 18.71 & 622.76 & 266.16\\
+      & IA64 & 54.41   & 30.29 & 25.54 & 15.72 & 164.16 & 84.73 & 3226.60 & 1723.11\\\hline
+\multirow{2}*{Sync Time(ms)}
+      & IA32 & 7.156   & 25.607 & 189.793 & 70.336 & 286.354 & 86.888 & 6.446 & 18.434\\
+      & IA64 & 5.960   & 7.043 & 21.980 & 10.078 & 2.780 & 13.793& 2.922 & 5.385\\\hline
+  \end{tabular}
+  \caption{Total run time and synchronization time for each benchmark.}
+  \label{tab:data}
+\end{table*}
+
+
+
+表格中的项如何垂直居中
+\documentclass{article}
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\begin{document}
+\begin{tabular}{cp{1in}}
+xxx & \multicolumn{1}{l}{Some ragged right text. Some ragged right text.}\\
+yyy & \multicolumn{1}{l}{Some ragged right text. Some ragged right text.}\\
+\end{tabular}
+
+\begin{tabular}{cp{1in}}
+xxx & \begin{flushleft}
+    Some ragged right text. Some ragged right text.\end{flushleft}\\
+yyy & \begin{flushleft}
+    Some ragged right text. Some ragged right text.\end{flushleft}\\
+\end{tabular}
+%
+\begin{tabular}{cp{1in}}
+xxx & \PreserveBackslash\raggedright
+   Some ragged right text. Some ragged right text.\\
+yyy & \PreserveBackslash\raggedleft
+   Some ragged right text. Some ragged right text.
+\end{tabular}
+\end{document}
+
+
+
+%%%%%%%%%%%%%%%%%%%%  图形 图像    %%%%%%%%%%%%%%%%%%%%%%%%%%%
+命令      可处理图像格式
+latex 	   eps, ps, mps
+pdflatex   pdf, mps, jpg, png
+
+
+浮动环境
+􀁺 \begin{table} … \end{table}
+􀁺 \begin{figure} … \end{figure}
+􀁺 注意：从结构上说，这两个环境并没有要求它所包围的内容是什么。例如：在table环境中可以包围非表格的内容，也可以包含多个表格
+
+浮动的位置指定
+􀁺 \begin{table}[位置] … \end{table}
+􀁺 \begin{table*}[位置] … \end{table*}
+􀁺 \begin{figure}[位置] … \end{figure}
+􀁺 \begin{figure*}[位置] … \end{figure*}
+􀁺 其中的可省参数“位置”指定浮动对象可以安置的位置
+•由于浮动对象的位置并不能精确预知，因此这里的参数只是提供给LaTeX浮动安置算法的建议
+
+
+位置
+􀁺 由零到四个字母组成
+• h: here 不能用于*-形式的环境
+• t: top 放在当前页的顶部，如果空间不够，那么就放在
+下一页的顶部
+• b: bottom 放在当前页的底部，如果空间不够，那么就
+放在下一页的底部
+• p: page 显示在只有插图与表格的特殊页上
+• !：与其它字母一起使用，去掉关于间距和数值限制
+􀁺 默认值：tbp
+
+
+实际放置点
+􀁺 符合下述规则的最早可能点
+• 在它定义的前面再没有浮动对象没有显示
+• 插图和表格是按照在文本中定义的顺序出现的
+• 插图与表格的顺序可能会混杂在一起• 只能出现在符合“位置”参数指定的地方
+• 除非使用了!，否则要遵从一定的样式参数的限制
+• 对于组合ht, 优先考虑h
+􀁺 当使用了\clearpage, \cleardoublepage 或者\end{document}命令时，所有还没有输出的浮动对象显示在单独一页或一列上，不考虑定位参数的影响
+
+cleardoublepage产生的空白页上无页码
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+   \hbox{}\thispagestyle{empty}\newpage\addtocounter{page}{-1}
+   \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+
+样式参数
+􀁺 topnumber: 一页顶部的最多浮动对象数
+􀁺 bottomnumber: 底部的最多浮动对象数
+􀁺 totalnumber: 一页中的最多浮动对象数
+􀁺 dpltopnumber: 双列格式中横跨两列的最多浮动对象数
+􀁺 用\setcounter{}{}改变它们的值
+
+百分比
+􀁺 \topfraction, \bottomfraction, \textfraction, \floatpagefraction, \dbltopfraction, \dblfloatpagefraction
+􀁺 用\renewcommand{}{}重定义上述浮点数
+􀁺 值必须介于[0, 1)之间
+
+
+间距
+􀁺 \floatsep, \textfloatsep: 顶部或底部浮动
+对象间以及与正文的间距
+􀁺 \intextsep：对于h参数，浮动对象与前后
+正文的间距
+􀁺 \dblfloatsep, \dbltextfloatsep
+􀁺 均为弹性长度，用\setlength改变
+
+\setlength{\textfloatsep}{6pt plus 1pt minus 1pt} % 缩小表格和其后文本的间距
+
+标题
+􀁺 \caption{\label{abc} caption}
+􀁺 可以放在浮动环境中的任何地方
+• 表格：放在顶部
+• 插图：放在底部
+􀁺 如果标题文本不足一行，那么标题居中显示，
+如果标题太长，那么它与正常段落一样
+• 太长时应当利用\caption[]{}形式提供短标题，用于插图与表格的列表显示
+
+
+LaTex采用右手坐标系[向上为正]
+\unitlength %xy坐标轴设置同单位长度1mm
+\setlength{\unitlength}{长度}
+
+\begin{picture}(宽度,高度)(x坐标,y坐标)
+绘图命令
+\end{picture}
+
+
+\usepackage{graphics}
+\includegraphics*[左下角x,y][右上角x,y]{图像文件名} %不带*插入整个图形
+\scalebox{横向放缩因子}[竖向放缩因子]{图像文件}
+\resizebox{宽度}{高度}{图像文件} %放缩到指定大小
+\reflectbox{图像文件} %水平翻转
+\rotatebox{旋转角度}{图像文件}
+
+\includegraphics[option]{myfile}
+option:
+       width 宽度
+       height 高度
+       scale 缩放因子
+       angle 旋转角度, 单位为度, 顺时针为正方向
+       origin 旋转中心
+       bb  如:bb=0.1cm 0.1cm 11.8cm 9.6cm, 设定BoundigBox的左下角在(0.1cm, 0.1cm)右上角在(11.8cm, 9.6cm)
+
+为什么photoshop导出的eps文件latex不认？
+  加上bounding box就行了，具体方法是：
+  用GSView打开看看大小（比如是800*600），在\includegraphics选项中加入bb=0 0 x y，如：
+\includegraphics[width=0.5\textwidth,bb=0 0 800 600]{1.eps}
+
+
+Too Many Unprocessed Floats
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+latex会把不能处理的浮动的图形放到 “未处理浮动图形队列”里，该队列最多放18个浮
+动图形，如果多于18个，就会产生“Too Many Unprocessed Floats”错误。
+
+
+此时可采用特殊命令，强制latex处理 未处理浮动图形，可以由以下三种方法
+\clearpage
+\FloatBarrier 在placeins包里
+\afterpage{\clearpage}  在afterpage包里
+
+
+
+
+
+\usepackage{subfigure}   % 使用子图形
+\renewcommand{\thesubfigure}%
+{(\arabic{subfigure})} %子图用阿拉伯计数
+
+多图并排 并列的字图形 a) b)....
+\usepackage{subfigure}
+\begin{figure}[tp]
+\begin{center}
+\subfigure[fig 1]{\label{fig:subfig:a}
+\includegraphics[width=6cm]{figure/runner_A.eps}}
+%\hspace{1in}
+\subfigure[fig 2]{\label{fig:subfig:b}
+\includegraphics[width=6cm]{figure/runner_B.eps}}
+%\hspace{1in}
+\subfigure[fig 3]{\label{fig:subfig:c}
+\includegraphics[width=6cm]{figure/runner_C.eps}}
+\end{center}
+\caption{Subfigures}
+\label{fig:subfig}
+\end{figure}
+
+
+
+放到一块分别计数
+\begin{figure}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=1in]{graphic.eps}
+\caption{Small Box}
+\label{fig:side:a}
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=1.5in]{graphic.eps}
+\caption{Big Box}
+\label{fig:side:b}
+\end{minipage}
+\end{figure}
+
+
+连续图形
+对一个页面放不下, 分别放到不同的figure, 使用
+\end{figure}
+\addtocounter{figure}{0}
+\begin{figure}
+\addtocounter{subfigure}{0}
+使图计数器/字图计数器对所有的图相同编号
+
+
+\begin{figure}%[tb]
+\centering \subfigure[Time: 11:29:58]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_1.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:29:59]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_2.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering \subfigure[Time: 11:30:00]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_3.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:01]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_4.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:02]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_5.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:03]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_6.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:04]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_7.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:05]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_8.eps}
+\end{minipage}
+}
+\end{figure}
+\addtocounter{figure}{0}
+\begin{figure}
+\addtocounter{subfigure}{0}
+\centering  \subfigure[Time: 11:30:06]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_9.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:07]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_10.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering \subfigure[Time: 11:30:08]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_11.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering \subfigure[Time: 11:30:09]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_12.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering \subfigure[Time: 11:30:10]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_13.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering \subfigure[Time: 11:30:11]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_14.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering \subfigure[Time: 11:30:12]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_15.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering \subfigure[Time: 11:30:13]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_16.eps}
+\end{minipage}
+}
+\end{figure}
+\addtocounter{figure}{0}
+\begin{figure}
+\addtocounter{subfigure}{0}
+\centering  \subfigure[Time: 11:30:14]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_17.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:15]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_18.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:16]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_19.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:17]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_20.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:18]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_21.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:19]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_22.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:20]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_23.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:21]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_24.eps}
+\end{minipage}
+}
+\end{figure}
+\addtocounter{figure}{0}
+\begin{figure}
+\addtocounter{subfigure}{0}
+\centering  \subfigure[Time: 11:30:22]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_25.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:23]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_26.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:24]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_27.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Time: 11:30:25]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A_28.eps}
+\end{minipage}
+}
+\hspace{0.5cm}
+\centering  \subfigure[Estimated trajectory using the 6$\times$6 resolution.]{
+\begin{minipage}[b]{0.4\textwidth}
+\centering
+\includegraphics[width=6.5cm]{figure/motion_1_A.eps}
+\end{minipage}
+}
+\caption{The location of human movement with constant velocity in 2 loops around the following
+square loop path: (3,6) to (3,15) to (18,15) to (18, 6) and back to (3,6) using the 6$\times$6 resolution.}
+\label{fig:runner_A}
+\end{figure}
+
+
+页眉 页脚 插入 图形
+\fancyhead[L]{\includegraphics[width=2in]{img.eps}}
+
+背景水印 文字版
+\usepackage{draftcopy}
+\draftcopyName{Copyright by XXXXX, 2004}{50}
+\draftcopySetGrey{0.8} \draftcopyPageTransform{55 rotate}
+\draftcopyPageX{80} \draftcopyPageY{-25}
+
+背景水印 图像版
+\newsavebox{\mygraphic}
+\sbox{\mygraphic}{\includegraphics[keepaspectratio,
+height=0.8\textheight, width=0.8\textwidth]{sjtulogo.eps}}
+\pagestyle{fancy} \fancyhead{}
+\fancyhead[C]{\setlength{\unitlength}{1in}
+\begin{picture}(0,0)
+\put(-2.2,-6){\usebox{\mygraphic}}
+\end{picture}}
+\fancypagestyle{plain}{%
+\fancyhead{}%
+\fancyhead[C]{\setlength{\unitlength}{1in}
+\begin{picture}(0,0)
+\put(-2.2,-6){\usebox{\mygraphic}}
+\end{picture}}}
+
+
+\begin{figure}[here]
+    \begin{center}
+        \includegraphics[bb=0 0 760 680,width=6cm]{fig2.jpg}
+
+        (a)
+
+        \includegraphics[bb=0 0 760 680,width=6cm]{fig2.jpg}
+
+        (b)
+
+%{\bf Fig.~2}  Rate and distortion curves for a laplacian source
+
+    \end{center}
+    \caption{Rate and distortion curves for a laplacian source}
+    \label{fig:ct}
+\end{figure}
+
+
+
+
+
+\begin{figure*}
+\centering
+\includegraphics{TensorLDA.eps}
+\caption{TensorLDA}\label{fig2}
+\end{figure*}
+
+
+更改插图题头（默认为：Figure 1: 改为：图 1 ）
+%% 用caption2宏包
+\renewcommand\figurename{\textbf{图}} % 插图题头
+%% 定义如 "图(表)1: 示例" 中的间隔符号,如 ":" ,这里定义为空
+\renewcommand{\captionlabeldelim}{}
+%定义图表编号与标题间的间隔距离
+\renewcommand{\captionlabelsep}{\hspace{1em}}
+
+%%%%%%%%%%%%%%%%%%%%  自定义命令   %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\新定义的命令名}[参量个数]{命令内容} %参量个数不超过9
+\newcommand*{\新定义的命令名}[参量个数]{命令内容}
+\renewcommand{\重新定义的命令名}[参量个数]{命令内容}
+\renewcommand*{\重新定义的命令名}[参量个数]{命令内容}
+
+自定义命令
+􀁺 \newcommand{}[]{}
+• \newcommand{\array}[1]{{#1}_1, \ldots, {#1}_n}
+􀁺 \renewcommand{}{}
+• \renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+
+%%%%%%%%%%%%%%%%%%%%   脚注 边注    %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\footnote{脚注文本} %不能位于数学模式，表格，LR盒子，字段盒子，\parbox
+\marginpar{边注文本}
+
+
+%%%%%%%%%%%%%%%%%%%%  数学公式   %%%%%%%%%%%%%%%%%%%%%%%%%%%
+公式变小
+{\small
+\begin{equation*}
+公式
+\end{equation*}} 
+
+
+\renewcommand{\theequation}{\roman{equation}} % 罗马数字小写编号
+\renewcommand{\theequation}{\Roman{equation}} % 罗马数字大写编号
+\renewcommand{\theequation}{\alph{equation}} % 拉丁语小写编号
+\renewcommand{\theequation}{\Alph{equation}} % 拉丁语大写编号
+\renewcommand{\theequation}{\arabic{equation}} %返回默认的格式（阿拉伯数字编号）
+
+
+\setlength{\mathindent}{10mm} % 制定数学公式缩进为10mm
+
+
+数学公式的排版
+  有两种公式：正文公式与单独公式
+  用$ 或$$ 切换数学公式排版模式
+  复杂的公式需要用相应的数学环境排版，
+如多行公式的对齐，有编号的公式等
+  有些符号只能用在数学公式中
+  数学公式中的空格只表示命令的结束
+  公式环境中不能有空行
+
+有编号公式的排版
+  $$ … $$ 生成没有编号的公式
+  \begin{equation}
+  \label{abc}
+    …
+  \end{equation} 生成有编号的
+  用\ref{abc}引用该公式
+  可以如下重定义公式编号的构成
+
+
+多行公式的排版
+  \begin{eqnarray} … \end{eqnarray}
+  \begin{align} … \end{align}
+  \begin{array} … \end{array}
+  前两个环境给每行公式加上编号，可以用  \nonumber 或\notag 去掉编号
+  array 环境只能用在数学环境内，可以生成矩阵
+  用\\ 表示一行公式的结束
+  用& 表示相应的对齐位
+
+
+无限扩展
+  用\usepackage{amsmath} 形式包含超过基本LaTeX 的宏包，以增强LaTeX的功能
+  可以从网上下载大量这样的宏包
+  许多杂志提供要投稿到该杂志的论文所用的宏包，甚至类文件
+
+\usepakage{latexsym,bm}
+
+\label{eq:x} %公式引用
+\eqref{eq:x} %加入(), ref只有公式编号
+
+\[ \binom{n}{k} \]  %排列组合 (n k)
+\tbinom %文本形式的组合数
+\dbinom %显示形式的组合数
+
+连分数
+\cfrac
+
+
+\CJKtilde ~
+
+字体式样
+\displaystyle \textstyle \scriptstyle \scriptscriptstyle
+\{
+\}
+\colon %:
+\dots 
+\ldots \cdots \vdots \ddots %下[基线] 中 竖直 右斜省略号
+\dotsc %逗号后面的省略号
+\dotsb %二元运算符/关系符后面的省略号
+\dotsm %乘积中的省略号
+\dotsi %积分号后面的省略号
+\dotso %其他情况后面的省略号
+
+\mbox %显示普通文本
+\framebox %有框
+\boxed %公式加框
+\text
+\intertext %用于上下处于公式环境
+\shoveleft %公式左对齐
+\shoveright 
+
+\begin{align} %各行公式上下对齐,多在等号,关系运算符处, 也可&对齐
+\end{align} 
+
+数学字体%不影响数学符号
+\mathrm \mathit \mathtt \mathsf \mathbf \mathcal
+数学粗体
+\newcommand*{\mi}{\mathrm{i}}
+
+\boldmath \unboldmath %不能用于数学模式
+另
+\mbox{\boldmath$...$}
+也可
+\usepackage{bm}
+\boldsymbol{数学符号} 或 \bm{数学符号}
+
+case环境
+\begin{equation} f(x)=
+\begin{case}
+1 & -1<x<1 \\0 & \text{其他~$x$}
+\end{case}
+\end{equation}
+
+多重角标 多行上标 多行下标 \substack
+\begin{equation}
+\sum_{\substack{k_0,k_1,\ldots>0\\
+k_0+k_1+\cdots=n}} F(k_i)
+\end{equation}
+
+
+
+多重角标 多行上标 多行下标 subarray环境
+\begin{equation*}
+\sum_{\begin{subarray}{l} %1使角标左对齐, c使居中对齐
+k_0,k_1,\ldots>0\\k_0+k_1+\cdots=n
+\end{subarray}}  F(k_i)
+\end{equation*}
+
+
+
+行内公式
+\begin{math} 公式 \end{math}
+\( 公式 \)
+$ 公式 $
+
+行间公式
+\[ 公式 \] %单行无编号
+\begin{equation} 公式 \end{equation} %单行有编号
+$$ 公式 \eqno右 \leqno左编号 $$ %多行人工编号
+\begin{eqnarray} 公式 \end{eqnarray} %多行自动编号,eqnarray*无编号
+
+例子
+\setcounter{equation}{5}
+\begin{equation}\label{eq:squaresum}
+a^2+b^2=c^2,
+\end{equation}
+由公式ref{eq:squaresum}可得
+
+单个公式 split公式对齐:一行排不下的长公式, 截成多行来排版
+\begin{equation}
+\begin{split}
+   (a+b)^2 &=a^2+b^2+2ab\\ %&指定对齐符号, 不写则右对齐
+   (a+b+c)^2&=a^2+b^2+c^2+2ab+2ac+2bc
+\end{split}
+\end{equation}
+
+子公式
+\begin{subequations}
+\begin{align}
+y & = cx+d\\
+c^2 & = a^2+b^2\\
+1 & = -2+3
+\end{align}
+\end{subequations}
+
+
+对齐公式组
+\begin{align}{列数}\label{eq:emd}
+y &=x  & a&= b+c \\ %要对齐的符合用&引导
+x'&=x' & c&= b+d
+\end{align}
+
+
+多行公式
+\begin{eqnarray*} %带*号公式不编号, 也可用命令\nonumber
+左公式 & 中公式 & 右公式 \\
+\end{eqnarray*}
+
+例子
+\begin{eqnarray*} 
+\sum_{i=1}^{20}i & = &1+2+3+4+5+6+7+8+9+10 \\
+& & {}+11+12+13+14+15+16+17 \\ %{}使加号成为双目运算符, 好对齐
+& & {}+18+19+20
+\end{eqnarray*}
+
+
+_{} ^{} %上下标
+\sideset{左侧角标}{右侧角标}主体符号
+\overset{上标}主体符号
+\underset{下标}主体符号 %arg \underset{x}{\min}
+
+上下箭头
+\overleftarrow{} \underleftarrow{} 
+\overrightarrow{} \underightarrow{}
+\overleftrightarrow{} \underleftrightarrow{}
+\xleftarrow[下方表达式]{上方表达式}
+\xrightarrow[下方表达式]{上方表达式}
+
+不可断行的区间符
+10\nobreakdash--20
+
+
+
+\frac{分子}{分母} %分式
+\cfrac
+
+\sqrt{}
+\sqrt[n高次方]{}  %^n\! 
+\surd %不要根号上面的横线
+
+\sum %求和
+\int %求积分
+$ $ %行内公式, 上下限在右边, 加\limits使之恢复到头顶 脚下 如\sum\limits_{k=1}^n
+\[ \] %行间公式, 上下限在头顶 脚下, 加\nolimits使之上下限在右边
+在微分算子后\, 微分算符d恢复直体\mathrm{d}
+如 \[ \int_a^b f(x)\,\mathrm(d)x \]
+
+求和 积分限 \nolimits \limits
+$$
+\sum\nolimits^n_{i=1}a_i
+\int\limits^b_a f(x)\,\mathrm(d)x
+$$
+
+直立积分号
+\usepackage{wasysym}
+用命令\varint \varoint \iint \iiint \varoiiint
+
+也可以在把下面命令插入导言区后, 用命令\varint \varoint
+\DeclareSymbolFont{euex}{U}{euex}{m}{n}
+\DeclareMathSymbol{\varint}{\mathop}{euex}{"52}
+\DeclareMathSymbol{\varoint}{\mathop}{euex}{"48}
+
+上下划线
+\overline{} \underline{}
+\overbrace{} \underbrace{}
+
+堆叠符号
+\stackrel{上位符号}{下位符号}
+
+{上位公式 \atop 下位公式}  %双行下标
+
+\begin{equation}
+\sum_{\atop{k_0,k_1,\ldots>0}{k_0+k_1+\cdots=n}} F(k_i)
+\end{equation}
+
+
+{上位公式 \choose 下位公式} %整体被大括号包围
+
+\big \Big \bigg \Bigg 
+
+矩阵
+array一般结构的矩阵
+\begin{array}[竖向位置]{列格式ccc}
+11 & 22 & 33 \\
+11 & 22 & 33 
+\end{array}
+\left(  %左右括号
+\right)
+
+matrix  %没有定界符
+pmatrix %圆括号矩阵
+bmatrix %方括号矩阵
+Bmatrix %花括号矩阵
+vmatrix %垂直线矩阵
+Vmatrix %双垂直线矩阵
+
+\hdotsfor[m]{n} %n是跨越的行数, m是黑点间距, 默认1
+
+例子
+\begin{gather*}
+\begin{pmatrix}a & b\\b & c\end{pmatrix}%
+\begin{bmatrix}a & b\\b & c\end{bmatrix}%
+\begin{vmatrix}a & b\\b & c\end{vmatrix}%
+\begin{Vmatrix}a & b\\b & c\end{Vmatrix}%
+\end{gather*}
+
+行内小矩阵
+smallmatrix %本身不带定界符
+例子
+\bigl(\begin{smallmatrix}
+a & b\\
+c & d
+\begin{smallmatrix} \bigr)
+
+
+\left\{  %左右大括号,只有左边,右边配上\right. 或左边配上\left.
+
+左大括号
+\begin{equation}
+W_{ij}= \left\{ \begin{aligned}
+         +1 &\qquad ( \mathrm{x}_i \in \mathrm{knn}(j) \vee \mathrm{x}_j \in \mathrm{knn}(i)\wedge (c_i=c_j), \\
+         -1 &\qquad ( \mathrm{x}_i \in \mathrm{knn}(j) \vee \mathrm{x}_j \in \mathrm{knn}(i)\wedge (c_i\neq c_j),\\
+          0 &\qquad otherwise.
+                \end{aligned} \right.
+\end{equation}
+
+或用cases环境
+\begin{equation}
+W_{ij}=\begin{cases}
+         +1 &\qquad ( \mathrm{x}_i \in \mathrm{knn}(j) \vee \mathrm{x}_j \in \mathrm{knn}(i)\wedge (c_i=c_j), \\
+         -1 &\qquad ( \mathrm{x}_i \in \mathrm{knn}(j) \vee \mathrm{x}_j \in \mathrm{knn}(i)\wedge (c_i\neq c_j),\\
+          0 &\qquad otherwise.
+       \end{cases}
+\end{equation}
+
+公式块
+
+
+分段函数
+$$P_{r-j}=\left\{\!\!\!\begin{array}{ll}
+0                & \text{if $r-j$ is odd},\\
+r!(-1)^{(r-j)/2} & \text{if $r-j$ is even}.
+\end{array}\right.$$
+
+右边大括号
+$\left. \begin{aligned}
+    B' &= -\partial E, \\
+    E' &= \partial B - 4 \pi j, 
+        \end{aligned}right\}
+\qquad \text{Maxwell's equations}$$
+
+行与行之间的文字
+\intertext{and} &跟在\\后
+
+
+公式编号
+按节section编号
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+每一节\section后使用
+\setcounter{equation}{0}
+
+也可用amsmath的命令\numberwithin
+导言部分加入
+\numberwithin{equation}{section} %按章节进行编号效果
+也可对图表等计算器
+
+公式连续/顺序编号
+\begin{subequation}\label{subequation}
+\begin{align}
+x+y&=1 \label{sub1}\\
+y+z&=2\\
+z+x&=3
+\end{align}
+
+\eqref{subequation}得到主公式编号, 如(5.9) \eqref{sub1}得到(5.9a)
+
+
+定理
+\theoremstyle{style}
+style: plain 定理名用黑体\bfseries, 定理内容用意大利斜体\itshape
+       definition  定理名用黑体\bfseries, 
+       remark 定理名用意大利斜体\itshape, 定理内容用罗马字体
+如:
+\theoremstyle{plain} \newtheorem{Cor}{Corollary}
+
+\newtheoremstyle{style}
+
+\newtheorem{定理环境名}{标题}[主计数器]
+定理环境
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{df}[theorem]{定义}
+\newtheorem{prop}[theorem]{命题}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{prob}{问题}[chapter]
+命令有两个放在大括号内的参数
+ 第一个参数表示所定义的环境名称
+ 第二个参数表示显示出来的标题
+这个命令也同时具有两个可省参数,分别出现在两个大括号的后面
+ 第一个表示与已有的定理环境用同一顺序编号
+ 第二个表示当调用相应的章节命令后，编号重新开始
+
+
+
+定义后可
+\begin{定理环境名}[附加标题] 文本 \end{定理环境名}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%% 文档布局   %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setlength{参数}{长度}
+参数:
+\textheight
+\textwidth
+\columnsep
+\columnseprule
+\columnwidth
+\linewidth
+\evensidemargin
+\oddsidemargin
+\footskip
+\headheight
+\headsep
+\topmargin
+\marginparpush
+\marginparsep
+\marginparwidth
+
+\documentclass[onecolumn/twocolmn] %分栏
+\setlength{\columnsep}{宽度} %栏间距
+\setlength{\columnseprule}{宽度} %栏分割线宽度,默认0
+\columnwidth
+
+\twocolmn[通栏文字] %新建页, 部分分两栏
+\onecolumn %结束分两栏
+
+\usepackage{multicol,multienum} %文档分栏
+\begin{document}
+contents
+\begin{muticols}{2}
+contents
+\end{muticols}
+\end{document}
+
+
+
+\usepackage{flushend,cuted} %单栏/两栏混排, 平均分成两栏
+\raggedend %先排左栏, 后右栏
+\flushend %恢复平衡两栏
+\begin{strip}
+单栏内容
+\end{strip}
+
+
+
+
+
+
+\documentclass[oneside/twoside] %单 双面
+
+
+%%%%%%%%%%%%%%%%%%%% 页版式  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{geometry} %版芯设置
+% A4: 297 x 210
+\geometry{verbose,a4paper,tmargin=25.4mm,bmargin=25.4mm,lmargin=31.7mm,rmargin=31.7mm}
+\special{papersize=210mm,297mm}
+
+
+\pagestyle{plain默认, 页眉空, 页码居中在页脚 empty页眉页脚空,无页码 headings myheadings}
+
+\markright{右页页眉} %对myheadings
+\markboth{左页页眉}{右页页眉} %对myheadings
+
+\thispagestyle{empty} %对特殊页面处理, 不影响计算器
+
+\pagenumbering{数字形式arabic roman Roman alph Alph} %页码编号
+
+\setcounter{page}{页码} %重置计数器
+
+\frontmatter %页码切换为罗马数字, 不对章编号, 用于前言和目录
+\mainmatter %页码切换为阿拉伯数字, 对章自动编号, 用于正文主体前
+\backmatter %用于参考文献和索引, 不对章编号, 但不改变页码数字格式, 不重设页码计数器
+
+自定义页眉 页脚
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[选项]{内容}
+\fancyfoot[选项]{内容}
+%选项是L左区 C中区 R右区 与O奇数页 E偶数页 的组合 如LO
+简化命令 \lhead \chead \rhead \lfoot \cfoot \rfoot
+
+fancyhdr对最后一页无效
+在\end{document}前面加一句\newpage   or \clearpage 
+
+
+
+
+
+\headrulewidth \footrulewidth %页眉 页脚与正文分割线的粗细, 默认0.4pt
+\renewcommand{\headrulewidth}{0.6pt} %修改页眉 页脚与正文分割线的粗细
+\renewcommand{\footrulewidth}{0.4pt}
+
+\headrule \footrule 修改页眉线 页脚线
+\renewcommand{\headrule}{%
+\hrule height0.8pt width\headwidth \vskip0.8pt %
+\hrule height0.4pt width\headwidth \vskip-2pt}
+%页眉线改为两条水平线, 第一条0.8pt, 第二条0.4pt, 它们之间的距离为0.8pt
+
+
+目录表 
+\tableofcontents
+\setcounter{tocdepth}{目录层次深度}
+
+\addcontentsline{toc}{章节名称}{条目内容} %把自动编号以外的内容插入目录, 
+\addtoccontents{toc}{条目内容}
+
+图表清单
+\listoffigures %把figures tables环境的\caption命令列表
+\listoftables
+
+\addcontentsline{清单类型toc lof lot}{格式:章节名称 figures table}{条目内容} 
+\addtoccontents{清单类型toc lof lot}{条目内容}
+
+修改目录清单的默认标题为汉字
+\renewcommand*{\contentsname}{目\quad 录}
+\renewcommand*{\listfigurename}{插图目录}
+\renewcommand*{\listtablename}{表格目录}
+
+
+
+章节标题结构
+\usepackage[选项]{titlesec}
+选项:
+rm sf md tt bf it sl sc %设置标题(章/节/小节)字体, 默认bf
+big medium small tiny %设置标题字体大小, 默认big, 标题字体大小按顺序递减
+raggedleft center raggedright %设置标题居右/中/左
+indentafer noindentafter %设置标题下一段落是否缩格
+
+\titleformat{命令}[形式]{格式}{标题头定义}{间距}{前命令}[后命令]
+命令 \part \chapter \section ...
+形式 hang默认:标题头与内容在同一行
+     block 将整个标题放在小页中
+     display 将标题头和标题内容放在不同的段落, 标题头在前, 内容在后
+     runin  设置段内标题
+     leftmargin 将标题放在左边空里
+     rightmargin  将标题放在右边空里
+     frame 带边框的标题, 标题头放在边框线上
+     wrap 将标题放在左边, 并且第一个段落对它进行绕排, 第一个段落必须比标题长
+格式 \large \bfseries \vspace \centering \titlerule
+标题头定义 \thesection 或无
+间距 标题头与标题内容之间的空白长度
+前命令 排版标题前先执行的命令, 常空置
+后命令 空 
+
+\titlespacing*{命令}{左距离}{上距离}{下距离}[右距离]
+命令 \part \section 等
+
+\titlerule
+
+
+%%%%%%%%%%%%%%%%%%%% 文档分割  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input 文件名  %读入文件到当前位置, 可嵌套
+\listfiles
+
+\include{文件名} %只能用于文档正文部分,省略扩展名tex,不可以嵌套,重新分页,与\includeonly配合
+\includeonly{文件清单} %只能位于导言区, 文件清单中文件名逗号分开, 
+
+多文档组织
+\input{abc}: 把abc.tex中内容包含中当前源文件中，如同在此处直接输入进来
+一般把常用的导言设置放到单独一个文件中
+
+\include{abc}: 新开始一页，然后把文件如同调用\input{abc}一样包含进来
+每个文件为一章
+
+%%%%%%%%%%%%%%%%%%%% 交叉引用  %%%%%%%%%%%%%%%%%%%%%%%%%%%
+辅助文件(.aux)
+.aux是LaTeX实现各种高级功能的桥梁
+LaTeX中有许多命令自动向.aux文件中写入相关信息，例如章节命令会把标题及相应页码信息写入到这个文件中交叉引用以及参考文献数据库的实现都是通过这个文件进行的
+
+
+\lable{标记} %被引用处
+\pageref{标记} %把标记所在的页码插入到当前位置
+\ref{标记} %标记所在位置对象的编号
+注意，学术文章中通常会在公式编号外面加上小括号()，但\ref{}命令并不会生成这个小括号，因此需要时可以采用
+Equation (\ref{eqn2})的形式
+
+
+\label{eq:x} %公式引用
+\eqref{eq:x}
+
+
+\usepackage{makeidx}
+\makeindex  %产生索引
+\printindex %打印索引
+\index{索引条目}
+\index{排序用条目@打印用条目}
+
+%%%%%%%%%%%%%%%%%%%% 彩色 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+定义颜色
+\difinecolor{色彩名}{模式}{参数}
+\providecolor{色彩名}{模式}{参数}
+如
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{yellow}{cmyk}{0,0,1,0}
+\definecolor{gray0.5}{gray}{0.5}
+
+使用颜色
+\usepackage{color}
+\color{色彩} %命令后文本采用
+\textcolor{色彩}{文本}
+\pagecolor{色彩}
+
+% 13-1-1.tex
+\documentclass[12pt,a4paper]{article}
+\usepackage[dvips,dvipsnames]{xcolor}
+\usepackage{multicol}
+\pagestyle{empty}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{22cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\begin{document}
+\renewcommand*{\DefineNamedColor}[4]{%
+  \textcolor[named]{#2}{\rule{7mm}{7mm}}\quad
+  \texttt{#2}\strut\\}
+\begin{multicols}{3}
+\DefineNamedColor{named}{GreenYellow}   {cmyk}{0.15,0,0.69,0}
+\DefineNamedColor{named}{Yellow}        {cmyk}{0,0,1,0}
+\DefineNamedColor{named}{Goldenrod}     {cmyk}{0,0.10,0.84,0}
+\DefineNamedColor{named}{Dandelion}     {cmyk}{0,0.29,0.84,0}
+\DefineNamedColor{named}{Apricot}       {cmyk}{0,0.32,0.52,0}
+\DefineNamedColor{named}{Peach}         {cmyk}{0,0.50,0.70,0}
+\DefineNamedColor{named}{Melon}         {cmyk}{0,0.46,0.50,0}
+\DefineNamedColor{named}{YellowOrange}  {cmyk}{0,0.42,1,0}
+\DefineNamedColor{named}{Orange}        {cmyk}{0,0.61,0.87,0}
+\DefineNamedColor{named}{BurntOrange}   {cmyk}{0,0.51,1,0}
+\DefineNamedColor{named}{Bittersweet}   {cmyk}{0,0.75,1,0.24}
+\DefineNamedColor{named}{RedOrange}     {cmyk}{0,0.77,0.87,0}
+\DefineNamedColor{named}{Mahogany}      {cmyk}{0,0.85,0.87,0.35}
+\DefineNamedColor{named}{Maroon}        {cmyk}{0,0.87,0.68,0.32}
+\DefineNamedColor{named}{BrickRed}      {cmyk}{0,0.89,0.94,0.28}
+\DefineNamedColor{named}{Red}           {cmyk}{0,1,1,0}
+\DefineNamedColor{named}{OrangeRed}     {cmyk}{0,1,0.50,0}
+\DefineNamedColor{named}{RubineRed}     {cmyk}{0,1,0.13,0}
+\DefineNamedColor{named}{WildStrawberry}{cmyk}{0,0.96,0.39,0}
+\DefineNamedColor{named}{Salmon}        {cmyk}{0,0.53,0.38,0}
+\DefineNamedColor{named}{CarnationPink} {cmyk}{0,0.63,0,0}
+\DefineNamedColor{named}{Magenta}       {cmyk}{0,1,0,0}
+\DefineNamedColor{named}{VioletRed}     {cmyk}{0,0.81,0,0}
+\DefineNamedColor{named}{Rhodamine}     {cmyk}{0,0.82,0,0}
+\DefineNamedColor{named}{Mulberry}      {cmyk}{0.34,0.90,0,0.02}
+\DefineNamedColor{named}{RedViolet}     {cmyk}{0.07,0.90,0,0.34}
+\DefineNamedColor{named}{Fuchsia}       {cmyk}{0.47,0.91,0,0.08}
+\DefineNamedColor{named}{Lavender}      {cmyk}{0,0.48,0,0}
+\DefineNamedColor{named}{Thistle}       {cmyk}{0.12,0.59,0,0}
+\DefineNamedColor{named}{Orchid}        {cmyk}{0.32,0.64,0,0}
+\DefineNamedColor{named}{DarkOrchid}    {cmyk}{0.40,0.80,0.20,0}
+\DefineNamedColor{named}{Purple}        {cmyk}{0.45,0.86,0,0}
+\DefineNamedColor{named}{Plum}          {cmyk}{0.50,1,0,0}
+\DefineNamedColor{named}{Violet}        {cmyk}{0.79,0.88,0,0}
+\DefineNamedColor{named}{RoyalPurple}   {cmyk}{0.75,0.90,0,0}
+\DefineNamedColor{named}{BlueViolet}    {cmyk}{0.86,0.91,0,0.04}
+\DefineNamedColor{named}{Periwinkle}    {cmyk}{0.57,0.55,0,0}
+\DefineNamedColor{named}{CadetBlue}     {cmyk}{0.62,0.57,0.23,0}
+\DefineNamedColor{named}{CornflowerBlue}{cmyk}{0.65,0.13,0,0}
+\DefineNamedColor{named}{MidnightBlue}  {cmyk}{0.98,0.13,0,0.43}
+\DefineNamedColor{named}{NavyBlue}      {cmyk}{0.94,0.54,0,0}
+\DefineNamedColor{named}{RoyalBlue}     {cmyk}{1,0.50,0,0}
+\DefineNamedColor{named}{Blue}          {cmyk}{1,1,0,0}
+\DefineNamedColor{named}{Cerulean}      {cmyk}{0.94,0.11,0,0}
+\DefineNamedColor{named}{Cyan}          {cmyk}{1,0,0,0}
+\DefineNamedColor{named}{ProcessBlue}   {cmyk}{0.96,0,0,0}
+\DefineNamedColor{named}{SkyBlue}       {cmyk}{0.62,0,0.12,0}
+\DefineNamedColor{named}{Turquoise}     {cmyk}{0.85,0,0.20,0}
+\DefineNamedColor{named}{TealBlue}      {cmyk}{0.86,0,0.34,0.02}
+\DefineNamedColor{named}{Aquamarine}    {cmyk}{0.82,0,0.30,0}
+\DefineNamedColor{named}{BlueGreen}     {cmyk}{0.85,0,0.33,0}
+\DefineNamedColor{named}{Emerald}       {cmyk}{1,0,0.50,0}
+\DefineNamedColor{named}{JungleGreen}   {cmyk}{0.99,0,0.52,0}
+\DefineNamedColor{named}{SeaGreen}      {cmyk}{0.69,0,0.50,0}
+\DefineNamedColor{named}{Green}         {cmyk}{1,0,1,0}
+\DefineNamedColor{named}{ForestGreen}   {cmyk}{0.91,0,0.88,0.12}
+\DefineNamedColor{named}{PineGreen}     {cmyk}{0.92,0,0.59,0.25}
+\DefineNamedColor{named}{LimeGreen}     {cmyk}{0.50,0,1,0}
+\DefineNamedColor{named}{YellowGreen}   {cmyk}{0.44,0,0.74,0}
+\DefineNamedColor{named}{SpringGreen}   {cmyk}{0.26,0,0.76,0}
+\DefineNamedColor{named}{OliveGreen}    {cmyk}{0.64,0,0.95,0.40}
+\DefineNamedColor{named}{RawSienna}     {cmyk}{0,0.72,1,0.45}
+\DefineNamedColor{named}{Sepia}         {cmyk}{0,0.83,1,0.70}
+\DefineNamedColor{named}{Brown}         {cmyk}{0,0.81,1,0.60}
+\DefineNamedColor{named}{Tan}           {cmyk}{0.14,0.42,0.56,0}
+\DefineNamedColor{named}{Gray}          {cmyk}{0,0,0,0.50}
+\DefineNamedColor{named}{Black}         {cmyk}{0,0,0,1}
+\DefineNamedColor{named}{White}         {cmyk}{0,0,0,0}
+\end{multicols}
+\end{document}
+
+
+ %%%%%%%%%%%%%如何在表格中添加脚注
+
+在tabular 环境中添加脚注，不能简单地使用\footnote{……}。应该在要添加脚注的地方使用\footnotemark[n]标记，其中n表示脚注的编号；在tabular环境外则用\footnotetext[n]{……}填入脚注内容，注意这里的[n]应该与表格中的\footnotemark中的 [n]一一对应。
+示例：
+\begin{tabular}{|c|c|c|}
+\hline
+类型名称&占用空间&表示范围\\
+\hline
+real&6字节\footnotemark[3]&$2.9 \times 10^{-39} \sim 1.7 \times 10^{38}$\\
+\hline
+single&4字节&$1.5 \times 10^{-45} \sim 3.4 \times 10^{38}$\\
+\hline
+double&8字节&$5.0 \times 10^{-324} \sim 1.7 \times 10^{308}$\\
+\hline
+extended&10字节&$3.4 \times 10^{-4932} \sim 1.1 \times 10^{4932}$\\
+\hline
+\end{tabular}
+\footnotetext[3]{在~Free Pascal~中，real~类型可以自动转换成~single~或~double~类型，所以占用的空间大小也不固定。}
+
+Trackback: http://tb.blog.csdn.net/TrackBack.aspx?PostId=278977
+
+
+\textstyle  \scriptstyle \scriptscriptstyle
+
+
+
+
+Winedt 使用技巧[转载]
+2008年03月12日 星期三 15:02
+
+
+Winedt 使用技巧
+1. 汉字相关
+
+Q: 在WinEdt里遇到汉字会显示红色并带下划线（拼写检查出错），如何解决？
+A: 最新版本的WinEdt（5.4 build:20030429）可以解决这个问题。
+   在Options-Dictionary-Spell Checking
+   选中"Check Only Words Containing 7-bit ASCII Characters"
+
+
+Q: 在WinEdt里输入汉字后，编辑区内显示的是乱码，如何解决？
+A: Options-Settings-Language
+   选中"Wide(16-bit) Characters Enabled"
+
+2. 背景相关
+
+Q: 在WinEdt中如何改变文本背景色？
+A: Options-Highlighting-Background Schemes
+   上面的工具条中有个Change Background Color，可以改变背景色
+   或者在上面的工具条中有个Set Background Bitmap，可以改变背景图片
+
+Q: 在WinEdt中如何设置行号栏和书签栏的颜色？
+A: Options-Highlighting-Background Schemes
+   双击Bookmarks Panel Background可以调整最左一栏（书签栏）的颜色
+   双击Line numbers可以调整行号栏的颜色
+
+3. 文件相关
+
+Q: 在WinEdt中如何设置文件关联？
+A: Options-Configuration Wizard-Shell Configuration Wizard-
+   Filetype Asscociations-Modify filetype Asscociations
+
+Q: 在WinEdt中如何在启动时不打开任何文件？
+A: Options-Preferences-Project-Restore Opened Files，把这项前面的勾去掉
+
+Q: 如何设置WinEdt打开文件时访问的默认目录？
+A: Options-Menu Setup-Main Menu-&File-&Open
+   在Start in中设置你想要的默认目录
+   并选中Set folder to "Start in"
+
+4. 换行相关
+
+Q: 如何去掉WinEdt的自动换行？
+A: WinEdt的编辑窗口最下面的状态条中有一项wrap，将其点击为灰色
+
+Q: WinEdt总是自动把几个单词缩到一行里面，如何解决？
+A: 1. 关掉wrap功能
+   2. 在每行的首字前面加一个空格或一个"Tab"
+
+Q: 如何在WinEdt中把自动换行设在第n个字符处？
+A: Options-Preferences-Editor-Right Margin
+   将在设置的字符数之后的空格处自动换行
+
+5. 编辑/TeX相关
+
+Q: 如何在WinEdt中显示行号？
+A: 1. WinEdt的编辑窗口最下面的状态条中左起第四个是行号区，点击一下即可
+   2. 在编辑窗口最左侧点击一下鼠标右键，在弹出菜单中选择"Show Line Numbers"
+   3. 热键ctrl + "="
+
+Q: WinEdt中有没环境(\begin{}...\end{})的自动补足功能？
+A: 以\begin{equation}...\end{equation}为例：
+   1. 输入时使用\begin{equation}}
+   2. 输入时使用\begin{equation}>，如果之后没有\end{...}，则与第一种方
+      法相同；如果之后有个别的\end{...}，如\end{document}，则系统将弹出
+      窗口提示Change Environment，输入equation，则自动将\end{document}
+      改为\end{equation}
+   3. 输入时使用\end{{
+
+Q: 如何在ctx文件中使用上面的自动补足功能？
+A: Options-Preferences-Modes，在TeX后面增加*.ctx
+   并在当前的ctx文件中单击状态行中的DATA，把Document Mode改为TeX
+
+Q: 如何在WinEdt里自动生成需要的环境？
+A: Options-Menu Setup-Popup Menus
+   在Items中选择Environments，并选中Attributes中的Enabled
+   然后就可以在编辑tex文件时用热键ctrl + alt + e自动生成一些常用的环境了
+
+Q: 如何去掉tex文件编译时出现的DOS窗口？
+A: Options-TeX Configuration Wizard...
+   选择Background Execution Mode或Detached Execution Mode就不会弹出窗口
+
+Q: 如何能使PDFLaTeX/LaTeX编译完后用acrobat自动打开编译好的pdf文件？
+A: Options-Configuration Wizard-TeX Configuration Wizard...-
+   Customize Execution Mode-Run Viewer
+   选择PDFLaTeX/LaTeX
+
+Q: 用PDFLaTeX/LaTeX编译完后，有时会出现一个DOS窗口，需要按任意键才能继续，如
+
+   何让这个DOS窗口自动关闭？
+A: Options-Configuration Wizard-TeX Configuration Wizard...-
+   Customize Execution Mode-Run TeX Accessories through BATCH Files
+   去掉PDFLaTeX/LaTeX前面的勾
+
+
+6. Beamer
+
+一个用来做Slide的Latex扩展，其特点是保留Latex的\section等层次结构，能够自动生成
+框架索引，在beamer的安装包中还包括了一些模拟其它TeX扩展的例子。 
+
+要求: LaTeX, pgf( LaTeX Portable Graphics Format) 
+主页: ftp://ftp.dante.de/tex-archive/macros/latex/contrib/beamer/ 
+文档: ftp://ftp.dante.de/tex-archive/macros/latex/contrib/beamer/doc/beameruse
+rguide.pdf 
+安装指导: 
+CTAN上分别下载beamer,pgf,xcolor，也可以到ftp://dsec.pku.edu.cn:27/下载三 个软件
+包的压缩文件; 
+把解压后的beamer,pgf,xcolor这三个目录拷贝到 texmf/tex/latex/ 下面(具体目 录可能
+根据 LaTeX 的安装不同而改变)； 
+如果是Linux系统运行texhash或mktexlsr命令，安装即完成，如果是windows转步4； 
+在winedit里菜单项"Accessories"里点击 "MiKTex Options"项,点击其中的 "Refresh No
+w",完成。 
+其它: 
+具体的用法参看 beamer/doc/beameruserguide.pdf 以及 pgf/pgfuserguide.pdf. 
+编译时直接点击 PdfLatex. 编译两次可以生成pdf中的书签。 
+beamer/examples 下有好几个例子，包括如何使用中文(beamerexample4.tex),不 过那个
+例子不能编译成功，应该将其中的 
+   \begin{CJK}{GB}{kai}
+   ......
+   \end{CJK}
+改为 
+    \begin{CJK*}{GBK}{kai}
+    ......
+    \end{CJK*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+LaTeX 对齐方式 
+
+一行对齐： 
+
+\leftline{左对齐} \centerline{居中} \rightline{右对齐} 
+
+  (LaTeX 学习博客 (http://latex.yo2.cn) , 白色印记.) 
+
+多行或者段落对齐： 
+
+左对齐 \begin{flushleft}...\end{flushleft}， 
+
+居中 \begin{center}...\end{center} 
+
+右对齐 \begin{flushright}...\end{flushright} 
+
+关于公式的左对齐可以参考 
+
+LaTeX首行缩进 ： 
+LaTeX 默认的第一段不是首行缩进的, 这不符合我们的中文习惯. 
+
+要实现首行缩进也很简单, 
+
+在导言区加入宏包首行 \usepackage{indentfirst} 就可以了. 
+
+使用命令 设置 缩进的距离 \setlength{\parindent}{2em}  , 
+
+这里的 2em 表示缩进 2 个字符位置. 
+
+如果有一个段落你不想首行缩进, 在段落前使用命令 \noindent . 
+
+同样的, 你要保证这一段是首行缩进, 使用命令 \indent, 如果使用了 CJK 宏包, 还可以用\CJKindent. 
+
+LaTeX之CCT中文排版介绍 
+
+
+环境为Win XP+ CTeX 
+
+现在介绍CCT中文排版。先看例子： 
+
+\documentclass{cctart} 
+\begin{document} 
+你好！这里是CCT！ 
+\end{document} 
+
+文件的后缀为.tex . 
+
+这里的cctart根据实际情况可以换为cctbook，分别与英文latex的article和book文档类别对应。 
+
+CCT有先后两种版本，旧版CCT文档的文件名是以.ctx为扩展名的，而新版CCT文档的文件名以.tex为扩展名，推荐使用新版的CCT，因为新版的CCT相比旧版的CCT有不少优点，比如它可以使用CJK宏包，只要在开始加入CJK参数就可以了： 
+
+\documentclass[CJK]{cctart} 
+\begin{document} 
+你好！这里是CCT！ 
+\end{document} 
+
+CCT文档可以用ctex.exe程序编译就可以了（对于CTeX套装，点击WinEdt里的CCT-LaTeX图标）。ctex.exe可以自动识别是ctx格式还是tex格式，然后自动调用相应的程序去处理cct文档。 
+
+
+LaTeX中文日期格式 
+
+\documentclass{article} 
+\usepackage{CJK,CJKnumb} 
+\begin{document} 
+\begin{CJK*}{GBK}{song} 
+第一种格式\\ 
+\renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日} 
+\today\\ 
+第二种格式\\ 
+\renewcommand{\today}{\CJKnumber\year 年 \CJKnumber\month 月 \CJKnumber\day 日} 
+\today 
+\end{CJK*} 
+\end{document} 
+
+LaTeX中beamer的在线教程 
+前面提到 LaTeX 幻灯片的模板 中文和英文PDFSCREEN模板 
+
+现在 用 LaTeX 幻灯片 Beamer 应该更流行 
+LaTeX 学习博客 (http://latex.yo2.cn) , 白色印记. 
+下面这个网站是 Beamer 的在线教程, 但是是英文的, 但写的很详细, 也适合初学者, 有兴趣的话, 慢慢看吧 
+
+还有下面中文的资源 
+
+如何用beamer做slide 
+
+TeX制作Slide的方法和 Beamer使用 
+
+ps2pdf对多个文件的操作 
+
+命令ps2pdf可以将ps文件(或eps文件)转化为pdf格式, 而pdf格式是使用的跟广泛的, 从而可以方便查看和传播。但是ps2pdf不支持对多个文件的操作，如果ps文件较多，则非常浪费时间。这种重复性的工作可以用简单的shell脚本来完成。注意这个shell脚本是在GUN/Linux下运行的. 
+
+
+#convert multi ps files to pdf. 
+for name in `find *.ps` 
+do 
+ps2pdf $name 
+done 
+
+mkdir _pdfs 
+mv *.pdf _pdfs/ 
+
+如果要将当前目录及子目录中的所有ps文件一次转换成pdf格式。可以将find命令改为 
+
+find -iname '*.ps' -depth 
+
+writer2latex中文支持 
+
+OpenOffice.org 套装上有将ODF文件转化为tex文件的工具writer2latex 
+
+你也可以用OpenOffice.org打开word (.doc)文件,  再转化为tex文件 
+
+writer2latex转化后的tex文件中文是乱码 
+
+在网上查了一下, 使用perl命令就可以转化 
+例子 
+
+#cat 0.tex | perl -p000e 's/([][0-9A-F?])\n([][0-9A-F?])/$1$2/g; s/\[([0-9a-f]{1,4})\?\]/chr(hex($1))/giex;' 2>/dev/null >final.tex 
+
+0.tex是writer2latex转化后的tex文件, 中文是乱码 
+使用这个命令, 生成的文档final.tex 就正常了. 
+
+编译的时候注意要加\usepackage{CJK} 
+
+而且在有中文的前后地方加上\begin{CJK}{编码}{字型}  \end{CJK} 
+
+用TeX合并pdf 
+12 四, 2008  3 条评论 
+
+用TeX合并pdf 
+
+前面介绍了合并 ps/pdf 文件的方法, 主要是讲gs工具和pdftk工具(参见这里). 
+
+其实用tex就可以合并pdf, 而且这个方法是跨平台的, 
+
+无论widows, linux, Mac X,  只要有装了tex和宏包pdfpages, 
+
+这个宏包一般的tex发行版默认都包含了, 像我的texlive就已经有了. 
+
+例子如下 
+
+代码: 
+\documentclass[a4paper]{article} 
+\usepackage{pdfpages} 
+\begin{document} 
+\includepdfmerge{1.pdf,1-3} 
+\end{document} 
+
+其中命令\includepdfmerge{1.pdf,1-3}就是导入1.pdf的1制3页. 
+
+LaTeX学习笔记 
+2 四, 2008  2 条评论 
+
+下面是一篇优秀的LaTeX学习笔记, 
+
+来自: http://vincentme.org/post/LaTeX_study_note.php , 版权归属原作者. 
+
+LaTeX 
+LaTeX（LATEX，音译“拉泰赫”）是一种基于TeX的排版系统，由美国计算机学家Leslie Lamport在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至 几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高印刷质量的科技和数学类文档。这个系 统同样适用于生成从简单的信件到完整书籍的所有其他种类的文档。 
+
+摘自中文维基百科-LaTeX条目。 
+
+文档 
+文档模式 
+字号 
+中文书籍一般使用基本字号为五号字（10.5pt），故在article中一般选用11pt，若不选默认为10pt。 
+
+空格 
+中文与英文之间一般加入小空隙排出来才好看，可以加"\,"或者"~"。中文与行内公式之间也要加。 
+如果"."不表示句子的结束，应加入"\空格"，如"Mr. Wang"应输入为"Mr.\空格Wang"。 因为当"."表示句号时，TeX会加入一段额外的空隙。 
+TeX遇到一个单词以大写字母结束时会自动认为这并不是句子的结束，故这种情况不必加入\空格。但如果确实是句子的结束，就需要在"."前加上"\@”，如“I study in SJTU\@.”。 
+
+分行 
+\\[*]，*为指定的行间距。 
+mbox{文本}可以将文本保持在同一行内。数学模式中一般以此加入中文。而且mbox里也可以出现数学模式。 
+
+标题 
+在用\author定义作者时可使用\and命令，来包含多个作者的信息。 
+如 
+\author{作者1\\单位1\\地址1 
+\and 作者2\\单位2\\地址2} 
+在\title、\author、\date中均可出现thanks命令来实现脚注。 
+
+对齐 
+左对齐、居中对齐、右对齐的环境分别为flushleft、center和flushright。也可以使用命令\raggedright、\centering和\raggedleft使以后的文本按指定方式对齐 
+
+引用 
+quotation环境：有段首缩进(正常段落有缩进的话)，有正常段间距。 
+quote环境：无首行缩进，增大段间距。 
+verse环境：类似quote，但换行时为左端悬挂。 
+
+抄录 
+verbatim环境可原样输出其中的文本，忽视TeX命令。verbatim*会将空格以└┘的形式输出。 
+对简短的抄录，可使用\verb|文字|和\verb*|文字|。 
+
+盒子 
+\mbox与\fbox的区别是后者会生成一个框将里面的文字包起来。 
+\makebox[宽度][位置]{文本}中可指定盒子宽度，文本在盒子中的位置（l：左端；r：右端；s：两端，默认是居中）。\framebox与此类似，也是加一个框。 
+
+表格 
+\begin{tabular}[竖向格式]{列格式} 
+………… 
+\end{tabular} 
+竖向格式可以选择t：顶部与外部对齐；b：底部与外部对齐，不选默认为与外部居中对齐。 
+\multicolumn{列数}{列格式}{文本}可以以指定的文本和列格式填充数列。 
+\cline{a-b}画一条从a列到b列的水平线。 
+也可以使用可视化工具LaTable来输入表格。 
+
+脚注 
+在不能使用脚注的环境（数学模式、表格、盒子等）中，可以先声明一个脚注标记\footnotemark，在禁止模式外再加入脚注文本\footnotetext{脚注文本}。 
+
+图形 
+在LaTeX中画图可使用amscd、diagrams、Xy-pic、MetaPost、PSTricks、PGF等宏包或软件，但都较复杂，如只需要画简单的图形，可以使用一款所见即所得作图工具WinFIG。 
+插入图形可使用graphicx宏包。使用LaTeX编译时选择dvips选项，能插入eps格式的图形。使用pdfLaTeX编译时选择pdfTex选项，能插入pdf、png、tif、jpg格式的图片，但不支持eps。 
+插入图片的基本命令是\includegraphics{文件名}。 
+放大缩小图形可使用\scalebox{横向放缩因子}[竖向放缩因子]{\includegraphics{文件名}}。若不输入B则竖向放缩因子等于横向放缩因子。 
+
+PSTtricks 和 PGF 是目前最强大的两个绘图宏包。
+
+PSTricks 在 Graphics Companion 中花了很大篇幅描述，目前仍然是功能最强、支持广泛的一个。由于使用 PS 语言，主要用在 dvips 和 XeTeX 平台上，PDFTeX 平台也有 pdftricks 以帮助使用 PSTricks（请熟悉的人介绍一下 pdftricks 有无限制），但 dvipdfm(x) 不能使用。
+
+PGF 是后起之秀，主要由 Till Tantau 制做，其基本目的就是达到 PSTricks 的功能和可移植的特性。支持 dvips、pdftex、xetex、dvipdfm(x)、vtex 和 网页的 SVG 输出。现在功能上也直追 PSTricks，落后之处不多了。虽然在功能上尚有不及，但相比 PSTricks，PGF 的文档更详尽易读，更新比较及时；而且 TikZ 前端的语法也更自然一些。
+
+目前有许多外部程序都可以输出 LaTeX 的绘图代码，如 gnuplot、TpX。它们所支持的代码类型，通常就是三种：picture 标准环境、PSTricks 和 PGF(TikZ)。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{pstricks}
+\usepackage{tikz}
+\usepackage{pst-node}
+
+
+
+\begin{minipage}{0.3\linewidth}
+\psset{unit=0.8cm}
+  \begin{pspicture}(-1.75,-3)(3.25,4)
+\psline[linewidth=0.25pt](0,0)(0,4)
+\rput[tl]{0}(0.2,2){$\vec e_z$}
+\rput[tr]{0}(-0.9,1.4){$\vec e$}
+\rput[tl]{0}(2.8,-1.1){$\vec C_{ptm{ext}}$}
+\rput[br]{0}(-0.3,2.1){$\theta$}
+\rput{25}(0,0){%
+  \psframe[fillstyle=solid,fillcolor=lightgray,linewidth=.8pt](-0.1,-3.2)(0.1,0)}
+\rput{25}(0,0){%
+  \psellipse[fillstyle=solid,fillcolor=yellow,linewidth=3pt](0,0)(1.5,0.5)}
+\rput{25}(0,0){%
+  \psframe[fillstyle=solid,fillcolor=lightgray,linewidth=.8pt](-0.1,0)(0.1,3.2)}
+\rput{25}(0,0){\psline[linecolor=red,linewidth=1.5pt]{->}(0,0)(0.,2)}
+\psRotation{0}(0,3.5){$\dot\phi$}
+\psRotation{25}(-1.2,2.6){$\dot\psi$}
+\psline[linecolor=red,linewidth=1.25pt]{->}(0,0)(0,2)
+\psline[linecolor=red,linewidth=1.25pt]{->}(0,0)(3,-1)
+\psline[linecolor=red,linewidth=1.25pt]{->}(0,0)(2.85,-0.95)
+\psarc{->}{2.1}{90}{112.5}
+\rput[bl](.1,.01){C}
+\end{pspicture}
+  \end{minipage}\hspace{1cm}
+\begin{minipage}[t]{0.5\linewidth}
+\psset{unit=0.3cm}
+\begin{pspicture}(1,2)(18,14)
+%\psgrid[gridcolor=lightgray,subgriddiv=0,subgridcolor=lightgray]
+%
+\psline[linewidth=1pt,linecolor=black](6,0.5)(6,14)
+\psline[linewidth=1pt,linecolor=black](1,8.5)(6,7)
+\psline[linewidth=1pt,linecolor=black](1.5,5.5)(11,8.5)
+%
+\rput(17,3){$x$}
+\rput(5.5,13){$y$}
+\rput(10.5,8.75){$z$}
+\rput(11,7.1){$\vec{r}$}
+%
+\psline[linewidth=1.5pt,linecolor=black]{<->}(6,7)(6,11.25)
+\rput(5.35,9.4){$R$}
+\psline[linewidth=1.5pt,linecolor=Green]{->}(6.5,12)(4.75,12)
+\rput(7.5,12.8){ $I d\vec{l}$}
+%
+\psellipse[doubleline=true,doublecolor=yellow,doublesep=3pt,linecolor=blue](6,7)(3,4.5)
+\psline[linewidth=1pt,linecolor=black](6,7)(17.5,3.5)
+\psline[linewidth=1.5pt,linecolor=black]{->}(6,11.38)(11.95,5.225)
+%
+\psarc[linewidth=1.5pt,linecolor=gray](6,8){3.4}{85}{95}
+%
+\psline[linewidth=1.5pt,linecolor=gray]{->}(12,5.15)(12,8.15)
+\psline[linewidth=1.5pt,linecolor=black]{->}(12,5.15)(15,7.25)
+\psline[linewidth=1.5pt,linecolor=gray]{->}(12,5.15)(15,4.25)
+%
+\psline[linewidth=1pt,linecolor=black](12,8.15)(15,7.25)(15,4.25)
+%
+\Cnode*[linecolor=black,radius=0.1cm](12,5.15){a}
+\rput(11.5,4.5){ $P$}
+%
+\rput(12.5,8.9){$dB_y$}
+\rput(14.5,3.4){$dB_x$}
+\rput(15.5,8){ $d \boldmath{\vec{B}}$}
+%
+\psarc[linewidth=1pt]{<->}(12,5){5.5}{133}{161}
+\rput(7.2,8.5){ $\theta$}
+\end{pspicture}
+\medskip
+
+\hspace{2cm}\begin{tikzpicture}
+[parent anchor=south,child anchor=north,grow=south, scale=0.8]
+\tikzstyle{every node}=[ball color=red,circle,text=white, scale=0.8]
+\tikzstyle{edge from parent}=[draw,dashed,thick,red]
+\node {root}
+child {node {left}}
+child {node {right}
+child {node {child}}
+child {node {child}}
+};
+\end{tikzpicture}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+数学模式 
+空白间隙 
+\quad 即\hspace{1em}，当前M的宽度 
+\qquad 即\hspace{2em}，两个M的宽度 
+\; 5/18个M的宽度 
+\: 4/18个M的宽度 
+\, 3/18个M的宽度 
+\! -3/18个M的宽度 
+\空格 产生一个空格 
+\hspace{长度} 产生指定宽度 
+\phantom{文本} 产生指定文本的宽度 
+
+行内公示 
+三种进入退出行内模式的方法 
+\(……\) 
+\begin{math}……\end{math} 
+$……$ 
+
+行间公式 
+进入单行无编号公式环境也有三种方法 
+\[……\] 
+\begin{displaymath}……\end{displaymath} 
+$$……$$ 
+使用$$……$$环境可以手动指定编号 
+$$公式 \eqno自定编号$$ 
+加载amsmath宏包后，使用选项fleqn（就是声明加载宏包时使用\usepackage[fleqn]{amsmath}）可以使本该居中对齐的行间公式改为左对齐。也可以在\documentclass中使用该选项。 
+
+单行公式 
+自动编号的单行公式 
+\begin{equation} 
+公式 
+\end{equation} 
+单行公式中可以是作为一个整体出现的环境或者盒子，如array环境。 
+当一个公式太长不适合排在一行时，可以使用split环境（amsmath）。在split中可以换行、以&进行对齐，同时使多行公式合并为一个整体用在equation中。 
+
+多行公式 
+多行公式可以使用eqnarray环境，带星号可取消自动编号。 
+\begin{eqarray} 
+左边公式 & 中间公式 & 右边公式 \\ 
+左边公式 & 中间公式 & 右边公式 \\ 
+………………………………………………………… 
+左边公式 & 中间公式 & 右边公式 
+\end{eqarray} 
+中间公式一般是单个数学符号，如=、>等。 
+eqnarray自动为每行公式编号，如不希望某行被编号，则在\\之前需加入\nonumber。 
+gather环境（amsmath）使其中每一个公式居中对齐，\notag可以使某行不自动编号，使用gather*则全部不自动编号。 
+align环境（amsmath）可以以&指定每一行上下对齐的位置。同样，\notag可以使某行不自动编号，使用align*则全部不自动编号。 
+flalign环境（amsmath）与align基本相同，但是使公式在每一行左右对齐。 
+alignat环境（amsmath）与align类似，可指定几个列队之间的间距，但需要一个参数，即为每一行中&的个数加1后除以2。 
+如 
+\begin{aligned}{2} 
+a&=b &\hspace{20pt) c&=d\\ 
+e&=f & g&=h 
+\end{aligned} 
+此时“a=b”与“c=d”之间的距离即为指定的20pt。 
+gathered、aligned和alignated环境（amsmath）可以将生成的公式作为一个“块”放在其他环境里，er相应的不加“ed”的环境是独占它所在的行。 
+case环境（amsmath）用来排版左侧带有花括号的方程组，如分段函数的定义等。 
+
+上标下标 
+在上标、下标环境输入中文应指定字体大小。一级下标为\scriptsize；二级下标为\tiny。 
+如 \[ 
+U_{\mbox{\scriptsize 极大值}}=8.3\, V 
+\] 
+输入字母左边的角标可以使用一个空字符 
+如 \[ 
+{}_{\phantom{1}7}^{14}\mathrm{N}^-_5 
+\] 
+也可以使用amsmath宏包的\sideset{左侧角标}{左侧角标}主体符号。 
+
+国际标准 
+向量用粗斜体表示。加载bm宏包后可用\bm命令实现。 
+常数（如π、i、e等）和微分算子d用直立体表示。 
+定义下面三条命令 
+\newcommand{\dif}{\mathrm{d}} 
+\newcommand{\me}{\mathrm{e}} 
+\newcommand{\mi}{\mathrm{i}} 
+后就可以用\dif输入微分算子d了。 
+无衬线斜体表示矩阵与张量。 
+需定义新字体mathfsl： 
+\DeclareMathAlphabet{\mathsfsl}{OT1}{cmss}{m}{sl} 
+使用\mathfsl{矩阵}来输入。 
+数与单位之间应有一个小空隙\,并且单位的字体应为直立体。 
+
+定理环境 
+我一般要自定义下面几个定理环境。 
+\newtheorem{theorem}{定理}[section] 
+\newtheorem{definition}{定义}[section] 
+\newtheorem{lemma}{引理}[section] 
+\newtheorem{corollary}{推论}[section] 
+\newtheorem{proposition}{性质}[section] 
+\newtheorem{example}{例}[section] 
+\newtheorem{remark}{注}[section] 
+如果文档类型为book或者report的话就应将主计数器改为chapter。 
+
+插入文本 
+既可以使用\mbox{文本}，也可以使用amsmath提供的\text{文本}。后者能自动根据环境改变字体大小。 
+在多行公式之间加入文本可用\intertext{文本}。（需加载amsmath宏包） 
+
+多重角标 
+\substack{a\\b}（amsmath）可产生多重角标，例如用在求和号下方。a和b是居中对齐的。 
+也可以使用\subarray环境（amsmath）。它可以指定对齐方式（l：左对齐；c：居中对齐） 
+如 
+\begin{subarray}{l} 
+abcd\\ 
+edfg 
+\end{subarray} 
+
+分式 
+一般的分式使用\frac{分子}{分母}输入。 
+连分式可使用amsmath的\cfrac{分子}{分母}输入，它可以使分子分母保持同样大的字体。 
+
+二项式系数 
+A \atop B和A \choose B均可产生A在上B在下的二项式系数表达式。 
+加载amsmath宏包后以上两个命令无效，需换用\binom{A}{B}。 
+
+宏包 
+ctex 
+使用文档类型为ctexart、ctexbook、ctexrep或者加载了ctex、ctexcap宏包后，会增加以下六种改变字体命令，\kaishu相当于\CJKfamily{kai}，其余类似。 
+\kaishu楷书\songti宋体\youyuan幼圆\lishu隶书\fangsong仿宋\heiti黑体使用命令\zihao{...}来改变字号，参数可以选择0、-0、1、-1……6、-6、7、8，分别对应初号、小初、一号、小一……七号、八号。 
+文档类型为ctexart、ctexbook、ctexrep或者加载了ctex、ctexcap宏包后，会自动加入CJK环境，不必再手动加入了。 
+
+bibtex 
+利用bibtex建立引用文献数据库时先在待编译的源文件同目录下建立一个后缀名为".bib"的文件。以如下格式输入所有需要引用的文献资料 
+@ARTICLE{, 
+AUTHOR = {}, 
+normalauthor = {}, 
+TITLE = {}, 
+JOURNAL = {}, 
+YEAR = {}, 
+miscyear = {}, 
+VOLUME = {}, 
+NUMBER = {}, 
+PAGES = {}, 
+MONTH = {}, 
+TypeofLit = {}, 
+date = {}, 
+modifydate = {}, 
+citedate = {}, 
+url = {}, 
+language = {}, 
+} 
+这可以用winedt的insert->BibTeX items输入，需要填写的是首字母大写的项目。 
+在winedt中同时打开TeX和bib文件，在需要引用的地方加入\cite{}就会自动弹出一个对话框选择需要引用的项目。 
+在导言区加入引用文献的格式\bibliographystyle{plain}，如果杂志有特殊要求它会提供bst文件。将plain改为bst的文件名就可以了。 
+在文末需要出现参考文献的地方加入\bibliography{bib文件名，不带后缀名.bib} 
+
+fancyhdr 
+fancyhdr宏包可以设计版面布局。 
+\lhead指定左页眉内容，\rfoot指定右页脚内容，其余依次类推。 
+使用时加载fancyhdr宏包，并且指定\pagestyle{fancy}。若使用ctexart等文档模式需要在选项中加入fancyhdr。 
+下面是我一般用的设置，供参考 
+\fancyhf{} %清空页眉页脚 
+\lhead{\bfseries Shanghai Jiao Tong University} 
+\rhead{\heiti 上\,海\,交\,通\,大\,学} 
+\cfoot{\thepage} 
+\lfoot{\small \sffamily Materials Science and Engineering} 
+\rfoot{\kaishu 材料科学与工程学院} 
+
+编辑器 
+winedt 
+环境匹配 
+在输入\begin{enviroment}后立即一个右花括号}后，会自动输出\end{enviroment}并且换行居中。 
+
+工具 
+LaTable 
+可视化输入表格 
+
+http://www.g32.org/latable/index.html 
+
+WinFIG 
+一款所见即所得作图工具，支持TeX命令输出，兼容性好。 
+
+http://user.cs.tu-berlin.de/~huluvu/WinFIG.htm 
+
+LaTeX公式左对齐 
+22 十二, 2007  1 条评论 
+
+LaTeX中公式默认是居中对齐的, 但有时我们希望它能左对齐, 使用的方法如下: 
+
+1. \documentclass[a4paper,fleqn]{article} 这个对整篇文章有效. 
+
+如果只需要对一行公式进行左对齐的话, 可使用 
+
+\begin{flalign} 
+your equation (1) 
+\end{flalign} 
+
+2. 对某一个公式: 
+some text here\\ 
+\[ 
+your equation here 
+\]\\ 
+and more text here. 
+3. 如果你说的是某一个公式有两三行, 你想把这几行做左对齐. 
+
+用 
+% 公式左对齐
+\begin{flalign*}
+\begin{split}
+c_0 &= 1.000000000190015\\
+c_1 &= 76.18009172947146\\
+c_2 &= -86.50532032941677\\
+c_3 &= 24.01409824083091\\
+c_4 &=  -1.231739572450155\\
+c_5 &= 1.208650973866179\times 10^{-3}\\
+c_6 &= -5.395239384953\times 10^{-6}
+\end{split}& %这个&符号关键
+\end{flalign*}
+
+还有其它方法, 
+
+例如使用 
+
+左对齐、居中对齐、右对齐的环境分别为flushleft、center和flushright。也可以使用命令\raggedright、\centering和\raggedleft使以后的文本按指定方式对齐. 
+
+或者 (LaTeX 学习博客 (http://latex.yo2.cn) , 白色印记.) 
+
+加载amsmath宏包后，使用选项fleqn（就是声明加载宏包时使用\usepackage[fleqn]{amsmath}）可以使本该居中对齐的行间公式改为左对齐.

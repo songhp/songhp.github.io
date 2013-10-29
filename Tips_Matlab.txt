@@ -1,0 +1,2387 @@
+% Author: SONG, He-Ping (hepingsong@gmail.com)
+% Sun Yat-Sen University, P.R. China
+scatter(Y(1,:),Y(2,:),12,[angle angle],'+','filled');
+
+
+realmax = 1.7977e+308 略小于2^1024  exp(709)
+realmin = 2.2251e-308 略大于-2^1024
+最小实数2^(-1074)
+eps = 2.220446049250313e-016
+
+显示精度
+format long
+format rational
+format short e
+format long
+format long e
+format long eng
+digits(10) %10位有效数字
+vpa(pi/2,20)
+
+
+A = meshgrid(1:6,1:5)'
+B = A - repmat(mean(A,1),size(A,1),1);     % center each column 中心化
+C = bsxfun(@minus, A, mean(A,1))           % center each column (the better way) 
+check = isequal(B,C)
+D =  bsxfun(@rdivide,A,sqrt(sum(A.^2,1)))  % 归一化make each column have unit norm
+
+normr %归一化行数据
+normc %归一化列数据
+
+
+m=[
+77	11
+66	22
+99	33
+10	88];
+% 输出结果到result.xls
+xlswrite('result.xls', m,'B2:C5')
+
+% 读取excel数据
+m = xlsread('result.xls', 1, 'B2:C5')
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+matlab输出中文eps
+1. 
+print -depsc2 -zbuffer zbuffer.eps
+print -depsc2 -opengl opengl.eps
+2. http://www.ctex.org/documents/latex/graphics/node56.html
+\usepackage{psfrag}
+\psfrag{CS}{计算机}
+3. 由figure打印到文件输出eps
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+源码生成tex文件。
+publish(kalmanfilter.m','latex')
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+随机选取前k个数据点
+perm = randperm(N); % random permutation 1--N
+perm = perm(1:k); % select k points
+
+随机产生L2归一化数据
+sample = randn(n,dim);
+sample = normr(sample);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+load标志 等待waiting...
+
+n = 1000;
+h = waitbar(0,'Waiting ...');
+for i=1:n
+waitbar(i/n);
+% here perform some stuff
+end
+close(h);
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+删除行或列
+假如A为你的矩阵，
+你要去掉第i行，
+用 A(i, :) = [];
+要去掉第j列，
+用A(:, j) = [];
+
+
+%%%%%%%%%%%%%%% 生成透明eps图形  %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+在网上发现如下codes，可以生成透明图形。
+% If you ever wondered how to get a matlab figure transparent (particularly usefull when you export it to formats that feature transparency, like eps, gif, png, etc.), here is how you do it:
+
+% you created a figure and it is "current". % the following, you could have guessed
+set(gcf,'color','none');
+set(gca,'color','none');
+% but this following little detail took me ages to figure out
+set(gcf,'InvertHardCopy','off');
+print -depsc2 framework.eps
+
+% saving current display
+saveas(gcf, ’my image’, ’png’);
+% saving a 2D or 3D matrix into an image
+imwrite(M, ’my image’, ’png’); % M should have its values in [0,1]
+% loading into a 2D (gray) or 3D (color) matrix
+M = double( imread( ’my image.png’ ) );
+
+
+%%%%%%%%%%%%%%% 输入参数检查  %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+disp(sprintf('My first input is "%s".' ,inputname(1)))
+disp(sprintf('My second input is "%s".',inputname(2)))
+
+
+error(nargchk(LOW,HIGH,N,'struct'));
+error(nargchk(4,4,nargin - length(varargin)));
+
+
+if ndims(X) ~= 2
+    error('X matrix must be 2 dimensional')
+end 
+
+if iterations <= 0
+    error('number of iterations must be positive')
+end
+
+for i = 1:length(varargin)
+    if strcmpi(varargin{i}, 'tie g')
+        g_tied = 1;
+    elseif strcmpi(varargin{i}, 'tie r')
+        r_tied = 1;
+        g_tied = 1;
+    else
+        disp('unknown argument:');
+        disp(varargin{i});
+        error(['unknown argument']);
+    end
+end
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%  Matlab Tips & Tricks   %%%%%%%%%%%%%
+
+1: 当for循环太多,运行时间太长会自动退出,函数嵌套nested(中间运行错误也会)
+2. 保存实验数据方面,可用MAT文件代替txt 的I/O,同时在每一次计算得到结果现保存,后clear
+ ? txt会截取数据有效位数， MAT
+函数嵌套很多，代码很长，可用pcode命令产生P文件，预解析preparsed文件提高速度
+
+有些mex文件编译的文件在无解的时候会自动退出
+图像聚类有时会产生空集，要自动删除，因为其计算结果是NaN, 赋值就会出现问题，NaN不是一个数，｛inf是数，所以可以用inf代替赋值｝
+% 图像聚类时可能产生空集void cell
+% 那么均值，协方差就为NaN，要删掉
+
+复制图形：图形窗口Edit → Copy Options → 选择Metafile,然后Edit → Copy Figure，在Word中粘贴即可。
+注:第一次运行结果图形中复制
+也可以用命令print输出高质量图形，如要输出eps文件在Latex中使用，可用print -deps filename.eps，其他参数还有　　　　
+     　 -dmeta     % Send figure to clipboard (or file) in Metafile format
+        -dbitmap   % Send figure to clipboard (or file) in bitmap format
+　　　　-dps       % PostScript for black and white printers
+        -dpsc      % PostScript for color printers
+        -dps2      % Level 2 PostScript for black and white printers
+        -dpsc2     % Level 2 PostScript for color printers
+ 
+        -deps      % Encapsulated PostScript
+        -depsc     % Encapsulated Color PostScript
+        -deps2     % Encapsulated Level 2 PostScript
+        -depsc2    % Encapsulated Level 2 Color PostScript
+ 
+        -dhpgl     % HPGL compatible with Hewlett-Packard 7475A plotter
+        -dill      % Adobe Illustrator 88 compatible illustration file
+        -djpeg<nn> % JPEG image, quality level of nn (figures only)
+                     E.g., -djpeg90 gives a quality level of 90.
+                     Quality level defaults to 75 if nn is omitted.
+        -dtiff     % TIFF with packbits (lossless run-length encoding)
+                     compression (figures only)
+        -dtiffnocompression % TIFF without compression (figures only)
+        -dpng      % Portable Network Graphic 24-bit truecolor image
+                     (figures only)
+
+在网上发现如下codes，可以生成透明图形。
+% If you ever wondered how to get a matlab figure transparent (particularly usefull when you export it to formats that feature transparency, like eps, gif, png, etc.), here is how you do it:
+
+% you created a figure and it is "current". % the following, you could have guessed
+set(gcf,'color','none');
+set(gca,'color','none');
+% but this following little detail took me ages to figure out
+set(gcf,'InvertHardCopy','off');
+print -depsc2 framework.eps
+
+关于奇异矩阵singular matrix
+A square matrix that is not invertible is called singular or degenerate
+记住一下结果：
+A是奇异的singular matrix，那么det(A)=0
+inv(A)=inf*ones(rank)
+log(0)=-Inf
+log(eps)=-36.0437
+log(0+eps)=-36.0437
+log(1)=0
+log(1+eps)=2.2204e-016
+对奇异矩阵log(det(A))时，要在其对角元素上加一个数
+det(A+eye(rank)*a)
+使上式结果趋于0
+
+
+%%%%%%%%%%%  正则表达式搜索 %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+regexp
+
+%%%%%%%%%%%  ftp %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ftplink=ftp('202.116.130.79','508','508')
+dir(ftplink)
+cd(ftplink,'songheping');
+mget(ftplink,'filename')
+mput(ftplink,'filename')
+mkdir(ftplink,'dirname')
+delete(ftplink,'filename')
+rmdir(ftplink,'dirname')
+close(ftplink);
+
+%%%%%%%%%%%   %%%%%%%%%%%%%
+   
+M-Lint Code Check Report
+自动检查m文件中有无多余“，；”，不使用的变量
+
+
+%%%%%%%%%%% 数字与字符 %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+num2str  int2str mat2str 
+str2num  sprintf sscanf
+
+
+%%%%%%%%%%%%% cell && struct %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A=cell(M,N)  cell类型
+A{1,2}=a[m,n]
+
+cell cellfun celldisp cellplot num2cell
+deal cell2struct struct2cell iscell reshape
+
+A(1).a1=10  A为struct类型
+A(2).a2='love'
+A(3).a3=[1 2 3]
+
+struct fieldnames getfield setfield 
+rmfield isfield isstruct
+cell2struct struct2cell
+celldisp
+cellplot
+num2cell
+
+
+%%%%%%%%%%%%% pcode   %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+pcode
+profile
+P文件是对应M文件的一种预解析版本（preparsed version）。因为当你第一次执行M文件时，Matlab需要将其解析（parse）一次（第一次执行后的已解析内容会放入内存作第二次执行时使用，即第二次执行时无需再解析），这无形中增加了执行时间。所以我们就预先作解释，那么以后再使用该M文件时，便会直接执行对应的已解析版本，即P文件。但又因为Matlab的解析速度非常快，一般不用自己作预解析。只有当一些程序要调用到非常多的M文件时，如GUI应用程序时，才会作预解析，以增加以后的调用速度。
+P文件的调用优先级比M文件要高,P文件可以用来作保密代码之用，如果你给别人一个M文件，别人可以打开来看到你所有的代码和算法。如果你的代码不想被别人看到，那可以给他P文件。
+pcode函数也可以应用在M函数文件。
+
+%%%%%%%%%%%%% 时间   %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+cputime tic,toc
+profile
+etime 计算时间差
+mytime=datestr(now)
+disp(sprintf('start at [%s]',mytime));
+disp(sprintf('over at  [%s]',datestr(now)));
+
+now date clock datenum datestr Datevec Calendar Weekday Eomday Datetick
+
+calendar    :返回日历
+clock       :当前时间
+cputime     :从启动经过的cpu时间
+date        :日期
+datenum     :转换成连续日期数
+datestr     :日期字符串
+datevec     :日期分隔部分
+eomday      :一个月的日期
+etime       :经过的时间
+now         :当前的日期和时间
+tic, toc    :秒表定时器
+weekday     :星期几
+%%%%%%%%%%% plot(x,y,'LineSpec','Linewidth',1),线型,色彩 plot3  %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+LineSpec参数color-linestyle-marker
+色彩: r红 g 绿 b蓝 c青 m 品红 y 黄 k黑 w白
+线型：- 实线 -- 双划线 :虚线 -.点划线
+点型符号：+ o *  .  x叉符 s正方  d菱形 v  ^ < > ^ v  p五星符 h六星符
+           b     blue          .     point              -     solid实线
+           g     green         o     circle             :     dotted虚线
+           r     red           x     x-mark             -.    dashdot点划线
+           c     cyan青        +     plus               --    dashed 双划线  
+           m     magenta品红   *     star             (none)  no line
+           y     yellow        s     square方形
+           k     black         d     diamond菱形
+           w     white         v     triangle (down)
+                               ^     triangle (up)
+                               <     triangle (left)
+                               >     triangle (right)
+                               p     pentagram五角星
+                               h     hexagram六角星
+r*--
+bx:
+ko-
+md-.
+cs:
+
+LineWidth — Specifies the width (in points) of the line.
+MarkerEdgeColor — Specifies the color of the marker or the edge color for filled markers (circle,
+square, diamond, pentagram, hexagram, and the four triangles). 
+MarkerFaceColor — Specifies the color of the face of filled markers.
+MarkerSize — Specifies the size of the marker in units of points.
+
+plot(x,y,'--rs','LineWidth',2,... 
+                'MarkerEdgeColor','k',...
+                'MarkerFaceColor',[.49 1 .63],...
+                'MarkerSize',10)
+
+☆★○●◇◆■△▲≡〓°――♂♀
+
+title('标题','FontName','Arial','FontSize','16','Fontweight','Bold')   标题
+FontName:宋体 隶书 
+\bf 加粗
+\it 斜体
+\rm 正常
+\fontname{宋体}
+\fontsize{16}
+^{上标}
+_{下标}
+\alpha \beta \pi
+
+xlabel('x轴');
+ylabel('y轴');    设定x轴和y轴的标识
+
+text(x,y,'\fontsize{16}\leftarrow\itsin(t)\fontname{隶书}极大值') 添加文本注释
+
+gtext('text')  在鼠标点击处标注上文本注释
+
+axis([xmin xmax ymin ymax]) 修改轴坐标范围
+axis xy 笛卡尔坐标系
+axis ij 坐标原点的左上
+axis square 图形设置为正方形
+axis on/offf 取消坐标
+axis equal 
+
+axis on/off  轴
+box on/off  边界
+grid on/off    打开网格线
+
+set(gca,'Xtick',0:.5:6,'Ytick',-2.5:0.5:2.5)   修改坐标范围和间隔
+xlim([0 100])  设置x轴的刻度范围
+
+
+legend('string1','string2','string3'...,'定位代号')  添加图例：0-自动 1-默认右上角 2-左上 3-左下 4-右下 -1-右外侧
+legend('boxoff') 不显示边框
+
+subplot(m,n,i)   % 分割窗口对象
+hold on  % 以后图形绘制在当前坐标轴图形上
+
+
+figure;
+
+对于变化剧烈的函数，可用fplot来进行较精确的绘图
+
+画圆
+x=a+R cos(theta) theta=[0,2pi] 小于2pi为一段圆弧
+y=b+R sin(theta)
+plot(x,y)
+axis equal
+
+theta=0:0.01:2*pi;
+x=30*cos(theta);
+y=20*sin(theta);
+plot(x,y)
+axis equal
+axis([-35 35 -25 25])
+legend('期望轨迹')
+gtext('实际轨迹')
+
+
+contour(x,y,z); 等高线contour函数，在后面的轮廓线函数里讲解
+clabel(C,h);   标注等高线值
+
+%%%%%%%%%%%%% 基本绘图函数  %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+plot：x轴和y轴均为线性刻度
+loglog：x轴和y轴均为对数刻度
+semilogx：x轴为对数刻度，y轴为线性刻度
+semilogy：x轴为线性刻度，y轴为对数刻度
+bar：直方图
+barh 水平直方图
+errorbar：图形加上误差范围
+fplot：较精确的函数图形
+polar：极座标图
+hist：累计图
+rose：极座标累计图
+stairs：阶梯图
+stem：针状图
+fill：实心图
+feather：羽毛图 [复数向量]
+compass：罗盘图 [复数向量]
+quiver：向量场图 [梯度场]
+pie 圆饼图
+area 区域图
+ginput 手工绘图
+zoom(off out reset xon yon (n)) 缩放图形
+
+%%%%%%%%%%% 三维图形 %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+plot3
+mesh 三维网格曲面图
+meshgrid 栅格数据点产生
+meshc 将网格与等高线结合
+meshz 屏蔽的网格图
+peaks 
+surf 阴影曲面
+surfc 带等高线的阴影曲面
+surfl 具有光照效果的阴影曲面
+fill 填充图形
+ezplot(f,xmin,xmax)  绘制f(x)的函数图
+hidden on off 隐藏线
+view 视点
+bar3
+stem3
+sphere 球面
+cylinder 圆柱体
+shading
+waterfall
+
+%%%%%%%%%%% 图形对象   %%%%%%%%%%%%%   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+root=0
+handle=gcf 产生当前图形句柄
+handle=figure('属性名','属性值') 产生图形句柄
+
+handle=gca 产生当前axes句柄
+handle=axes('属性名','属性值') 产生axes句柄
+
+handle=line(x,y,z) 产生line句柄
+handle=patch surface text uimenu uicontrol
+
+handle属性值获取
+属性值=get(handle,'属性名')
+
+handle属性值设置
+set(handle,'属性名','属性值')
+
+figure(handle) 设置handle为当前窗口
+
+close(handle) 关闭图形窗口
+
+
+创建图形用户界面-->对话框
+dialog  :创建对话框
+errordlg:创建错误对话框
+helpdlg :创建帮助对话框
+inputdlg:创建输入对话框
+listdlg :创建选择列表对话框
+msgbox  :创建消息对话框
+pagedlg :显示页面的版面对话框
+printdlg:显示打印对话框
+questdlg:问题对话框
+uigetfile:文件检索对话框
+uiputfile:为写入而显示的检索对话框
+uisetcolor:从对话框交互式设置对象的ColorSpec
+uisetfont :交互设置对象字体特征
+warndlg   :警告对话框
+
+
+%%%%%%%%%%% GUI   %%%%%%%%%%%%%   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+图形窗口的创建
+handle=figure('属性名','属性值',....)
+
+下拉菜单的生成
+menuhandle=uimenu(handle,'属性名','属性值',....) 主菜单
+itemhandle=uimenu(menuhandle,'属性名','属性值',....) 菜单项
+subitemhandle=uimenu(itemhandle,'属性名','属性值',....) 子菜单
+
+对话框
+handle=dialog('属性名','属性值',....)
+
+文件对话框
+[filename,filepath]=uigetfile(filetype,title,X,Y) 打开
+[filename,filepath]=uiputfile(inifile,title,X,Y) 保存
+
+设置字体
+font=uisetfont(handle,tile)
+
+颜色设置
+colorRGB=uisetcolor(handle,title)
+colorRGB=uisetcolor(RGB,title)
+
+信息提示对话框
+handle=ErrorDlg('error string','title')
+
+输入对话框
+answer=InputDlg('prompt','title',lineno,defanswer)
+
+消息显示对话框
+MsgBox('message','title',icon,mode)
+
+提问对话框
+buttonname=QuestDlg('questionstring','Dlgname',ButtonArray,defButton)
+
+警告对话框
+handle=WarnDlg('warnstring','title')
+
+======================== guide =========================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+控件实现方法
+hControl=uicontrol(handle,'属性名','属性值',....)
+style属性取pushbutton,radiobutton,checkbox,listbox,popupbutton,slider,text,edit,frame
+CallBack属性写实现代码
+
+单选radio按钮实现方法
+CallBack属性里写：当value属性取值1时表示取中，用“if get(radio,'value'==1) ... else ... end”实现
+
+多选按钮checkbox实现方法
+CallBack属性里写：get/set(checkbox,"value")
+
+listbox列表框实现方法
+string属性显示项目名，用|隔开，CallBack属性里set取value
+
+下拉菜单popupmenu实现方法
+string属性显示项目名，用|隔开，CallBack属性里set取value
+
+slider滑块实现方法
+Min,Max,Vavle属性，CallBack属性里写：get/set(slider,"value")
+
+edit编辑框实现方法
+string属性,CallBack属性里写：get/set(edit,"string")
+
+%%%%%%%%%%% 数组   %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+x=[1 2 3 4
+5 6 7 8
+]    “，”或空格分隔元素，“；”表示行的结束
+x(3) %%查询第3个元素 ,MATLAB是按列存储的,所以是按列数第几个
+x([2,3,5,8])  查询第2,3,5,8个元素
+x(3:end)  
+x(end:-1:2)   倒排
+x(find(x>5))   查询大于5的所有元素
+x(2,3)=0    第2行,第3列重新赋值
+x(2,:)    查询第2行所有元素
+x(:)   所有元素每列以从左到右连成数组
+ 
+x([2 4;5 6])    第2,4个元素,第5,6个元素组成新的
+x([2 4],[5 6])  取第2,4行第5,6列的元素
+
+linspace(a,b,n)   在a，b间创建n个采样点，n默认为100
+
+logspace(a,b,n)   在10^a，10^b间创建n个采样点，n默认为50
+
+
+dot(a,b)=a'*b=sum(a.*b) 点积
+cross 叉积
+inv 逆
+pinv 伪逆
+det 行列式
+eig 特征值、特征向量
+eigs
+svd 奇异值
+svds
+
+cond 条件数
+condest 1范数条件数
+rcond 条件数的倒数
+norm 范数
+normest
+rank 秩 
+trace 迹
+null 零空间
+orth 正交空间
+
+
+
+标准数组生成函数
+ones
+zeros
+diag(2) 
+eye(3)
+magic(3)
+rand(1)
+rand(2,2) 
+randn(3,3)
+
+compan gallery hadamard hilb invhilb magic pascal rosser toeplitz vander wikiinson
+
+%%%%%%%%%%%% n维函数 %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+repshape(a,3,3)
+rot90 逆时针90度
+fliplr 左右翻转
+flipud  上下翻转
+flipdim 第i维翻转
+tril  下三角
+triu  上三角
+repmat
+diag
+cat
+ndgrid
+ndims
+shiftdim
+permute 
+ipermute
+squeeze
+sub2ind ind2sub
+
+
+
+
+poly 创建多项式
+poly2sym 转符号多项式表示
+root 求根
+polyfit 拟合
+
+%%%%%%%%for--end语句%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+n=0:10
+y=n;
+for i=1:11
+  y(i)=sin(n(i));
+end
+y
+
+
+%%%%%%%%while--end语句%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+x=zeros(1,6);
+i=1;
+while i<=6
+   x(i)=1/i;
+   i=i+1;
+end
+x
+
+
+%%%%%%%% if--else--elseif--end语句 %%%%%%%%%
+
+
+%%%%%%%%  switch--case--otherwise--end语句不用break  %%%%%%%%%
+
+%%%%%%%%  break跳出for,while  return跳出函数 %%%%%%%%%
+
+%%%%  pause 暂时停止运行，回车继续执行，pause(n)是中断n秒后继续执行 %%%%%%
+
+%%%%%%%%  Ctrl+C终止运行  %%%%%%%%%
+
+%%%%%%%%  echo on/off是否在屏幕显示正在执行的语句  %%%%%%%%%
+ 
+
+
+
+
+%%%%%%%%%%%    I/O 文本文件  %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+csvread('data.txt',a)    以逗号为间隔
+csvwrite('data.txt',a)     
+a = dlmread('data.txt',指定间隔符号{'\t' ',' ' '})    
+dlmwrite('data.txt',a,',')
+textread
+
+
+[fid,message]=fopen('filename','flag') 
+fid成功返回非负整数，失败返回-1 message为错误信息
+flag: r w a   [追加数据] r+ w+ a+
+
+status=fclose(fid) 
+status成功返回0，失败返回-1
+
+
+fscanf(fid,'%s %f %d %i ') 从文件中读出数据
+fprintf(fid,'%s %f %i ',a)  将数据写到文件
+fprintf('_____________________________\n')
+
+
+fid = fopen('histogram.dat','w');
+fprintf(fid,'function\t[');
+for pic=0:1998
+fprintf(fid,'histogram%d,',pic);
+end
+fprintf(fid,'histogram1999');
+fprintf(fid,']=histogram\n');
+
+disp(sprintf('read the %dth image data.................',pic));
+
+input('input a number');
+s=input('input a num:  ','s');
+num=str2num(s);
+
+s1='E:\research\mfile\ddsvm\image';
+s2=sprintf('%d.jpg',pic);
+filemame=cat(2,s1,s2);
+
+
+%%读写多个图像文件数据
+fid = fopen('samples.m','w');
+fprintf(fid,'function  [sample1,sample2,sample3,sample4,sample5,sample6,sample7,sample8,sample9,sample10]=data\n');
+for pic=1:1000
+ 
+        s1='E:\research\GMVQ\'; %也可用filename=dir('*.jpg'); str ={d.name}; cat(2,dir,filename)
+        s2=sprintf('%d.jpg',pic);
+        s=cat(2,s1,s2);
+        disp(sprintf('read the %dth image data.................',pic));
+fprintf(fid,'sample%d=[',pic); 
+fprintf(fid,'];\n');
+end
+fclose(fid);
+
+
+fid = fopen('ctestl.dat','wb');
+fwrite(fid,dim,'float');
+for i=1:n
+    fwrite(fid,pstar(:,i),'float');
+end
+fclose(fid);
+
+
+[sprime,cnt] = fread(fid,[dim,1],'float');
+[ndd,cnt] = fread(fid,1,'float');
+
+
+filename=sprintf('U%dS%d.TXT',uid,no);
+save(filename, 'A'); %A是变量名
+load(filename);
+
+
+
+
+fclose  :关闭文件
+fopen   :打开文件
+fread  :从文件中读入二进制数据
+fwrite :把二进制数据写入文件
+fgetl :逐行从文件中读取数据并放弃换行符
+fgets :从文件中读取行，保留换行符并把行作为字符串返回
+fprintf:把格式化数据写入文件
+fscanf :从文件中读取格式化数据
+feof  :测试文件是否结束
+ferror:测试文件输入输出错误信息
+frewind:文件指针归零
+fseek  :设置文件位置指针
+ftell  :获取文件位置指针
+sprintf:把格式化数据写入一个字符串
+sscanf :使用格式控制读取字符串
+
+csvread :读取逗号分隔格式的数据文件到矩阵
+csvwrite:写矩阵到逗号分隔格式的数据文件
+dlmread :把一个ASCII限定文件(数据文件)读入矩阵
+dlmwrite:把矩阵写入到ASCII限定文件(数据文件)
+hdf     :HDF接口??
+imfinfo :返回图形图象文件的信息
+imread  :读取图象(到矩阵)
+imwrite :写入图象
+textread:从文本文件读取格式化数据(important)
+wk1read :把Lotus123电子表格读入矩阵
+wk1write:把矩阵写入Lotus123wk1电子表格
+xlsread :读取excel表格
+
+%%%%%%%%%%%%% help  %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+help
+matlab\general       -  General purpose commands.
+matlab\ops           -  Operators and special characters.
+matlab\lang          -  Programming language constructs.
+matlab\elmat         -  Elementary matrices and matrix manipulation.
+matlab\elfun         -  Elementary math functions.
+matlab\specfun       -  Specialized math functions.
+matlab\matfun        -  Matrix functions - numerical linear algebra.
+matlab\datafun       -  Data analysis and Fourier transforms.
+matlab\polyfun       -  Interpolation and polynomials.
+matlab\funfun        -  Function functions and ODE solvers.
+matlab\sparfun       -  Sparse matrices.
+matlab\scribe        -  Annotation and Plot Editing.
+matlab\graph2d       -  Two dimensional graphs.
+matlab\graph3d       -  Three dimensional graphs.
+matlab\specgraph     -  Specialized graphs.
+matlab\graphics      -  Handle Graphics.
+matlab\uitools       -  Graphical User Interface Tools.
+matlab\strfun        -  Character strings.
+matlab\imagesci      -  Image and scientific data input/output.
+matlab\iofun         -  File input and output.
+matlab\audiovideo    -  Audio and Video support.
+matlab\timefun       -  Time and dates.
+matlab\datatypes     -  Data types and structures.
+matlab\verctrl       -  Version control.
+matlab\codetools     -  Commands for creating and debugging code.
+matlab\helptools     -  Help commands.
+matlab\winfun        -  Windows Operating System Interface Files (COM/DDE)
+matlab\demos         -  Examples and demonstrations.
+matlab\timeseries    -  Time series data visualization and exploration.
+matlab\hds           -  (No table of contents file)
+matlab\guide         -  Graphical User Interface Tools.
+matlab\plottools     -  Graphical User Interface Tools.
+
+
+
+
+
+%%%%%%%%%%%%% MATLAB系统命令%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+命 令                含 义
+help                 在线帮助
+helpwin              在线帮助窗口
+helpdesk            在线帮助工作台
+demo               运行演示程序
+ver                     版本信息
+readme              显示Readme文件
+who                      显示当前变量
+whos                显示当前变量的详细信息
+clear               清空工作间的变量和函数
+clc                清屏Clear command window.
+clf
+pack              整理工作间的内存
+load                 把文件调入变量到工作间
+save              把变量存入文件中
+quit/exit           退出MATLAB
+what            显示指定的matlab文件
+lookfor                   在HELP里搜索关键字
+which                 定位函数或文件 
+path                   获取或设置搜索路径
+echo                 命令回显
+cd                 改变当前的工作目录
+pwd                 显示当前的工作目录
+dir                 显示目录内容
+unix                 执行unix命令
+dos                 执行dos命令
+!           执行操作系统命令
+computer           显示计算机类型
+iskeyword
+disp
+
+%%%%%%%%%%%%%  matlab 预定义变量  %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ans     预设的计算结果的变量名
+eps   正的极小值=2.2204e-016 10^-52
+pi    3.1416
+inf   无穷大（1/0）
+NaN   无法定义一个数目（0/0）
+i或j   虚数单位i=sqrt(-1)
+nargin   函数输入参数个数
+nargout   函数输出参数个数
+realmax    最大的正实数 1.7977e+308 2^1023
+realmin   最小的正实数2.2251e-308 2^-1022
+flops     浮点运算次数
+ 
+
+%%%%%%%%%%%%%  latex字符集  %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+text/title/xlabel/ylabel对象支持简单的TeX排版语法
+
+\alpha
+\bata
+\gamma
+\delta
+\epsilon
+\zeta
+\eta
+\theta
+\vartheta
+\iota
+\kappa
+\lambda
+\mu
+\nu
+\xi
+\pi
+\rho
+\sigma
+\varsigma
+\tau
+\equiv
+\im
+\otimes
+\cap
+\supset
+\int
+\rfloor
+\lfloor
+\perp
+\rceil
+\lceil
+\vee
+\langle
+\upsilon
+\phi
+\chi
+\psi
+\omega
+
+大写
+\Gamma
+\Delta
+\Theta
+\Lambda
+\Xi
+\Pi
+\Sigma
+\Upsilon
+\Phi
+\Psi
+\Omega
+
+
+\forall 任意
+\exists 存在
+\in 属于
+\cong 约等号加下划线
+\approx 约等号
+
+\otimes
+\oplus 
+\cup 交
+\subset 右包含
+\subseteq 右包含加=
+\supset 左包含
+\supseteq 左包含加=
+
+\int 积分号
+\lceil
+\cdot .
+\ldots ...
+\times 乘号
+\surd 根号[前面部分]
+\varpi
+\angle 角度号
+\rangle
+\sim 单约等号
+\leq 小于等于号
+\infty 无穷号
+\clubsuit
+\diamondsuit
+\heartsuit
+\spadesuit
+\leftrightarrow
+\leftarrow 左箭头
+\Leftarrow 左双箭头
+\uparrow 上箭头
+\rightarrow 右箭头
+\downarrow 下箭头
+\circ 句号
+\pm 正负号
+\geq 大于等于号
+\propto
+\partial 微分号
+\bullet 大圆点
+\div 除号
+\neg 不等号
+\aleph
+\wp
+\prime '
+\oslash 空集
+\sum 累加号[\Sigma]
+\o
+\nabla
+\ldots
+\prime '
+\Re
+\Im
+\0
+\mid
+\copyright 
+\ll <<
+\gg >>
+\#
+\$
+\%
+\&
+\{
+
+\fontsize{16}
+\fontname{隶书}
+\fontname{Times New Roman}
+\bf 黑体
+\it 斜体一
+\sl 斜体二
+\rm 正体
+^　上标
+_　下标
+
+gtext('\fontsize{16}\leftarrow\itsin(t)\fontname{隶书}\supseteq\subset\o\nabla\ldots\prime\0\mid\mid\copyright}')
+
+gtext('\fontname{Times New Roman}\it\copyrightSong He-ping, GDUT');
+
+%%%%%%%%%%%%% 概论统计 统计工具箱   %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+概论密度函数
+Y=pdf(name,X,A[,B,C])
+name可以是
+beta
+bino
+chi2
+exp
+f或F
+gam
+geo
+hyge
+logn
+nbin
+ncf
+nct
+ncx2
+norm
+poiss
+ray1
+t或T
+unif
+unid
+weib
+
+专用概率密度函数pdf
+概论密度函数加pdf
+
+概论累积函数cdf
+概论密度函数加cdf
+
+逆概论累积函数
+概论密度函数inv
+
+随机数生成函数rnd
+概论密度函数加rnd
+beternd
+binornd
+chi2rnd
+geornd
+hygernd
+mvnrnd
+normrnd
+trnd
+unifrnd
+
+
+mean 均值
+nanmean 算术平均
+geomean 几何平均
+harmmean 和谐[调和]平均
+trimmean 调整平均 [截尾平均]
+max
+nanmax 忽略nan的最大值
+min
+nanmin 
+median 中值
+nanmedian
+mad 绝对差分平均值
+sort 
+sortrows
+range 最大值与最小值的差 [极差]
+iqr 内四分极值 样本数据的75%与25%位置处的值之差
+grpstats 分组数据描述 返回每一列的均值
+sum
+nan{sum,mean,max,min,std,median} 包含缺失数据的样本描述
+sumsqr 平方和
+cunsum 此位置以前的元素和
+cumtrapz 梯形累和函数
+cumprod 当前元素与所有前面位置的元素的积
+
+var 方差
+std 标准差
+cov 协方差
+corrcoef 相关系数
+moment 中心矩
+
+skewness 偏斜度 偏度
+kurtosis 峰度
+
+tabulate 频数表 各样本值出现的次数、比例
+
+crosstable 列联表 检验样本的独立性
+
+anova1 单因子方差分析
+anova2 双因子方差分析
+anovan 多因子方差分析
+
+多元方差分析
+manova1 单因素多元方差分析
+multcomare 多元比较
+manovacluster 分组聚类
+
+试验设计
+ff2n 
+fullfact
+fracfact
+
+aoctool 方差分析
+
+线性回归
+rcoplot
+regress
+leverage
+regstats
+stepwise
+
+岭回归
+ridge
+
+扩展线性模型
+glmfit
+
+多项式拟合
+polyconf
+polyfit
+polyval
+
+稳健回归
+robustfit
+
+二次响应面模型
+rstool
+
+非线性模型
+非线性最小二乘 nlinfit nlintool nlpredci nlparci nnls
+
+决策树
+carsmall treefit
+
+bootstrap 自助统计量 [自举]
+
+
+各种分布统计量估计 加stat [期望与方差]
+
+参数估计fit
+概论密度函数加fit
+
+假设检验
+单样本t检验 ttest
+两样本t检验 ttest2
+
+z检验 ztest
+
+分布检验
+jarque-bera检验 jbtest
+kolmogorov-smirnov检验 kstest  kstest2
+lilliefors检验 lillietest
+
+非参数检验
+kruskal-wallis检验 kruskalwallis
+friedman检验 friedman
+
+秩和检验
+ranksum
+
+符号秩检验
+signrank
+
+符号检验
+signtest
+
+多元统计
+线性判别分析 classify
+马氏距离 mahal
+
+系统聚类分析
+pdist 矩阵配对样本的匹配距离 [Euclid,SEuclid,Mahal,CityBlock,Minkowski]距离
+squareform pdist的输出重定义为平方矩阵格式
+linkage 创建系统聚类树
+dendrogram  输出冰柱图
+cophenet 计算cophenetic系数
+cluster 根据linkage的输出创建聚类
+clusterdata 根据数据创建分类
+inconsistent 计算聚类树的不连续系数
+
+k均值聚类 kmeans
+
+主成分分析 
+barttest维数检验 barttest
+pcacov 使用协方差进行主成分分析 
+pcares 主成分分析的残差
+princomp 主成分分析 
+
+因子分析
+factoran
+ 
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%  最优化 优化工具箱  %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+线性规划
+bintprog     - Binary integer (linear) programming.
+linprog      - Linear programming. 老版本 lp
+quadprog     - Quadratic programming. 老版本qp]
+
+非线性规划
+【单目标无约束优化
+fminunc 多变量优化   拟牛顿法求多元函数的的极小点
+fminsearch 多变量优化 单纯形法求多元函数的的极小点
+lsqcurvefit 曲线拟合
+lsqnonlin 最小二乘法 】
+
+【单目标约束优化
+fminbnd 单变量优化 一元函数的极小点
+fmincon 多变量优化
+quadprog 二次项优化
+fseminf 半无穷优化】
+
+多目标优化
+fminimax
+fgoalattain
+
+
+%%%%%%%%%%%%% 小波  %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%% help elmat 基本数学函数 %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+abs(x)：纯量的绝对值或向量的长度
+angle(z)：复数z的相角
+sqrt(x)：开平方
+
+复数
+complex(a,b)
+abs(z)
+real(z)：复数z的实部
+imag(z)：复数z的虚部
+conj(z)：复数z的共轭复数
+
+取整
+round(x)：四舍五入至最近整数
+fix(x)：无论正负，舍去小数至最近整数 [向零取整]
+floor(x)：地板函数，即舍去正小数至最近整数
+ceil(x)：天花板函数，即加入正小数至最近整数
+
+rat(x)：将实数x化为分数表示
+rats(x)：将实数x化为多项分数展开
+sign(x)：符号函数 当x<0时，sign(x)=-1； 当x=0时，sign(x)=0; 当x>0时，sign(x)=1
+rem(x,y)：求x除以y的余数
+gcd(x,y)：整数x和y的最大公因数
+lcm(x,y)：整数x和y的最小公倍数
+exp(x)：自然指数 e=exp(1)
+pow2(x)：2的指数
+log(x)：以e为底的对数，即自然对数
+log2(x)：以2为底的对数
+log10(x)：以10为底的对数
+symsum:级数
+
+%%%%%%%%%%%%%%%%%% 三角函数  %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+sin(x)：正弦函数
+cos(x)：余弦函数
+tan(x)：正切函数
+asin(x)：反正弦函数
+acos(x)：反余弦函数
+atan(x)：反正切函数
+atan2(x,y)：四象限的反正切函数
+sinh(x)：超越正弦函数
+cosh(x)：超越余弦函数
+tanh(x)：超越正切函数
+asinh(x)：反超越正弦函数
+acosh(x)：反超越余弦函数
+atanh(x)：反超越正切函数
+
+%%%%%%%%%%%%%%%%%% 向量的常用函数 %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+min(x)：向量x的元素的最小值
+max(x)：向量x的元素的最大值
+mean(x)：向量x的元素的平均值
+median(x)：向量x的元素的中位数
+std(x)：向量x的元素的标准差
+diff(x)：向量x的相邻元素的差
+sort(x)：对向量x的元素进行排序
+length(x)：向量x的元素个数
+norm(x)：向量x的欧氏长度
+sum(x)：向量x的元素总和
+prod(x)：向量x的元素总乘积
+cumsum(x)：向量x的累计元素总和
+cumprod(x)：向量x的累计元素总乘积
+dot(x, y)：向量x和y的内积
+DOT(A,B,DIM) 
+
+Kronecker tensor product.
+
+if X is 2 by 3, then 
+KRON(X,Y) =
+[ X(1,1)*Y  X(1,2)*Y  X(1,3)*Y
+X(2,1)*Y  X(2,2)*Y  X(2,3)*Y ]
+
+
+cross(x, y)：向量x和y的外积
+
+向量函数 集合函数
+cross    :向量叉积
+intersect:集合交集
+ismember :是否集合中元素
+setdiff  :集合差集
+setxor   :集合异或(不在交集中的元素)
+union    :两个集合的并
+unique   :返回向量作为一个集合所有元素(去掉相同元素)
+
+位函数
+bitand bitcmp bitget bitor bitset bitshift bitxor 
+
+基地函数
+base2dec bin2dec dec2base dec2bin 
+
+%%%%%%%%%%%%%%%%%% 永久常数 %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ans 当前的答案
+eps：系统的浮点精确度
+realmax：系统所能表示的最大数值
+realmin：系统所能表示的最小数值
+inf：无限大， 例如1/0
+nan或NaN：非数值，例如0/0
+pi：圆周率 p（= 3.1415926...）
+i或j：基本虚数单位
+nargin：函数的输入引数个数
+nargin：函数的输出引数个数
+
+
+
+
+滤波和卷积
+conv      :卷积和多项式相乘
+conv2     :二维卷积
+deconv    :反卷积
+filter    :滤波
+filter2   :二维数字滤波
+
+相关
+corrcoef  :相关系数
+cov       :协方差矩阵
+xcorr     :互相关系数
+xcov      :互协方差矩阵
+xcorr2    :二维互相关
+
+有限差分
+del2    :Laplacian离散
+diff    :差分和近似微分
+gradient:数值梯度
+
+
+傅立叶变换  
+abs       :绝对值和模magnitude
+angle     :相角phase angle
+cplxpair  :按复共扼把复数分类
+fft       :一维快速傅立叶变换
+fft2      :二维快速傅立叶变换
+fftn       多维快速傅立叶变换
+fftshift   :将快速傅立叶变换的DC分量移到谱中央
+ifft      :以为逆快速傅立叶变换
+ifft2     :二维逆快速傅立叶变换
+ifftn     :多维逆快速傅立叶变换
+ifftshift :逆fft平移
+nextpow2  :最相邻的2的幂
+unwrap    :修正相角 自然态相角
+
+
+数据分析和傅立叶变换-->基本运算
+convhull  :凸壳函数
+cumprod   :累计积
+cumsum    :累计和
+cumtrapz  :累计梯形数值积分
+delaunay  :Delaunay三角化
+dsearch   :求最近点   (这是两个有趣的函数)
+factor    :质数分解
+inpolygon :搜索多边形内的点
+max       :最大元素
+mean      :平均值
+median    :数组的中间值
+min       :最小值
+perms     :向量所有排列组成矩阵
+polyarea  :多边形的面积
+primes    :生成质数列表
+prod      :数组元素积
+sort      :元素按升序排列
+sortrows  :将行按升序排列
+std       :标准差     
+sum       :元素和
+trapz     :梯形数值积分
+tsearch   :搜索Delaunay三角形
+var       :方差
+voronoi   :Voronoi图
+
+数值积分
+quad 递推自适应simpson法计算积分，精度高，常用
+quadl 递推自适应lobatto法求数值积分，精度高，常用
+trapz     采用梯形法定积分，精度差，速度快
+dblquad 多重数值积分
+
+常微分方程 数值求解
+ode23
+ode45
+ode113
+ode23t
+ode15s
+ode23s
+ode23tb
+bvp4c
+
+局部极小值 fminbnd
+
+非线性方程 数值求解 fsolve多元函数的零点
+
+符号变量
+syms a b c
+
+微分 diff 
+梯度 gradient 
+积分 int 符号解析法
+
+
+
+极限与代换
+limit subs
+
+反拉普拉斯变换 
+ilaplace
+
+集合运算
+intersect:集合交集
+ismember :是否集合中元素
+setdiff  :集合差集
+setxor   :集合异或(不在交集中的元素)
+union    :两个集合的并
+unique   :返回向量作为一个集合所有元素(去掉相同元素)
+
+排序算法
+colmmd  :进行列的最小度排序
+colperm :基于非零算法排序
+dmperm  :Dulmage-Mendelsohn分解
+randperm:随机置换
+symmmd  :对称最小度排序
+symrcm  :反向Cuthill-McKee排序
+
+
+spy     :稀疏矩阵的图形表示
+
+稀疏矩阵的非零元素操作
+nnz      :非零元素个数
+nonzeros :矩阵中的非零元素
+nzmax    :为非零元素分配的存储空间数
+spalloc  :稀疏矩阵存储空间
+spfun    :稀疏矩阵中非零元素的函数计算
+spones   :非零元素全部用1替换
+
+满阵和稀疏矩阵的转换
+find     :寻找非零元素下标和值
+full     :稀疏矩阵转化为满阵
+sparse   :生成稀疏矩阵
+spconvert:载入稀疏矩阵
+
+基本稀疏矩阵
+spdiags  :生成稀疏带状矩阵
+speye    :单位稀疏矩阵
+sprand   :随机稀疏矩阵
+sprandn  :正态分布的随机稀疏矩阵
+sprandsym:生成稀疏对称随机矩阵
+
+范数、条件数和秩
+condest :I范数矩阵条件数
+normest :2范数估计
+
+线性方程的稀疏系统
+bicg    :双共扼梯度法
+bicgstab:双共扼梯度稳定法
+cgs     :二次共扼梯度法
+cholinc :不完全Cholesky分解
+cholupdate:Cholesky分解的秩1修正
+gmres   :广义最小残差法
+luinc   :不完全的LU分解
+pcg     :预处理共扼梯度法
+qmr     :Quasi_Minimal残差法
+
+
+基转换
+bin2dec :把二进制转换为十进制
+dec2bin :十进制转换为二进制
+dec2hex :十进制转换为十六进制
+hex2dec :十六进制转换为十进制
+hex2num :十六进制转换为双精度
+
+字符串函数
+char mat2char strcat strmatch strncmp strcat
+
+
+字符串和数值的转换
+double 
+char  :生成字符串数组
+int2str:整数转换为字符串
+mat2str:矩阵转换为字符串
+num2str:数值转换为字符串
+sprintf:格式输出字符串
+sscanf :格式读入字符串
+str2double:字符串转换为双精度
+str2num   :字符串转换为数值
+
+
+字符串函数-->常用函数
+eval  :运行字符串表示的表达式
+char  :将数组变成字符串
+double:将数字字符串变成数字
+
+
+help simulink看看，好多命令
+我把它都翻译出来吧，就当做simulink的命令集：
+
+仿真命令：
+    sim       ---仿真运行一个simulink模块
+    sldebug   ---调试一个simulink模块
+    simset    ---设置仿真参数
+    simget    ---获取仿真参数
+
+线性化和整理命令：
+    linmod    ---从连续时间系统中获取线性模型
+    linmod2   ---也是获取线性模型，采用高级方法
+    dinmod    ---从离散时间系统中获取线性模型
+    trim      ---为一个仿真系统寻找稳定的状态参数
+
+构建模型命令：
+    open_system   --打开已有的模型
+    close_system  --关闭打开的模型或模块
+    new_system    --创建一个新的空模型窗口
+    load_system   --加载已有的模型并使模型不可见
+    save_system   --保存一个打开的模型
+    add_block     --添加一个新的模块
+    add_line      --添加一条线（两个模块之间的连线）
+    delete_block  --删除一个模块
+    delete_line   --删除一根线
+    find_system   --查找一个模块
+    hilite_system --使一个模块醒目显示
+    replace_block --用一个新模块代替已有的模块
+    set_param     --为模型或模块设置参数
+    get_param     --获取模块或模型的参数
+    add_param     --为一个模型添加用户自定义的字符串参数
+    delete_param  --从一个模型中删除一个用户自定义的参数
+    bdclose       --关闭一个simulink窗口
+    bdroot        --根层次下的模块名字
+    gcb           --获取当前模块的名字
+    gcbh          --获取当前模块的句柄
+    gcs           --获取当前系统的名字
+    getfullname   --获取一个模块的完全路径名
+    slupdate      --将1.x的模块升级为3.x的模块
+    addterms      --为未连接的端口添加terminators模块
+    boolean       --将数值数组转化为布尔值
+    slhelp        --simulink的用户向导或者模块帮助
+
+封装命令:
+    hasmask       --检查已有模块是否封装
+    hasmaskdlg    --检查已有模块是否有封装的对话框
+    hasmaskicon   --检查已有模块是否有封装的图标
+    iconedit      --使用ginput函数来设计模块图标
+    maskpopups    --返回并改变封装模块的弹出菜单项
+    movemask      --重建内置封装模块为封装的子模块
+
+诊断命令：
+    sllastdiagnostic  --上一次诊断信息
+    sllasterror       --上一次错误信息
+    sllastwarning     --上一次警告信息
+    sldiagnostics     --为一个模型获取模块的数目和编译状态
+
+硬拷贝和打印命令：
+    frameedit         --编辑打印画面
+    print             --将simulink系统打印成图片，或将图片保存为m文件
+    printopt          --打印机默认设置
+    orient            --设置纸张的方向
+
+%%%%%%%%%%%%%%%%%% M文件处理函数 %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+assignin evalin inmem inputname mexext pcode profile varargin varargout warning
+
+
+
+%%%%%%%%%%%%%%%%%% 逻辑函数  logical %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+all    :向量中是否所有分量均非零
+any    :是否有元素非零
+exist  :指定变量或文件是否存在
+find   :返回矩阵中非零元素的索引和置
+is*    :is系列，大部分根据名称可以知道功能
+        iscell()
+        iscellstr()
+        isempty()    :是否空数组
+        isequal()    :数组是否相等
+        isfield()    :是否结构数组中的字段
+        isfinite()   :数组中元素是否有限
+        isglobal()   :是否全局变量
+        ishandle()   :是否有效图形句柄
+        ishold()     :hold命令处于on状态与否
+        isieee       :是否使用IEEE算法
+        isinf()      :是否无穷大
+        isletter()   :数组元素是否是字母表中字母
+        islogical()  :是否逻辑数组
+        isnan()      :是否非数值数
+        isnumeric()  :是否数值数组
+        isobject()   :是否对象
+        isprime()    :是否质数
+        isreal()     :是否实数
+        isspace()    :是否空字符
+        issparse()   :是否是按稀疏类别存储
+        isstruct()   :是否结构类
+        isstudent    :matlab版本是否学生版
+        isunix       :是否unix版本
+        isa()        :指定对象是否属于指定类
+logical()    :把数值数组转变为逻辑数组
+A(B)         :A为数值数组,B为逻辑数组时，按B索引的非零元素返回
+              A中相应位置元素
+mislocked()  :当前文件是否锁定
+
+
+%%%%%%%%%%%%%%%%%% 特殊函数矩阵  %%%%%%%%%%%%%%%%%%   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+compan      :返回向量的伴随矩阵
+eig         :矩阵特征值
+gallery     :测试矩阵,或者说大约50个矩阵模版
+hadamard    :哈达马得矩阵
+hankel      :汉克尔矩阵
+hilb        :希尔波特矩阵
+invhilb     :逆希尔波特矩阵
+magic       :魔术方阵
+pascal      :帕斯卡矩阵
+toeplitz    :托普利茨矩阵
+wilkinson   :维尔金森特征值测试矩阵
+
+矩阵操作
+cat         :把矩阵按行或列连接起来
+diag        :给定向量，构造对角矩阵
+fliplr      :矩阵左右翻转
+flipud      :矩阵上下翻转
+repmat      :复制数组,repmat(A,m,n)表示把A复制m行n列组成新数组
+meshgrid     将两向量转化为等长
+reshape     :按逐列来的方式重新整形数组
+rot         :按逆时针方向旋转90度
+tril        :返回一个矩阵的下三角矩阵
+triu        :返回一个矩阵的上三角矩阵
+
+
+%%%%%%%%%%%%%%%%%% 位操作函数、结构和对象函数 %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+位操作
+bitand :按位与(两个数进行二进制的与操作)
+bitcmp :按位求补
+bitor  :按位或
+bitmax :最大浮点整数
+bitset :设置指定位的值
+bitshift:逐位移动
+bitget :获取指定位的值
+bitxor :按位异或
+结构函数
+deal      :把输入处理成输出
+fieldnames:结构的字段名
+getfield  :获得结构的字段
+rmfield   :删除结构的字段
+setfield  :设置结构数组中的字段
+struct    :创建结构数组
+struct2cell:结构数组转化为单元数组
+对象函数
+class   :创建对象或返回对象的类
+isa     :检查是否属于所给定的类
+
+数组函数-->多维数组函数
+cat    :连接函数
+flipdim:翻转数组(see:fliplr,flipud,rot90)
+ind2sub:由下标得到线性索引
+ipermute:多维数组维数的逆置换
+ndgrid  :生成多维函数和插值数组
+ndims   :数组维数
+permute :重新安排多维数组的行和列
+reshape :整形数组
+shiftdim:转换行列
+squeeze :删除单一行列
+sub2ind :下标的单一索引  l(r,c)=(c列-1)*m矩阵行数+r行 
+
+数组函数-->单元数组函数
+
+cell   :创建单元数组
+cellfun:对单元数组中的每一个元素调用一个函数
+cellstr:从字符数组中创建字符串单元数组
+cell2struct :将单元数组转换为结构数组
+celldisp    :显示单元数组的内容
+cellplot    :图形显示单元数组
+num2cell    :数值数组转换为单元数组
+
+
+多项式和插值函数-->数据插值(important)
+griddata  :三维网格点数据整合 规则化数据和曲面拟合
+interp1   :一维插值
+interp2   :二维插值
+interp3   :三维插值
+interpft  :一维傅立叶插值
+interpn   :多维插值
+meshgird  :生成三维双数据点的X坐标矩阵和Y坐标矩阵
+ndgrid    :为多维函数和多维插值准备数据
+spline    :三次样条插值
+
+样条
+fnder 对样条函数求导
+fnint 对样条函数积分
+mkpp  逐段多项式数据的明晰化
+ppval 由逐段多项式数据求插值
+spline 样条插值，或获得构成样条的逐段多项式数据
+unmkpp  逐段多项式数据的“反明晰化”
+
+
+多项式和插值函数-->多项式
+conv     :卷积
+deconv   :反卷积
+poly     :求已知根的多项式
+polyder  :多项式求导
+polyeig  :多项式特征值问题
+polyfit  :多项式/曲线拟和
+polyval  :多项式求值
+polyvalm :矩阵多项式求值
+residue  :两个多项式的比值
+roots    :多项式求根
+fzero  一元函数的零点
+
+多项式命令补遗
+poly2str()
+把用向量表示的多项式转变为符号表示，例如：
+a=[2 3 5 6];
+b=poly2str(a,'x')
+结果多项式是  2 x^3 + 3 x^2 + 5 x + 6 
+
+
+图象可视化函数-->图形图象处理 
+
+axes      :生成轴图形对象
+axis      :坐标轴的比例和外观
+cla       :清楚当前轴
+clc       :清除窗口中的命令
+clf       :清除当前窗口
+close     :删除指定的图形
+copyobj   :复制图形对象及其子对象
+dragrect  :用鼠标拖动矩形
+drawnow   :完成等待的绘图
+figure    :创建一个图形窗口
+findobj   :查找图形对象
+gca       :获取当前轴的句柄
+gcbo      :返回当前指向正在被调用的对象的句柄
+gcf       :获取当前图形句柄
+gco       :返回当前对象的句柄
+get       :获取对象的属性
+getframe  :获取图形帧
+ginput    :使用鼠标输入数据
+image     :显示图象对象     
+ishandle  :判断图形对象是否有效
+light     :创建一个照明对象
+line      :创建线对象
+newplot   :确定图形对象的位置
+patch     :创建块图形对象
+rectangle :生成二维矩形对象
+refresh   :重新绘制当前图形
+reset     :将图形对象重新设置为默认值
+rotate    :按指定方向旋转对象
+rotate3d  :使用鼠标旋转轴
+selectmoveresize:选择移动调整和复制轴和用户界面控制图形对象
+set       :设置对象属性
+surface   :创建面对象
+text      :标注文字
+uicontextmenu:创建一个上下文按钮
+zoom      :在二维图形上进行放大和缩小
+orient    :为打印输出设置纸张的方向
+
+图象可视化函数-->打印函数
+print,printopt:创建硬拷贝输出
+saveas    :使用指定的格式保存图形或模型(important)
+
+
+图象可视化函数-->颜色操作
+brighten   :控制色图明暗
+caxis      :色轴刻度
+colorbar   :画色轴
+colordef   :设置默认的属性值来显示不同的颜色方案
+hsv2rgb    :饱和色彩色图HSV向rgb转换
+rgbplot    :绘制色图
+graymon    :为灰度显示器设置默认的图形窗口属性
+rgb2hsv    :rgb转换为hsv
+spinmap    :旋转色图
+shading    :设置颜色渲染属性
+surfnorm   :计算和显示三维表面法向量 法线
+whitebg    :改变轴的背景色
+colormap   :设置和获得当前色图
+
+图象可视化函数-->表面、网格和轮廓绘制
+contour  :二维等高线图
+contourc :低层等高线图形计算
+contourf :填充二维等高线图
+hidden   :从一个网线图中删除消隐线
+mesh
+meshc
+meshz    :网线图
+peaks    :两变量的样本函数
+surf
+surfc    :三维阴影表面图
+surfl    :带有基于色图照明的表面图
+trimesh  :三角形网线图
+trisurf  :三角形表面图
+
+图象可视化函数-->体数据可视化 
+coneplot    :三维向量场中将速度向量锥形表示
+contourslice:在三维物体切面上绘制等高线
+isocaps     :计算帽端等表面几何
+isonormals  :计算等值表面顶点的法向
+isosurface  :从块体数据中提取等表面数据
+reducepatch :缩减块体表面的数目
+reducevolume:缩减块体数据集中元素的数目
+shrinkfaces :缩减块体表面的尺寸
+smooth3     :使三维数据光滑化
+stream2     :计算二维流线数据
+stream3     :计算三维流线数据
+streamline  :画流线
+surf2patch  :表面数据转换为块数据
+subvolume   :从体数据中提取子集   
+
+图象可视化函数-->绘制标注和网络
+clabel    :为等高线图加数值标记
+datetick  :使用日期标注标记线
+grid      :绘制二维和三维图形网格
+gtext     :使用鼠标确定文本在二维视图中的位置
+legend    :在图形上显示图例
+plotyy    :双y轴创建图形
+title     :为当前轴添加标题
+xlabel
+ylabel
+zlabel    :标注三轴
+
+图象可视化函数-->三维绘图函数
+bar3,bar3h:三维直方图
+comet3    :三维彗星图
+cylinder  :柱面图
+fill3     :填充的三维多边形
+plot3     :三维直角坐标曲线图
+quiver3   :三维向量场图 方向导数
+slice     :切片图
+sphere    :生成球面
+stem3     :三维火柴杆图
+waterfall :瀑布水线图
+
+图象可视化函数-->基本绘图和图象函数 
+bar,barh:垂直和水平直方图
+hist    :统计频数直方图
+hold    :在图象窗口中保留当前图形
+loglog  :双对数刻度曲线图
+pie     :饼图
+plot    :绘制二维曲线
+polar   :极坐标图
+semilogx
+semilogy:半对数刻度曲线图
+subplot :创建子图
+subplot('position',[left bottom width height])再plot 指定位置画图
+
+创建图形用户界面-->其他函数
+dragrect :用鼠标拖动矩形
+gcbo     :返回正在执行回叫信息的图形对象句柄
+rbbox    :创建橡皮框
+textwrap :对给定的用户界面控制读写返回覆盖的字符串矩阵
+uiwait   :控制程序的执行
+waitbar  :显示等待条
+waitforbuttonpress:等待键或按钮的触发
+
+矩阵函数－数值线性代数-->低级函数
+qrdelete:从QR分解中删除列
+qrinsert:在QR分解中加入列
+
+矩阵函数－数值线性代数-->矩阵函数
+expm    :矩阵指数(与exp不同)
+funm    :一般矩阵函数
+logm    :矩阵对数(对应expm)
+sqrtm   :矩阵平方根
+
+矩阵函数－数值线性代数-->特征值和奇异值 
+发信站: BBS 水木清华站 (Tue Nov 19 17:26:44 2002), 转信
+
+balance :提高特征值精度（a good function）
+cdf2rdf :复数对角型转换为实数对角型
+eig     :特征值和特征向量
+gsvd    :广义奇异值分解
+hess    :矩阵的Hessenvberg形式
+poly    :根据根给出多项式(系数)
+qz      :广义特征值的QZ分解
+rsf2csf :实的Schur形式转换为复的Schur形式
+schur   :Schur分解
+svd     :奇异值分解  
+
+矩阵函数－数值线性代数-->线性方程
+chol    :Cholesky分解
+inv     :矩阵求逆
+lscov   :最小二乘解
+lu      :LU分解
+lsqnonneg:非负约束的最小线性二乘
+pinv    :Moore-penrose伪逆
+qr      :正交三角分解
+
+矩阵函数－数值线性代数-->矩阵分析
+cond   :条件数(关于逆)
+cond   :条件数(关于特征值)
+det    :行列式
+norm   :矩阵范数
+null   :零空间
+orth   :矩阵的正交化空间
+rank   :矩阵的秩
+rcond  :矩阵的逆条件数
+rref   :去相关阶梯矩阵(高斯约当消去法)
+rrefmovie: 去相关阶梯矩阵的逐步演示
+subspace:两个子空间的角度,几何上讲其实是镶嵌于一个空间中的两个
+         超平面的角度；物理上讲是第二次试验和第一次试验提供了多少
+         新信息
+trace   :矩阵的迹
+
+
+
+特殊变量和常量
+ans       :对最近输入的反应
+computer  :当前计算机类型
+eps       :浮点精度
+flops     :计算浮点操作次数，现已不再常用
+i         :虚部单位
+inf       :无穷大
+inputname :输入参数名
+j         :虚部单位
+nan       :非数值
+nargin    :输入参数的数目
+nargout   :输出参数的数目(用户定义函数)
+pi        :圆周率
+realmax   :最大正浮点数
+realmin   :最小正浮点数
+varargin,varargout:返回参数数目(matlab函数)
+
+图象可视化函数-->视觉控制
+camdolly   :移动相机的位置和坐标
+camlookat  :确定相机位置来观察一个对象或一组对象
+camorbit   :绕照相机的目标旋转照相机
+campan     :围绕照相机的位置旋转照相机目标
+campos     :设置或查询照相机的位置
+camproj    :设置或查询投影类型
+camroll    :绕视轴旋转照相机
+camtarget  :设置或查询相机目标位置
+camva      :设置或查询照相机视角
+camup      :设置或查询照相机方向
+camzoom    :放大或缩小
+daspect    :设置或查询轴的纵横比
+pbaspect   :设置或查询绘图框的纵横比
+view       :确定视角
+viewmtx    :视角变换矩阵
+xlim,ylim,zlim:设置或查询轴的刻度范围
+camlight   :在相机系统中生成或移动光源体
+lightangle :在球坐标系里创建或定位一个照明对象
+lighting   :选择照明算法      
+material   :控制面和块的反射比属性
+
+图象可视化函数-->专门图形绘制
+area     :一个二维图形的填充
+box      :控制轴的边界
+comet    :二维彗星轨迹图
+compass  :绘制从原点出发的向量图
+ezcontour:简易等高线图绘图
+ezcontourf:简易填充等高线绘图
+ezmesh    :简易网线图绘图
+ezmeshc   :简易网线/等高线组合绘图
+ezplot    :简易曲线图绘图
+ezplot3   :简易三维曲线图绘图
+ezsurf    :简易三维着色表面绘图仪
+ezpolar   :简易极坐标曲线图
+feather   :沿水平轴等间距的点发散的向量
+ezsurfc   :简易带等高线的三维表面图绘图
+fplot     :在指定区域画出一个函数的图形(important)
+fill      :填充二维多边形 patch
+pie3      :三维饼图
+pareto    :Pareto图
+plotmatrix:绘制离散图
+pcolor    :伪色绘图
+rose      :极坐标直方图
+quiver    :向量场图
+ribbon    :带图 
+stairs    :阶梯曲线图
+scatter   :二维离散点图
+scatter3  :三维散点图
+stem      :二维火柴图
+convhull  :凸壳图
+inpolygon :检测点是否在多边形内
+dsearch   :搜索最近点
+polyarea  :多边形的面积
+voronoi   :Voronoi图
+
+图象可视化函数-->域生成
+griddata  :数据网格化
+meshgrid  :为三维图形生成XY矩阵
+
+
+
+
+矩阵和数组基础
+blkdiag   :构造一个分块对角矩阵
+eye       :创建单位矩阵
+linespace :产生线性间隔向量
+logspace  :产生对数间隔向量
+ones      :产生元素全为1的数组
+rand      :产生均匀分布随机数组
+randn     :产生正态分布随机数组 randn('state',0)
+zeros     :产生全零数组
+
+坐标变
+cart2pol   :笛卡儿坐标变换为极坐标或圆柱坐标
+cart2sph   :笛卡儿坐标变换为球坐标
+pol2cart   :极坐标变换为笛卡儿坐标
+sph2cart   :球坐标变换为笛卡儿坐标
+
+
+特殊函数
+airy   :airy函数
+besselh:第三类贝塞尔函数；）
+besseli
+besselk:改良型besselh函数
+besselj
+bessely:贝塞尔函数
+beta
+betainc
+betaln :贝塔函数
+ellipj :雅克比椭圆函数
+ellipke:完全椭圆积分
+erf
+erfc
+erfcx
+erfinv :误差函数
+expint :指数积分
+factorial:阶乘函数
+gamma
+gammaln
+gammainc:伽马函数
+legendre:勒让德函数
+pow2    :2的幂次
+rat              
+rats    :有理逼近  
+
+
+语言结构和调试命令-->程序调试
+dbclear    :断点清除
+dbcont     :重新开始执行
+dbdown     :改变当前工作空间
+dbmex      :调试Mex文件
+dbquit     :退出调试模式
+dbstack    :显示函数调用堆栈
+dbstatus   :列出所有断点
+dbstep     :从断点处执行
+dbstop     :设置断点
+dbtype     :列出带行号的M文件内容
+dbup       :改变当前工作空间
+
+语言结构和调试命令-->面向对象编程
+class      :创建一个对象或者返回一个对象类
+double     :转换为双精度
+inferiorto :亚类关系
+inline     :创建一个内联函数
+int8,int16,int32 ：转换到符号整数
+isa        :检查是否为所给类的对象
+loadobj    :load函数用户定义扩展
+saveobj    :save函数用户定义扩展
+single     :转换为单精度
+superiorto :超类关系
+uint8,uint16,uint32: 转换到无符号整数
+
+语言结构和调试命令-->lasterr,lastwarn
+lasterr  :返回Matlab中产生的最后一个异常信息。
+lastwarn :最后的警告信息这两个函数在调试程序时非常有用 8*)
+
+语言结构和调试命令-->交互输入
+input      :交互输入
+keyboard   :在M文件中遇到keyboard时将在命令窗口
+            产生交互直到输入return命令
+menu       :为用户输入产生一个选择菜单
+pause      :暂停
+
+
+语言结构和调试命令-->流程控制
+break      :停止执行循环
+case       :case语句,switch语句一部分
+            switch   switch_expr
+               case   case_expr
+                     statments
+               case
+               otherwise
+            end
+catch      :try-catch语句一部分，捕捉程序
+else       :if条件语句一部分
+elseif     :if条件语句一部分
+end        :终止for、while、switch、try和if语句
+error      :显示错误信息
+for        :循环语句一(确定次数)
+if         :if条件语句
+other      :switch语句一部分
+return     :返回到调用函数
+switch     :开关语句   
+try        :try程序块
+warning    :类似于disp，但可被禁止
+while      :循环语句(次数不确定)
+
+
+语言结构和调试命令-->程序设计  
+builtin    :从可重载方法中调用内置函数
+eval       :执行包含可执行表达式的字符串
+evalc      :计算并返回表达式的值
+evalin     :执行某个工作空间中的包含表达式的字符串
+feval      :执行函数(从函数名或函数句柄)
+function   :函数头
+global     :定义全局变量
+nargchk    :检查输入参数数目
+persistent :定义常量
+script     :作为脚本的M文件
+
+常用命令-->启动和退出Matlab
+matlabrc      :Matlab的启动M文件
+exit
+quit          :退出Matlab
+startup       :运行matlab启动文件  
+
+常用命令-->文件和工作环境
+说明：这一部分命令结合‘判断目录是否为空的’命令，可以
+完成一部分非常实用的操作－－－对文件系统进行管理。
+cd         :改变工作目录
+copyfile   :复制文件
+delete     :删除文件和图形对象
+diary      :把命令窗口的人机交互保存到文件
+dir        :显示目录
+edit       :编辑文本文件
+fileparts  :返回文件的各个部分
+fullfile   :使用指定部分建立文件全名
+inmem      :返回内存(伪代码区)的matlab函数名
+ls         :在unix系统中列出目录(win中亦可)
+matlabroot :根目录
+mkdir      :新建目录
+open       :打开文件
+pwd        :显示当前目录
+tempdir    :返回系统临时目录的名字
+tempname   :随机给出一个临时字符串(可用作文件名)
+!          :直接调用操作系统command命令  
+
+常用命令-->管理命令控制窗口(command窗口) 
+clc        :清空命令窗口
+echo       :禁止或允许显示执行过程
+format     :设置输出显示格式
+home       :光标移动到命令窗口左上角
+more       :设置命令窗口页输出格式
+clear all
+format compact
+Ctl+C  退出函数执行
+Ctl+P  最后一次键入的信息，按多次P可查看以前的信息，↑↓也可以
+
+常用命令-->管理变量和工作区(输入输出、内存管理等)
+clear     :从内存中删除
+disp      :显示文本或数组内容
+length    :数组长度(最长维数)=max(size(A))
+load      :重新载入变量(从磁盘上)
+mlock     :锁定文件，防止文件被错误删除
+munlock   :解锁文件
+openvar   :在数组编辑器中打开变量
+pack      :整理内存空间
+save      :保存变量到文件 8*)
+size      :数组各维的维数  ndims(A)A的维数
+who
+whos      :列出内存变量
+workspace :显示工作空间窗口
+
+常用命令-->管理命令和函数
+addpath  :添加目录到MATLAB搜索路径
+editpath edit fullfile
+doc      :在Web浏览器上现实HTML文档
+help     :显示Matlab命令和M文件的在线帮助
+helpwin
+helpdesk :help 兄弟几个
+lookfor  :在基于Matlab搜索路径的所有M文件中搜索关键字
+partialpath:部分路径名      8*)
+path     :所有关于路径名的处理
+pathtool :一个不错的窗口路径处理界面
+rmpath   :删除搜索路径中指定目录
+type     :显示指定文件的内容
+ver      :版本信息
+version  :版本号
+web      :打开web页
+what     :列出当前目录吓所有的M文件 Mat文件和 Mex文件
+whatsnew :显示readme文件
+which    :显示文件位置
+
+按原图像的大小显示truesize
+
+对图像的自由剪切roipoly or improfile
+
+图像旋转imrotate
+
+两张图象对齐
+im1=double(imread('matlab.bmp'));
+im2=double(imread('matlab.bmp'));
+im3=[im1 im2];
+
+JPEG格式是以8*8分块编码的，不足会补齐
+
+matlab读取一个文件夹下所有文件
+d = dir('*.jpg'); % or *.xxx
+str = {d.name}; % get the name list
+for i = 1: size(str,2)
+...
+filename = str(i);
+...
+do what you want...
+....
+end
+
+如何获取MAT文件中的变量名
+s=load('dbtwo.mat');
+name=fieldnames(s);
+getfield(s,name{i});   %获取dbtwo.mat第i个变量的值
+
+类似C中的static变量
+persistent
+
+运算符重载
+比如说要建立一个类test,并为它重载加法
+在matlab的搜索路径下建立一个文件夹，起名叫@test
+（你可以去matlab的路径下查查，有好多文件夹前面带@的，都是类）
+然后在@test文件夹下建立一个test.m这就相当于test类的构造函数
+怎么写构造函数，你可以用edit gf看看（gf类的构造函数）他有三个成员
+(x,m,prim_poly),这儿假设给test类两个成员（简单起见）
+只需：function p=test(x,y)
+       p.x=x;
+       p.y=y;
+       p=class(p,'test');     %建立test类
+然后在@test文件夹下建立一个plus.m,即为重载了加法
+示例如下：
+      function w=plus(p,q)
+        w.x=p.x+q.x;
+        w.y=p.y+q.y;
+        w=class(w,'test');
+重载其他运算苻也是如此
+这儿再将matlab下类再讲全面一些,如果在@test文件夹下再建立一个
+private文件夹，那么在private里面的m文件，就将是此类的私有函数
+
+%%%%%%%%%%%%% toolbox   %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+SDC  morphology toolbox
+camera calibbration toolbox
+speech processing toolbox
+statistical pattern recogniton toolbox
+matlab and C radar toolbox
+FIR filter optimization toolbox
+GPS software toolbox
+computer vision toolbox
+Dimensional anlysis toolbox
+
+
+
+
+%%%%%%%%%%%%%%% 快捷键  %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+检查括号匹配　Ctrl+B
+加注释　Ctrl+R
+取消注释 Ctrl+T
+中断运算　Ctrl+C
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+function [centers, labels, info] = slkmeansex(X, n, estfunctor, clsfunctor, varargin)
+%SLKMEANSEX Performs Generalized K-means
+%
+% $ Syntax $
+%   - [centers, labels] = slkmeansex(X, n, estfunctor, clsfunctor, ...)
+%   - [centers, labels, info] = slkmeansex(X, n, estfunctor, clsfunctor, ...)
+%
+% $ Arguments $
+%   - X:            the samples to be clustered
+%   - n:            the number of samples
+%
+% $ Description $
+%   - [centers, labels] = slkmeansex(X, n, estfunctor, clsfunctor, ...) 
+%     is a generalized version of K-means. It actually implements an
+%     iterative process to estimate centers from clustered samples and
+%     re-clustered the samples according to centers.
+%     You can specify the following properties:
+%       - 'K':              the number of initial number of clusters
+%                           (default = 3)
+%       - 'init_centers':   the initial centers.
+%
+% $ Remarks $
+%   - The X and centers can be in any form that conform to the specified
+%     functors.
+%
+%   - If init_centers is specified, K should be exactly the number of
+%     initial centers.
+
+%
+% $ History $
+%   - Created by Dahua Lin, on Aug 28, 2006
+%   - Modified by Dahua Lin, on Aug 30, 2006
+%       - utilize slevalfunctor and slsharedisp

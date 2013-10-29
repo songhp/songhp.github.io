@@ -1,0 +1,50 @@
+/* Time-stamp: <13 September 2008 07:38:50 PM W. Europe Daylight Time --  suvrit> */
+/* This is my site wide stylesheet. I will just stick to one */
+
+BODY {	
+  background: White;
+  color: black;
+  font-family: Arial,Helvetica, sans-serif;
+  font-size: 12pt;
+}
+
+a:hover {background-color: #7fffd4}
+a:visited {color: purple}
+a:link img, a:visited img {border-style: none}
+a img {color: white} /* The only way to hide the border in NS 4.x */
+
+H1 {
+   color: black;
+   font-weight: bold;
+   background: #66cdaa;
+   font-size: 18pt;
+}
+
+H2 {
+   color: black;
+   font-weight: bold;
+   font-size: 14pt;
+   background: #ffe4e1;
+}
+
+H3 {
+   color: black;
+   background: #f5deb3;
+   font-weight: bold;
+   font-size: 12pt;
+}
+
+TD {
+   font-family: Arial,Helvetica,sans-serif;
+   font-size: 10pt;
+   background: White;
+  border-style: dotted;
+}
+
+TH {
+   font-family: Arial,Helvetica,sans-serif;
+   font-size: 10pt;
+   background: #fffacd;
+}
+
+P.justify { text-align: justify; }
