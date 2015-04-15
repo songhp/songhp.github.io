@@ -1,0 +1,105 @@
+* {
+	margin: 0px; padding: 0px;
+}
+body {
+	background: url("background.jpg") no-repeat top rgb(255, 255, 255); font: 84%/1.6em Arial, Helvetica, sans-serif; color: rgb(48, 48, 48); font-size-adjust: none; font-stretch: normal;
+}
+a {
+	color: rgb(35, 154, 35); text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+ul {
+	margin: 0px 0px 20px;
+}
+dl {
+	margin: 0px 0px 20px;
+}
+p {
+	margin: 0px 0px 20px;
+}
+h1 {
+	margin: 20px 0px; color: rgb(136, 136, 136); line-height: 1.1em; letter-spacing: -2px; font-size: 3.2em; border-bottom-color: rgb(238, 238, 238); border-bottom-width: 2px; border-bottom-style: solid;
+}
+h1 a {
+	text-transform: none; text-decoration: none;
+}
+h1 a:hover {
+	color: rgb(51, 51, 51); text-transform: none; text-decoration: none;
+}
+h2 {
+	margin: 30px 0px 20px; color: rgb(51, 51, 51); letter-spacing: -1px; font-size: 2.2em; border-bottom-color: rgb(238, 238, 238); border-bottom-width: 2px; border-bottom-style: solid;
+}
+h2 a {
+	color: rgb(51, 51, 51); text-transform: none; text-decoration: none;
+}
+h2 a:hover {
+	color: rgb(51, 51, 51); text-transform: none; text-decoration: none;
+}
+h3 {
+	margin: 30px 0px 15px; letter-spacing: -1px; font-size: 1.8em; border-bottom-color: rgb(238, 238, 238); border-bottom-width: 2px; border-bottom-style: solid;
+}
+h1 {
+	line-height: 1.4em; font-weight: 700;
+}
+h2 {
+	line-height: 1.4em; font-weight: 700;
+}
+h3 {
+	line-height: 1.4em; font-weight: 700;
+}
+#wrap {
+	margin: 40px auto; padding: 0px; width: 910px; color: rgb(48, 48, 48);
+}
+#content {
+	width: 610px; text-align: left; padding-right: 40px;
+}
+#sidebar {
+	width: 200px; padding-left: 40px; border-left-color: rgb(204, 204, 204); border-left-width: 2px; border-left-style: solid; float: right;
+}
+#sidebar ul {
+	list-style: none; margin: 0px; padding: 10px 0px 0px; border-top-color: rgb(238, 238, 238); border-top-width: 1px; border-top-style: solid;
+}
+#sidebar li {
+	list-style: none; margin: 0px 0px 10px; padding: 0px 0px 10px; color: rgb(136, 136, 136); font-size: 1.2em; border-bottom-color: rgb(238, 238, 238); border-bottom-width: 1px; border-bottom-style: solid;
+}
+#sidebar li a {
+	font-size: 1.2em;
+}
+#sidebar h2 {
+	font-size: 1.4em;
+}
+.toappear {
+	color: rgb(112, 112, 112); border-bottom-color: rgb(112, 112, 112); border-bottom-width: 1px; border-bottom-style: dashed;
+}
+.slogan {
+	margin: 0px 0px 20px; color: rgb(136, 136, 136); letter-spacing: -1px; font-size: 1.4em; font-weight: 700;
+}
+.readmore {
+	margin: 0px 20px 30px 0px; text-align: right;
+}
+.timestamp {
+	margin: 0px 20px 20px 0px; padding: 20px 20px 20px 0px; width: 150px; text-align: right; color: rgb(136, 136, 136); font-weight: 700; border-right-color: rgb(238, 238, 238); border-right-width: 2px; border-right-style: solid; float: left; display: block;
+}
+.timestamp a {
+	font-weight: normal;
+}
+.credits {
+	margin: 30px 0px; width: 100%; text-align: center; color: rgb(170, 170, 170); font-size: 0.9em; display: block;
+}
+.credits a {
+	color: rgb(136, 136, 136);
+}
+.clear {
+	clear: both;
+}
+.announcement {
+	background: rgb(255, 248, 186); padding: 10px; border: 1px solid rgb(221, 205, 153); border-image: none; text-align: center; font-size: 116%; margin-right: auto; margin-bottom: 20px; margin-left: auto;
+}
+.moreindent {
+	margin: 0px 0px 20px;
+}
+.moreindent li {
+	margin-left: 20px;
+}
